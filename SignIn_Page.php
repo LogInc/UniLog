@@ -27,7 +27,7 @@
             }
             div.signUp_form{
                 font-family:"Calibri Light";
-                margin-top:20px;		
+                margin-top:5px;		
             }
             p.Sign{
                 font-size:27px;
@@ -67,7 +67,7 @@
             }
             .hor_rule{
                 margin-top: 120px;
-               
+                
             }
             div.img{
                 
@@ -86,10 +86,14 @@
     
     <body>
         <div class="container">
+            
             <h1 class="uni"><a href="#" class ="brand"> UniLog</a> </h1>
             <hr>
             <div class = "welcome"> Welcome to <b style="color:#4472c4" >UniLog</b>, we hope you enjoy the experience </div>
+            
+            
             <br>
+            
             <div class="row body"  >
                 <div class="col-sm-6">
                     
@@ -101,34 +105,39 @@
                     <form>
                         <p class="Sign"><strong>Sign In</strong><br>
                         <p> or <a href="#" id = "signup_page" > create an account </a></p>
-                        <input class="input" id="username" type="text" onFocus= "this.value = ''" onBlur = "rename()" value="Username" >
+                        <label class="sr-only"  for="email">Username:</label>
+                        <input type="username" class="form-control" id="email" placeholder="Username">
                         <br>
-                        <br>
-                        <input id="password" type="text" onfocus= "input_password()" onBlur = "rename()"  value="Password">
+                        <label class="sr-only" for="password"> Password: </label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password">
                         <br><br>
                         <input id="remember me" type="checkbox" name="remember_me"> Remember me
                         
                     </form>
                     
                     <button class = "btn btn-primary sign ">Sign In </button>
-                </div>
-                
+                </div>      
                 
                 
                 <div class= "col-sm-4 signUp_form"  style = "display:none">
                     <form>
                         <p class="Sign"><strong>Sign Up</strong><br>
                         <p> or <a href="#" id = "signin_page" > Sign In </a></p>
-                        <input class="input" id = "First_name" type="text" onFocus= "this.value = ''" onBlur = "rename()" value="First Name" >
+                        <label class="sr-only"  for="email">First Name:</label>
+                        <input type="email" class="form-control" id="email" placeholder="First Name">
                         <br>
+                        <label class="sr-only"  for="email">Last Name:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Last Name">
                         <br>
-                        <input class="input" id="Last_name" type="text" onfocus= "this.value = ''" onBlur = "rename()"  value="Last Name">
+                       <label class="sr-only"  for="email">Email Id:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email">
                         <br>
+                        <label class="sr-only"  for="email">Roll Number:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Roll_Number (e.g 2012-CE-08)"> 
                         <br>
-                        <input class="input" id="Email" type="text" onfocus= "this.value = ''" onBlur = "rename()"  value="Email Id">
-                        <br>
-                        <br>
-                        <input class="input" id="Roll_Number" type="text" onfocus= "this.value = ''" onBlur = "rename()"  value="Roll_Number (e.g 2012-CE-08)">
+                        <input id="unilogterms" type="checkbox" name="remember_me"> I agree to
+                        <a href="#" class="brand"> UniLog terms </a>
+                        
                     </form>
                     
                     <button class = "btn btn-primary sign">Sign Up </button>
@@ -136,6 +145,7 @@
                 
             </div>
             <hr class="hor_rule">
+            
         </div>
         <script>
             $(document).ready(function(){
@@ -153,51 +163,6 @@
 
             });
 	
-            function input_password()
-            {
-                var val = document.getElementById("password");
-                val.value = '';
-                val.setAttribute("type", "password");
-            }
-	
-
-            function rename() {
-
-                var user_val = document.getElementById("username");
-                var fname_val = document.getElementById("First_name");
-                var lname_val = document.getElementById("Last_name");
-                var email_val = document.getElementById("Email");
-                var roll_val = document.getElementById("Roll_Number");
-                var pass_val =  document.getElementById("password");
-	
-	
-                if(user_val.value == '')
-                {
-                    user_val.value = "Username";
-		
-                }
-                if(fname_val.value == '')
-                {
-                    fname_val.value = "First Name";
-                }
-                if(lname_val.value == '')
-                {
-                    lname_val.value = "Last Name";
-                }
-                if(email_val.value == '')
-                {
-                    email_val.value = "Email Id";
-                }
-                if(roll_val.value == '')
-                {
-                    roll_val.value = "Roll_Number (e.g 2012-CE-08)";
-                }
-                if(pass_val.value == '')
-                {
-                    pass_val.value = "Password";
-                    pass_val.setAttribute("type", "text");				
-                }
-            }
                   
         </script>
         
