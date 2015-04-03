@@ -5,20 +5,19 @@
         <title>UniLog | Sign in </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url()?>css/bootstrap-theme.min.css">
+		<script src="<?php echo base_url()?>js/jquery-2.1.1.min.js"></script>
+        <script src="<?php echo base_url()?>js/bootstrap.min.js"></script>
         <style>
             body{
                 background-color:white;
 				font-family:"Calibri Light";
             }
-            h1.uni{
-                color:#4472c4;
-                font-family:"Bauhaus 93", Times, serif;      
+            div.logo{     
                 margin-top:20px;
             }
-			
+
 			p.welcome, .input, #password {
 				font-size: 20px;
 			}
@@ -27,7 +26,7 @@
                 float:right;
             }
             div.signIn_form{
-                     
+
                	margin-top:30px;	
             }
             div.signUp_form{
@@ -84,13 +83,16 @@
 
     <body>
         <div class="container">
-
-            <h1 class="uni"><a href="#" class ="brand"> UniLog</a> </h1>
+			<?php
+			$a = '<div class="logo"><a href="'.base_url(). '">'.img('images/unilog_logo.png', FALSE, 'width="150" alt="unilog logo"');
+			echo $a . '</a></div>';
+			?>
+			
             <hr>
             <p class = "welcome"> Welcome to <b style="color:#4472c4" >UniLog</b>, we hope you enjoy the experience </p>
-			
+
             <br>
-            
+
 			<div class="row body"  >
                 <div class="col-sm-6">
 
