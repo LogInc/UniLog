@@ -17,6 +17,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Welcome extends CI_Controller {
 
+	public function __construct() {
+		parent::__construct();
+	}
+	
 	/**
 	 * The index page of the website.
 	 */
@@ -81,39 +85,53 @@ class Welcome extends CI_Controller {
 
 		// Input valid?
 		if ($this->form_validation->run()) {
+			$data['page_title'] = 'Sign Up';
 			$this->load->model('user');
 
 			// Generate a unique key for the user.
 			$key = password_hash(uniqid($this->input->post('email'), false), PASSWORD_BCRYPT);
-			$data['page_title'] = 'Sign Up';
 
 			// Attempt to add the key to the temp_user table.
 			// Success?
 			if ($this->user->add_temp_user($key)) {
 				// Send a mail to the user.
-				$this->sendMail($key);
 				$data['message'] = 'An email has been sent to you.';
+				$this->load->view('error', $data);
+				$this->sendMail($key);
+				//$this->load->view('mail.php', $data, FALSE);
 			} else {
 				// Get the error.
 				$error = $this->db->error();
 				
 				// Duplicate entry. This occurs when a single user repeatedly signups
-				// In this case, we just send the mail again. A new entry in the table
-				// is not required.
+				// In this case, we 
 				if ($error['code'] == 1062) {
-					$this->sendMail($key);
 					$data['message'] = 'An email has been sent to you.';
+					$this->load->view('error', $data);
+					$this->sendMail($this->user->get_temp_user_key());
+					//$this->load->view('mail.php', $data, FALSE);
 				} else {
 					// Have not acquired any other error till now. So output any other
 					// error if encountered. 
 					$data['message'] = 'An error has occured. (' . $error['code'] . ') ' . $error['message'];
+					$this->load->view('error', $data);
 				}
 			}
-			// Display a page with the message.
-			$this->load->view('error', $data);
 		} else {
-			// Keep us on sign-up page in case the user input is valid.
+			// Keep us on sign-up page in case the user input is invalid.
 			$this->sign(1);
+		}
+	}
+	
+	public function register_user() {
+		$key = $_GET['id'];
+	
+		$this->load->model('user');
+		
+		if ($this->user->valid_key($key)) {
+			if ($this->user->add_user($key)) {
+				redirect('home');
+			}
 		}
 	}
 
@@ -124,9 +142,8 @@ class Welcome extends CI_Controller {
 
 		$data['page_title'] = 'Sign Up';
 		$data['key'] = $key;
-		$message = $this->load->view('mail.php', $data, TRUE);
-		$this->email->message($message);
-		$this->email->send();
+		$message = $this->load->view('mail.php', $data, FALSE);
+		//$this->email->message($message);
+		//$this->email->send();
 	}
-
 }

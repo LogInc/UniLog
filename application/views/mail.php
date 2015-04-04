@@ -8,13 +8,14 @@
 
 require_once 'page_head.php';
 require_once 'brand.php';
+$link = site_url('welcome/register_user') . '/a?id=' . urlencode($key);
 ?>
 
 <div>
 	<p>Greetings from UniLog</p>
 	<p>	We have received your request to sign up at UniLog.
 		Please 
-		<a href="<?php echo site_url('welcome/register_user') . '/' . urlencode($key); ?>">Click Here</a>
+		<a href="<?php echo $link; ?>">Click Here</a>
 		to activate your account.
 	</p>
 	<br/>
