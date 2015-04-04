@@ -56,7 +56,7 @@
     <div class="form-group form-group-lg">
         <div class="col-md-9 col-md-offset-1 col-sm-8 col-sm-offset-0">
             <label class="form-control-static">By signing up, you agree to UniLog's
-                <a href='#'>Terms of Service</a></label>
+                <a href='terms'>Terms of Service</a></label>
         </div>
     </div>
 	<?php echo '</form>'; ?>

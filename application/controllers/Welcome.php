@@ -163,5 +163,15 @@ class Welcome extends CI_Controller {
 		
 		return $this->email->send();
 	}
+	
+	/**
+	 * Displays the terms of service page.
+	 */
+	public function terms_of_service() {
+		$this->load->view('templates/page_head');
+		$this->load->view('templates/brand');
+		$this->load->view('terms_of_service');
+		$this->load->view('templates/page_foot');
+	}
 
 }

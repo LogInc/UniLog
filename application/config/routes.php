@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['sign-in'] = 'welcome/sign_in';
 $route['sign-up'] = 'welcome/sign_up';
+$route['terms'] = 'welcome/terms_of_service';
