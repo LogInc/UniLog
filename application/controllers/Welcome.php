@@ -27,8 +27,7 @@ class Welcome extends CI_Controller {
 	public function index() {
 		if ($this->session->is_logged_in) {
 			redirect('home');
-		}
-		$this->sign(0);
+		} else redirect('sign-in');
 	}
 
 	/**
@@ -110,10 +109,10 @@ class Welcome extends CI_Controller {
 	 */
 	public function validate_signup_fields() {
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim|is_unique[user.user_email]');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.user_email]|trim');
 		$this->form_validation->set_rules('firstname', 'First Name', 'required|trim');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'required|trim');
-		$this->form_validation->set_rules('rollno', 'Roll No.', 'trim|is_unique[user.user_rollno]');
+		$this->form_validation->set_rules('rollno', 'Roll No.', 'is_unique[user.user_rollno]|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		return $this->form_validation->run();
 	}
