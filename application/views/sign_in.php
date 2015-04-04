@@ -20,19 +20,19 @@
 	</div>
 
 	<div class="form-group form-group-lg">
-            <label class="control-label col-lg-1 col-md-4 col-sm-2 sr-only" for="password">Password:</label>
+            <label class="control-label col-lg-1 col-md-2 col-sm-0 sr-only" for="password">Password:</label>
 		<div class="col-md-9 col-sm-10">
                     <input class="form-control" type="password" name="password" placeholder="Enter your password">
 		</div>
 	</div>
 
 	<div class="form-group form-group-lg form-inline">
-		<div class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-4 col-sm-3 col-sm-offset-2">
+		<div class="col-lg-5 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-1 col-sm-offset-1+">
 			<div class="checkbox">
 				<label><input type="checkbox" name="remember_me"> Remember me</label>
 			</div>
 		</div>
-		<div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-0 col-sm-2 col-sm-offset-5">
+		<div class="col-lg-3 col-lg-offset-2 col-md-4 col-md-offset-1 col-sm-1 col-sm-offset-5">
 			<button class="btn btn-primary btn-lg btn-block" type="submit" name="submit_signin">Sign In</button>
 		</div>
 	</div>

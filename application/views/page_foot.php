@@ -7,7 +7,7 @@
 ?>
 
 </div>
-<footer class="text-center text-info">Copyright &copy; 2015 log inc. All rights reserved.</footer>
+<footer class="text-center text-info"><br>Copyright &copy; 2015 log inc. All rights reserved.</footer>
 </div>
 </body>
 </html>

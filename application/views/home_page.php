@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>UniLog | <?php echo $page_title; ?></title>
     </head>
     <body>
 		<?php
