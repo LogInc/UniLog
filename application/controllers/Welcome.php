@@ -96,7 +96,7 @@ class Welcome extends CI_Controller {
 			$data['page_title'] = 'Sign Up';
 			$data['key'] = $key;
 			$data['name'] = 'ab';
-			$this->load->view('mail');
+			$this->load->view('templates/signup_mail');
 		} else {
 			// Keep us on sign-up page in case the user input is invalid.
 			$this->sign(1);
@@ -158,7 +158,7 @@ class Welcome extends CI_Controller {
 		// Load the mail page as the message. The mail page is a dynamic page.
 		// The TRUE argument returns the PHP output as a string instead of sending it
 		// to the client.
-		$message = $this->load->view('mail.php', $data, TRUE);
+		$message = $this->load->view('templates/signup_mail.php', $data, TRUE);
 		$this->email->message($message);
 		
 		return $this->email->send();

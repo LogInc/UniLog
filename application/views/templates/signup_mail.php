@@ -5,8 +5,8 @@
  * Copyright 2015 log inc.
  */
 
-require_once 'templates/page_head.php';
-require_once 'templates/brand.php';
+require_once 'page_head.php';
+require_once 'brand.php';
 $link = site_url('welcome/register_user') . '/a?id=' . urlencode($key);
 ?>
 
@@ -28,5 +28,5 @@ $link = site_url('welcome/register_user') . '/a?id=' . urlencode($key);
 </div>
 
 <?php
-require_once 'templates/page_foot.php';
+require_once 'page_foot.php';
 ?>
