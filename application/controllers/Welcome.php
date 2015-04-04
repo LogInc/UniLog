@@ -84,7 +84,7 @@ class Welcome extends CI_Controller {
 			$this->load->model('user');
 
 			// Generate a unique key for the user.
-			$key = password_hash(uniqid($this->input->post('email'), true), PASSWORD_BCRYPT);
+			$key = password_hash(uniqid($this->input->post('email'), false), PASSWORD_BCRYPT);
 			$data['page_title'] = 'Sign Up';
 
 			// Attempt to add the key to the temp_user table.
@@ -94,18 +94,25 @@ class Welcome extends CI_Controller {
 				$this->sendMail($key);
 				$data['message'] = 'An email has been sent to you.';
 			} else {
-				
+				// Get the error.
 				$error = $this->db->error();
 				
+				// Duplicate entry. This occurs when a single user repeatedly signups
+				// In this case, we just send the mail again. A new entry in the table
+				// is not required.
 				if ($error['code'] == 1062) {
 					$this->sendMail($key);
 					$data['message'] = 'An email has been sent to you.';
 				} else {
+					// Have not acquired any other error till now. So output any other
+					// error if encountered. 
 					$data['message'] = 'An error has occured. (' . $error['code'] . ') ' . $error['message'];
 				}
 			}
+			// Display a page with the message.
 			$this->load->view('error', $data);
 		} else {
+			// Keep us on sign-up page in case the user input is valid.
 			$this->sign(1);
 		}
 	}
@@ -114,6 +121,12 @@ class Welcome extends CI_Controller {
 		$this->load->library('email', array('mailtype' => 'html'));
 		$this->email->to($this->input->post('email'));
 		$this->email->from('', 'Admin');
+
+		$data['page_title'] = 'Sign Up';
+		$data['key'] = $key;
+		$message = $this->load->view('mail.php', $data, TRUE);
+		$this->email->message($message);
+		$this->email->send();
 	}
 
 }

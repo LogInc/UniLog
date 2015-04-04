@@ -10,7 +10,7 @@ require_once 'brand.php';
 
 echo '<p class="text-info">';
 echo $message;
-echo '<a href="' . base_url() . '">Go to Home</a>';
+echo ' <a href="' . base_url() . '">Go to Home</a>';
 echo '</p>';
 
 require_once 'page_foot.php';
