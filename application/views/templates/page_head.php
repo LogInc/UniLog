@@ -12,10 +12,10 @@
         <title>UniLog | <?php echo $page_title; ?></title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="<?php echo stylePath('bootstrap.min.css') ?>">
-        <link rel="stylesheet" href="<?php echo stylePath('bootstrap-theme.min.css') ?>">
-        <script src="<?php echo scriptPath('jquery-2.1.1.min.js') ?>"></script>
-        <script src="<?php echo scriptPath('bootstrap.min.js') ?>"></script>
+        <link rel="stylesheet" href="<?php echo style_path('bootstrap.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo style_path('bootstrap-theme.min.css') ?>">
+        <script src="<?php echo script_path('jquery-2.1.1.min.js') ?>"></script>
+        <script src="<?php echo script_path('bootstrap.min.js') ?>"></script>
         <style>
             body{
                 font-family:"Calibri Light";

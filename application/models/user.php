@@ -71,6 +71,14 @@ class User extends CI_Model {
 		);
 		
 		$inserted = $this->db->insert('temp_user', $data);
+		
+		if (!$inserted) {
+			$this->db->where('user_email', $this->input->post('email'));
+			$this->db->or_where('user_rollno', $this->input->post('rollno'));
+			$this->db->delete('temp_user');
+			$inserted = $this->db->insert('temp_user', $data);
+		}
+		
 		return $inserted;
 	}
 	
@@ -95,9 +103,9 @@ class User extends CI_Model {
 	 * @return true if the key is found in the database.
 	 */
 	public function valid_key($key) {
-		$key = xss_clean(htmlescape($key));
-		$query = $this->db->get_where('temp_user', 'user_key', $key);
-		
+		$key = xss_clean(html_escape($key));
+
+		$query = $this->db->get_where('temp_user', array('user_key' => $key));
 		if ($query) {
 			return ($query->num_rows() == 1);
 		}
@@ -112,7 +120,7 @@ class User extends CI_Model {
 	 * @return string The user key if one found, otherwise null.
 	 */
 	public function get_temp_user_key() {
-		$query = $this->db->get_where('temp_user', 'user_email', $this->input->post('email'));
+		$query = $this->db->get_where('temp_user', array('user_email' => $this->input->post('email')));
 
 		if ($query && $query->num_rows() == 1) {
 			return $query->row()->user_key;

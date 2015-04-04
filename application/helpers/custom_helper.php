@@ -6,14 +6,24 @@
  * Copyright 2015 log inc.
  */
 
-function imagePath($file) {
+function image_path($file) {
 	return base_url() . 'images/' . $file;
 }
 
-function stylePath($file) {
+function style_path($file) {
 	return base_url() . 'css/' . $file;
 }
 
-function scriptPath($file) {
+function script_path($file) {
 	return base_url() . 'js/' . $file;
+}
+
+function show_message($message, $heading, $title='Message') {
+	$data = array(
+		'page_title'	=> $title,
+		'message'		=> $message,
+		'heading'		=> $heading
+			);
+	
+	get_instance()->load->view('message', $data);
 }

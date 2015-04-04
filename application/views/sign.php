@@ -15,14 +15,14 @@
 
 <div class="row">
 	<div class="col-md-6 ">
-		<img class="img-responsive" style="margin-top: 10%" src="<?php echo imagePath('schoolbag.png') ?>" alt="bag sketch" >
+		<img class="img-responsive" style="margin-top: 10%" src="<?php echo image_path('schoolbag.png') ?>" alt="bag sketch" >
 	</div>
 	
 	<?php
 	if ($signup) {
-		require_once 'sign_up.php';
+		require_once 'forms/sign_up.php';
 	} else {
-		require_once 'sign_in.php';
+		require_once 'forms/sign_in.php';
 	}
 	?>
 </div>
