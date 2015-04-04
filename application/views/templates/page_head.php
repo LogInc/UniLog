@@ -31,4 +31,3 @@
     <body>
         <div class="container">
             <div style="min-height:100px">
-                </body>
