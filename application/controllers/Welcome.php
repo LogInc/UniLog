@@ -85,7 +85,7 @@ class Welcome extends CI_Controller {
 			// Attempt to add the key to the temp_user table.
 			if ($this->user->add_temp_user($key)) {				
 				if ($this->send_mail($key))
-					show_message('An email has been sent to you.', 'Email sent');
+					show_message('An email has been sent to you.', 'Thank You!');
 				else
 					show_message('Unable to send email. Please try again.', 'Email not sent');
 			} else {
@@ -96,7 +96,7 @@ class Welcome extends CI_Controller {
 			$data['page_title'] = 'Sign Up';
 			$data['key'] = $key;
 			$data['name'] = 'ab';
-			$this->load->view('mail');
+			$this->load->view('templates/signup_mail');
 		} else {
 			// Keep us on sign-up page in case the user input is invalid.
 			$this->sign(1);
@@ -158,7 +158,7 @@ class Welcome extends CI_Controller {
 		// Load the mail page as the message. The mail page is a dynamic page.
 		// The TRUE argument returns the PHP output as a string instead of sending it
 		// to the client.
-		$message = $this->load->view('mail.php', $data, TRUE);
+		$message = $this->load->view('templates/signup_mail.php', $data, TRUE);
 		$this->email->message($message);
 		
 		return $this->email->send();
