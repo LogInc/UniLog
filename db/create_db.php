@@ -41,3 +41,15 @@ $query = <<<END
 		);
 END;
 mysql_query($query) or die('Query failed: ' . mysql_error()); 
+
+$query = <<<END
+CREATE TABLE ci_sessions (
+        id			varchar(40)							NOT NULL,
+        ip_address	varchar(45)							NOT NULL,
+        timestamp	int(10)		unsigned	DEFAULT 0	NOT NULL,
+        data blob										NOT NULL,
+        PRIMARY KEY (id),
+        KEY ci_sessions_timestamp (timestamp)
+);
+END;
+mysql_query($query) or die('Query failed: ' . mysql_error()); 
