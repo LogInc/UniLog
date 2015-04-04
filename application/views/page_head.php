@@ -5,7 +5,7 @@
  * Copyright 2015 log inc.
  */
 ?>
-
+    
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,20 +14,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="<?php echo stylePath('bootstrap.min.css') ?>">
         <link rel="stylesheet" href="<?php echo stylePath('bootstrap-theme.min.css') ?>">
-		<script src="<?php echo scriptPath('jquery-2.1.1.min.js') ?>"></script>
+        <script src="<?php echo scriptPath('jquery-2.1.1.min.js') ?>"></script>
         <script src="<?php echo scriptPath('bootstrap.min.js') ?>"></script>
         <style>
             body{
-				font-family:"Calibri Light";
-				font-size: 20px;
+                font-family:"Calibri Light";
+                font-size: 20px;
             }
-
-			a:hover, a:focus {
-				text-decoration: none;
-			}
+            
+            a:hover, a:focus {
+                text-decoration: none;
+            }
         </style>
     </head>
-
-	<body>
-        <div class="container-fluid">
-			<div style="min-height:100px">
+        
+    <body>
+        <div class="container">
+            <div style="min-height:100px">
+                </body>

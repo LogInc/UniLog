@@ -13,35 +13,35 @@
 	<p> or <a href="<?php echo site_url('welcome/sign/0'); ?>">Sign In</a></p>
 
 	<div class="form-group form-group-lg">
-		<label class="control-label col-lg-3 col-md-4 col-sm-2" for="firstname">First Name:</label>
+		<label class="control-label col-lg-3 col-md-4 col-sm-2 sr-only" for="firstname">First Name:</label>
 		<div class="col-md-8 col-sm-10">
 			<input class="form-control" type="text" name="firstname" value="<?php echo set_value('firstname'); ?>" placeholder="Enter your first name">
 		</div>
 	</div>
 
 	<div class="form-group form-group-lg">
-		<label class="control-label col-lg-3 col-md-4 col-sm-2" for="lastname">Last Name:</label>
+		<label class="control-label col-lg-3 col-md-4 col-sm-2 sr-only" for="lastname">Last Name:</label>
 		<div class="col-md-8 col-sm-10">
 			<input class="form-control" type="text" name="lastname" value="<?php echo set_value('lastname'); ?>" placeholder="Enter your last name">
 		</div>
 	</div>
 
 	<div class="form-group form-group-lg">
-		<label class="control-label col-lg-3 col-md-4 col-sm-2" for="rollno">Roll No:</label>
+		<label class="control-label col-lg-3 col-md-4 col-sm-2 sr-only" for="rollno">Roll No:</label>
 		<div class="col-md-8 col-sm-10">
 			<input class="form-control" type="text" name="rollno" value="<?php echo set_value('rollno'); ?>" placeholder="Enter your roll no.">
 		</div>
 	</div>
 
 	<div class="form-group form-group-lg">
-		<label class="control-label col-lg-3 col-md-4 col-sm-2" for="email">Email:</label>
+		<label class="control-label col-lg-3 col-md-4 col-sm-2 sr-only" for="email">Email:</label>
 		<div class="col-md-8 col-sm-10">
 			<input class="form-control" type="text" name="email" value="<?php echo set_value('email'); ?>" placeholder="Enter your email address">
 		</div>
 	</div>
 
 	<div class="form-group form-group-lg">
-		<label class="control-label col-lg-3 col-md-4 col-sm-2" for="password">Password:</label>
+		<label class="control-label col-lg-3 col-md-4 col-sm-2 sr-only" for="password">Password:</label>
 		<div class="col-md-8 col-sm-10">
 			<input class="form-control" type="text" name="password" placeholder="Enter your password">
 		</div>

@@ -14,8 +14,8 @@
 </div>
 
 <div class="row">
-	<div class="col-md-5 col-md-offset-1">
-		<img class="img-responsive" style="margin-top: 5%" src="<?php echo imagePath('schoolbag.png') ?>" alt="bag sketch" >
+	<div class="col-md-6 ">
+		<img class="img-responsive" style="margin-top: 10%" src="<?php echo imagePath('schoolbag.png') ?>" alt="bag sketch" >
 	</div>
 	
 	<?php
