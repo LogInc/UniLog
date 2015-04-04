@@ -32,7 +32,7 @@ $query = <<<END
 		CREATE TABLE temp_user (
 			user_key			VARCHAR(64)		NOT NULL,
 			user_email			VARCHAR(255)	NOT NULL	UNIQUE,
-			user_rollno			VARCHAR(12)		NULL,
+			user_rollno			VARCHAR(12)		NULL		UNIQUE,
 			user_password		VARCHAR(64)		NOT NULL,
 			user_first_name		VARCHAR(25)		NOT NULL,
 			user_last_name		VARCHAR(25)		NOT NULL,

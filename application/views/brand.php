@@ -15,14 +15,3 @@
 		?>
 	</div>
 </div>
-
-<div class="row">
-	<div class="col-md-12">
-		Welcome to <b style="color:#4472c4" >UniLog</b>, we hope you enjoy the experience.
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-5 col-md-offset-1">
-		<img class="img-responsive" style="margin-top: 5%" src="<?php echo imagePath('schoolbag.png') ?>" alt="bag sketch" >
-	</div>

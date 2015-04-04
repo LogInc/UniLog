@@ -1,4 +1,5 @@
 <?php
+
 /*
  * UniLog project.
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
@@ -6,8 +7,6 @@
  */
 ?>
 
+<div class="col-xs-10">
+	<?php echo $message; ?>
 </div>
-<footer class="text-center text-info">Copyright &copy; 2015 log inc. All rights reserved.</footer>
-</div>
-</body>
-</html>
