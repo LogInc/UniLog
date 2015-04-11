@@ -15,6 +15,7 @@
  *	temp_user
  *	temp_student
  *  student
+ *	student_pin
  *	course
  *	ci_session
  */
@@ -99,6 +100,16 @@ CREATE TABLE student (
 	
 	FOREIGN KEY (user_id) REFERENCES user(user_id),
 	PRIMARY KEY (user_id)
+);
+END;
+runQuery();
+
+
+$query = <<<END
+CREATE TABLE student_pin (
+	student_email		VARCHAR(255)	NOT NULL	UNIQUE,
+	student_rollno		VARCHAR(12)		NOT NULL	UNIQUE,
+	student_pin			SMALLINT(5)		NOT NULL	UNIQUE,
 );
 END;
 runQuery();
