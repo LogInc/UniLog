@@ -63,4 +63,59 @@ class Student extends User {
 
 		$this->db->insert('temp_student', $data);
 	}
+	
+	/**
+	 * Adds a student authentication pin to the database.
+	 * 
+	 * Student users who attempt to sign-up must have a secret pin entry corresponding
+	 * to their email and roll no. in the database. This method adds that entry.
+	 * @param smallint $pin A unique pin identifying the student.
+	 * @return boolean True if the entry was successfully added.
+	 */
+	public function add_student_pin($pin) {
+		$data = array(
+			'student_email'		=> clean_input($this->input->post('email')),
+			'student_rollno'	=> clean_input($this->input->post('rollno')),
+			'student_pin'		=> $pin
+				);
+		
+		$inserted = $this->db->insert('student_auth', $data);
+		return $inserted;
+	}
+	
+	/**
+	 * Validates a student input when signing up.
+	 * 
+	 * A student user when signing up must provide a valid pin allotted to him secretly.
+	 * This key must be present in the database corresponding to his email and roll no.
+	 * This method verifies the existence of the pin.
+	 * @return boolean	True if the a valid entry exists in the database.
+	 */
+	public function valid_student_pin() {
+		$email = clean_input($this->input->post('email'));
+		$rollno = clean_input($this->input->post('rollno'));
+		$pin = clean_input($this->input->post('pin'));
+		
+		$query = $this->db->get_where('student_auth', array('student_email'		=> $email,
+															'student_rollno'	=> $rollno,
+															'student_pin'		=> $pin));
+		if ($query)
+			return ($query->num_rows() == 1);
+		else return false;
+	}
+	
+	/**
+	 * Generates a unique student pin for student authentication.
+	 * @return int A unique pin.
+	 */
+	public function generate_unique_pin() {
+		$found = false;
+		$pin = 0;
+		while (!found) {
+			$pin = rand(10000, 99999);
+			$query = $this->db->get_where('student_auth', array('student_pin' => $pin));
+			$found = ($query != null) && ($query->num_rows() == 0);
+		}
+		return $pin;
+	}
 }
