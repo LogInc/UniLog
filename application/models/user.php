@@ -16,7 +16,7 @@ class User extends CI_Model {
 	/**
 	 * Adds a user in the database.
 	 * @param string $key	The user_key which exists in the temp_user table.
-	 * @return string email of the newly added user if success, null otherwise.
+	 * @return int id of the newly added user if success, null otherwise.
 	 */
 	public function add_user($key) {
 		$key = clean_input($key);
@@ -47,7 +47,9 @@ class User extends CI_Model {
 		// Drop the entry from the temporary table.
 		$this->db->delete('temp_user', array('user_key' => $key));
 		
-		return $data['user_email'];
+		$query = $this->db->get_where('user', array('user_email' => $data['user_email']));
+		
+		return $query->row()->user_id;
 	}
 
 	/**
@@ -69,13 +71,11 @@ class User extends CI_Model {
 			'user_type' => clean_input($this->input->post('user_type'))
 		);
 		
-		$inserted = $this->db->insert('temp_user', $data);
+		// Delete any previous temp_user with the same email address.
+		$this->db->where('user_email', $email);
+		$this->db->delete('temp_user');
 		
-		if (!$inserted) {
-			$this->db->where('user_email', $email);
-			$this->db->delete('temp_user');
-			$inserted = $this->db->insert('temp_user', $data);
-		}
+		$inserted = $this->db->insert('temp_user', $data);
 		
 		return $inserted;
 	}
