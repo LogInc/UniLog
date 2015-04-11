@@ -85,7 +85,7 @@ CREATE TABLE temp_student (
 	student_rollno		VARCHAR(12)		NOT NULL	UNIQUE,
 	student_pin			SMALLINT(5)		NOT NULL	UNIQUE,
 
-	FOREIGN KEY (temp_user_key) REFERENCES temp_user(user_key),
+	FOREIGN KEY (temp_user_key) REFERENCES temp_user(user_key) ON DELETE CASCADE ON UPDATE NO ACTION,
 	PRIMARY KEY (temp_user_key)
 );
 END;

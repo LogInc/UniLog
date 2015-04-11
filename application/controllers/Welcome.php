@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Description of Welcome
+ * 
  * This controller class is the starting point of the website. The controller checks if
  * a user is already logged on. If that is the case, then the site is redirected to the
  * home controller. Otherwise the sign-in page is displayed.

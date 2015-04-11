@@ -8,6 +8,7 @@
 
 /**
  * Description of user
+ * 
  * This model represents a UniLog user.
  * Includes functionality to create new users, verify a user's existence.
  */
@@ -59,7 +60,7 @@ class User extends CI_Model {
 	 *
 	 */
 	public function add_temp_user($key) {
-		$key = xss_clean(html_escape($key));
+		$key = clean_input($key);
 		$password = password_hash($this->input->post('pasword'), PASSWORD_BCRYPT);
 		$email = clean_input($this->input->post('email'));
 		$data = array(
