@@ -112,7 +112,6 @@ class Welcome extends CI_Controller {
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.user_email]|trim');
 		$this->form_validation->set_rules('firstname', 'First Name', 'required|trim');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'required|trim');
-		$this->form_validation->set_rules('rollno', 'Roll No.', 'is_unique[user.user_rollno]|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		return $this->form_validation->run();
 	}

@@ -19,7 +19,7 @@ class User extends CI_Model {
 	 * @return string email of the newly added user if success, null otherwise.
 	 */
 	public function add_user($key) {
-		$key = xss_clean(html_escape($key));
+		$key = clean_input($key);
 		
 		// Look for the user in the temp_user table.
 		$temp_user = $this->db->get_where('temp_user', array('user_key' => $key));
@@ -33,10 +33,10 @@ class User extends CI_Model {
 		$row = $temp_user->row();
 		$data = array(
 			'user_email'		=> $row->user_email,
-			'user_rollno'		=> $row->user_rollno,
 			'user_password'		=> $row->user_password,
 			'user_first_name'	=> $row->user_first_name,
-			'user_last_name'	=> $row->user_last_name
+			'user_last_name'	=> $row->user_last_name,
+			'user_type'			=> $row->user_type
 			);
 		
 		// Add the entry.
@@ -58,23 +58,21 @@ class User extends CI_Model {
 	 */
 	public function add_temp_user($key) {
 		$key = xss_clean(html_escape($key));
-		
 		$password = password_hash($this->input->post('pasword'), PASSWORD_BCRYPT);
-		
+		$email = clean_input($this->input->post('email'));
 		$data = array(
-			'user_key' => xss_clean($key),
-			'user_first_name' => $this->input->post('firstname'),
-			'user_last_name' => $this->input->post('lastname'),
-			'user_rollno' => $this->input->post('rollno'),
-			'user_email' => $this->input->post('email'),
-			'user_password' => $password
+			'user_key' => $key,
+			'user_first_name' => clean_input($this->input->post('firstname')),
+			'user_last_name' => clean_input($this->input->post('lastname')),
+			'user_email' => $email,
+			'user_password' => $password,
+			'user_type' => clean_input($this->input->post('user_type'))
 		);
 		
 		$inserted = $this->db->insert('temp_user', $data);
 		
 		if (!$inserted) {
-			$this->db->where('user_email', $this->input->post('email'));
-			$this->db->or_where('user_rollno', $this->input->post('rollno'));
+			$this->db->where('user_email', $email);
 			$this->db->delete('temp_user');
 			$inserted = $this->db->insert('temp_user', $data);
 		}
@@ -90,7 +88,7 @@ class User extends CI_Model {
 	 * @param string $mail	The email address of the user.
 	 */
 	public function delete_temp_user($mail) {
-		$mail = xss_clean(html_escape($mail));
+		$mail = clean_input($mail);
 		$this->db->delete('temp_user', array('user_email' => $mail));
 	}
 
@@ -103,7 +101,7 @@ class User extends CI_Model {
 	 * @return true if the key is found in the database.
 	 */
 	public function valid_key($key) {
-		$key = xss_clean(html_escape($key));
+		$key = clean_input($key);
 
 		$query = $this->db->get_where('temp_user', array('user_key' => $key));
 		if ($query) {
@@ -120,7 +118,7 @@ class User extends CI_Model {
 	 * @return string The user key if one found, otherwise null.
 	 */
 	public function get_temp_user_key() {
-		$query = $this->db->get_where('temp_user', array('user_email' => $this->input->post('email')));
+		$query = $this->db->get_where('temp_user', array('user_email' => clean_input($this->input->post('email'))));
 
 		if ($query && $query->num_rows() == 1) {
 			return $query->row()->user_key;

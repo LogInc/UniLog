@@ -27,3 +27,7 @@ function show_message($message, $heading, $title='Message') {
 	
 	get_instance()->load->view('message', $data);
 }
+
+function clean_input($input) {
+	return xss_clean(html_escape($input));
+}
