@@ -30,7 +30,7 @@
         <div class="form-group form-group-lg">
             <br>
             <div class="col-lg-offset-10 col-md-10 col-md-offset-8 col-sm-9 col-sm-offset-5 pull-right">
-                <button class="btn btn-primary moveOn" type="Next" >Ok, next!</button>
+                <button class="btn btn-primary moveOn">Ok, next!</button>
             </div>
         </div>
         
@@ -111,7 +111,6 @@
     $(document).ready(function(){
         $(".moveOn").click(function(){
             
-            
             var value =  $('input[name=type]:checked', '#form_type').val()
             
             if(value === "1")
@@ -130,4 +129,3 @@
         });
     });
 </script>
-
