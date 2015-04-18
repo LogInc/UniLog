@@ -34,12 +34,15 @@ class Welcome extends CI_Controller {
 	/**
 	 * Displays the sign-in/up page. $signup flags dictates which form to show.
 	 * @param int $signup 0 displays the sign-in form, 1 outputs sign-up.
+	 * @param int $signup_initial	1 displays the university student form; 2 displays
+	 *	the open course student form.
 	 */
-	public function sign($signup = 0) {
+	public function sign($signup = 0, $signup_initial="0") {
 		$this->load->helper('form');
 
 		$data['page_title'] = $signup ? 'Sign Up' : 'Sign In';
 		$data['signup'] = $signup;
+		$data['initial_form'] = $signup_initial;
 		$this->load->view('templates/page_head', $data);
 		$this->load->view('templates/brand');
 		$this->load->view('sign', $data);
@@ -100,7 +103,7 @@ class Welcome extends CI_Controller {
 			$this->load->view('templates/signup_mail');
 		} else {
 			// Keep us on sign-up page in case the user input is invalid.
-			$this->sign(1);
+			$this->sign(1, $this->input->post('type'));
 		}
 	}
 
