@@ -181,7 +181,9 @@ CREATE TABLE post (
 	post_title			VARCHAR(128)						NOT NULL,
 	post_summary		TEXT								NOT NULL,
 	post_text			TEXT								NOT NULL,
+	post_author			INT		UNSIGNED					NOT NULL,
 		
+	FOREIGN KEY (post_author) REFERENCES user(user_id),
 	PRIMARY KEY (post_id)
 );
 END;
@@ -192,10 +194,12 @@ $query = <<<END
 CREATE TABLE comment (
 	comment_id			INT			UNSIGNED	NOT NULL	AUTO_INCREMENT,
 	post_id				INT			UNSIGNED	NOT NULL,
+	comment_author		INT			UNSIGNED	NOT NULL,
 	comment_timestamp	TIMESTAMP				NOT NULL,
 	comment_text		TEXT					NOT NULL,
 	
-	FOREIGN KEY (post_id) REFERENCES post(post_id),
+	FOREIGN KEY (post_id)			REFERENCES post(post_id),
+	FOREIGN KEY (comment_author)	REFERENCES user(user_id),
 	PRIMARY KEY (comment_id)
 );
 END;
