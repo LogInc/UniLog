@@ -15,8 +15,12 @@
  *	temp_user
  *	temp_student
  *  student
- *	student_pin
+ *	student_auth
+ *	instructor
  *	course
+ *	upload
+ *	post
+ *	comment
  *	ci_session
  */
 
@@ -106,10 +110,23 @@ runQuery();
 
 
 $query = <<<END
-CREATE TABLE student_pin (
+CREATE TABLE student_auth (
 	student_email		VARCHAR(255)	NOT NULL	UNIQUE,
 	student_rollno		VARCHAR(12)		NOT NULL	UNIQUE,
-	student_pin			SMALLINT(5)		NOT NULL	UNIQUE
+	student_pin			SMALLINT(5)		NOT NULL	UNIQUE,
+		
+	PRIMARY KEY (student_email, student_rollno, student_pin)
+);
+END;
+runQuery();
+
+
+$query = <<<END
+CREATE TABLE instructor (
+	user_id			INT		UNSIGNED		NOT NULL,
+		
+	FOREIGN KEY (user_id) REFERENCES user(user_id),
+	PRIMARY KEY (user_id)
 );
 END;
 runQuery();
@@ -121,11 +138,69 @@ CREATE TABLE course (
 	course_term			ENUM('spring', 'fall')				NOT NULL,
 	course_year			YEAR								NOT NULL,
 	course_type			ENUM('th', 'pr')					NOT NULL,
-	course_instructor	INT						UNSIGNED	NOT NULL,
+	course_start_date	DATE								NOT NULL,
+	course_end_date		DATE								NULL,
 	course_name			VARCHAR(128)						NOT NULL,
+	course_instructor	INT						UNSIGNED	NOT NULL,
 		
 	FOREIGN KEY	(course_instructor) REFERENCES user(user_id),
 	PRIMARY KEY (course_code, course_term, course_year, course_type)
+);
+END;
+runQuery();
+
+
+$query = <<<END
+CREATE TABLE upload (
+	upload_id			INT			UNSIGNED	NOT NULL	AUTO_INCREMENT,
+	upload_type			ENUM(	'upload_pdf',
+								'upload_doc',
+								'upload_image',
+								'upload_video'
+							)					NOT NULL,
+	upload_timestamp	TIMESTAMP				NOT NULL,
+	upload_caption		VARCHAR(64)				NOT NULL,
+	upload_description	TEXT					NOT NULL,
+	upload_altext		VARCHAR(128)			NOT NULL,
+	upload_data			LONGBLOB				NOT NULL,
+		
+	PRIMARY KEY (upload_id)
+);
+END;
+runQuery();
+
+
+$query = <<<END
+CREATE TABLE post (
+	post_id				INT		UNSIGNED					NOT NULL	AUTO_INCREMENT,
+	post_type			ENUM(	'post_admin_notification',
+								'post_course_update',
+								'post_discussion'
+							)								NOT NULL,
+	post_timestamp		TIMESTAMP							NOT NULL,
+	post_title			VARCHAR(128)						NOT NULL,
+	post_summary		TEXT								NOT NULL,
+	post_text			TEXT								NOT NULL,
+	post_author			INT		UNSIGNED					NOT NULL,
+		
+	FOREIGN KEY (post_author) REFERENCES user(user_id),
+	PRIMARY KEY (post_id)
+);
+END;
+runQuery();
+
+
+$query = <<<END
+CREATE TABLE comment (
+	comment_id			INT			UNSIGNED	NOT NULL	AUTO_INCREMENT,
+	post_id				INT			UNSIGNED	NOT NULL,
+	comment_author		INT			UNSIGNED	NOT NULL,
+	comment_timestamp	TIMESTAMP				NOT NULL,
+	comment_text		TEXT					NOT NULL,
+	
+	FOREIGN KEY (post_id)			REFERENCES post(post_id),
+	FOREIGN KEY (comment_author)	REFERENCES user(user_id),
+	PRIMARY KEY (comment_id)
 );
 END;
 runQuery();

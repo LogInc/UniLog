@@ -1,0 +1,56 @@
+/*
+UniLog project.
+UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
+Copyright 2015 log inc.
+*/
+/* 
+    Created on : Apr 21, 2015, 7:03:15 PM
+    Author     : Ahmar
+*/
+
+.navbar-default .navbar-brand {
+    color: rgba(71, 115, 196, 1);
+}
+.navbar-default {
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 1);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    border-width: 1px;
+    border-radius: 0px;
+}
+.navbar-default .navbar-nav>li>a {
+    color: rgba(68, 115, 196, 1);
+    background-color: rgba(255, 255, 255, 1);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(51, 51, 51, 1);
+    background-color: rgba(242, 242, 242, 1);
+    background: -webkit-linear-gradient(top, rgba(68, 114, 196, 1) 0%, rgba(242, 242, 242, 1) 100%);
+    background: linear-gradient(to bottom, rgba(68, 114, 196, 1) 0%, rgba(242, 242, 242, 1) 100%);
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(85, 85, 85, 1);
+    background-color: rgba(231, 231, 231, 1);
+    background: -webkit-linear-gradient(top, rgba(68, 114, 196, 1) 0%, rgba(231, 231, 231, 1) 100%);
+    background: linear-gradient(to bottom, rgba(68, 114, 196, 1) 0%, rgba(231, 231, 231, 1) 100%);
+}
+.navbar-default .navbar-toggle {
+    border-color: #ddd;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #ddd;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #ffffff;
+}
