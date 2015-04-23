@@ -18,10 +18,19 @@ $bag_image = image_path('schoolbag.png');
 	#nav li {
 		padding-left:30px;
 	}
+	
+	nav > div {
+		padding:5px;
+	}
+	
+	ul#nav {
+		list-style-type:none;
+		padding-top:5px;
+	}
 </style>
 
-<nav class="row navbar navbar-default" style='padding:10px'>
-	<div class="col-md-2 navbar-header">
+<nav class="navbar navbar-default" style='padding:10px'>
+	<div class="col-sm-2 navbar-header">
 		<?php
 		$a = '<a href="' . base_url() . '" >';
 		$a .= img(image_path('unilog_logo.png'), FALSE, 'width="100" alt="unilog logo"');
@@ -29,9 +38,9 @@ $bag_image = image_path('schoolbag.png');
 		?>
 	</div>
 
-	<div class='col-md-6'>
-		<form class="form-inline" role="form">
-			<div class="col-md-12 col-sm-6 input-group">
+	<div class='col-md-6 col-sm-4'>
+		<form class="form-horizontal" role="form">
+			<div class="col-sm-12 input-group">
 					<input id="search" type="text" class="form-control" placeholder="Search my bag" name="serch-term">
 				<div class="input-group-btn">
 					<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
@@ -40,9 +49,9 @@ $bag_image = image_path('schoolbag.png');
 		</form>
 	</div>
 
-	<div class="col-md-4" style="font-size:17px">
-		<ul id="nav" class="navbar-nav navbar-right" style="list-style-type:none; padding-top:5px" >
-			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	<div class="" style="font-size:17px;">
+		<ul id="nav" class="navbar-nav pull-right">
+			<li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<strong>Ahmar Sultan</strong> <span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="#">Profile</a></li>
