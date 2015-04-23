@@ -31,7 +31,7 @@
             
         </b>
         <hr style="height:2px;background-color: gray">
-        <div >
+        <div>
             <h2>This is the news title</h2>
             <p>this is the news</p>
             
