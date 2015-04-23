@@ -40,7 +40,7 @@ $bag_image = image_path('schoolbag.png');
 		</form>
 	</div>
 
-	<div class="col-md-4" style="font-size:17px">
+	<div class="col-md-4 " style="font-size:17px">
 		<ul id="nav" class="navbar-nav navbar-right" style="list-style-type:none; padding-top:5px" >
 			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<strong>Ahmar Sultan</strong> <span class="caret"></span></a>

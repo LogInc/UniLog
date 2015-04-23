@@ -9,8 +9,6 @@
 ?>
 
 
-</div>
-
 <div class="col-md-6" >
     <div class="jumbotron" style="background-color: white"> 
         
