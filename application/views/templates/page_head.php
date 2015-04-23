@@ -32,5 +32,4 @@
 
     <body>
         <div class="container">
-            <div style="min-height:100px">
-            
+            <div style="min-height:500px">
