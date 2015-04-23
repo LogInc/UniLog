@@ -21,6 +21,7 @@
             body{
                 font-family:"Calibri Light";
                 font-size: 20px;
+                background-color: #eee;
             }
             
             a:hover, a:focus {
