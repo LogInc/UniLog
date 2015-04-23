@@ -5,7 +5,7 @@
  * Copyright 2015 log inc.
  */
 ?>
-<div class="col-md-3 navbar-default " style="border-radius: 5px" >
+<div class="col-md-3 navbar-default" style="border-radius:5px" >
     <div class ="row"> 
 		<nav>
 			<ul style="list-style-type: none;padding-top: 10%;font-size: 18px;min-height: 500px">
