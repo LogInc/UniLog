@@ -24,7 +24,7 @@ class Home extends CI_Controller {
             $data['page_title'] = 'Wall';
             $this->load->view('templates/page_head', $data);            
             $this->load->view('templates/nav');
-			$this->load->view('templates/left_nav');
+	    $this->load->view('templates/left_nav');
             $this->load->view('user_wall');
             $this->load->view('templates/page_foot');
                 

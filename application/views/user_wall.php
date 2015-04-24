@@ -15,8 +15,8 @@
                 <label for="comment">Write your post</label>
                 <textarea class="form-control" rows="5" id="comment" placeholder="Write a post or share information..."></textarea>
                 <div class="pull-right" style="margin-top:10px">
-				<button class="btn btn-primary btn-group-justified" type="submit" name="submit_post">Post</button>
-				</div>
+                    <button class="btn btn-primary btn-group-justified" type="submit" name="submit_post">Post</button>
+                </div>
             </div>
         </form>
     </div>
