@@ -7,7 +7,7 @@
  */
 
 ?>
-<div style="background-color: white"> 
+<div class="no-select" style="background-color: white"> 
 
     <div class="row">
         <div class="col-md-12">

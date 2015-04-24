@@ -29,7 +29,7 @@ $bag_image = image_path('schoolbag.png');
 	}
 </style>
 
-<nav class="navbar navbar-default" style='padding:10px'>
+<nav class="navbar navbar-default no-select" style='padding:10px'>
 	<div class="col-sm-2 navbar-header">
 		<?php
 		$a = '<a href="' . base_url() . '" >';
@@ -63,4 +63,3 @@ $bag_image = image_path('schoolbag.png');
 		</ul>
 	</div>
 </nav>
-

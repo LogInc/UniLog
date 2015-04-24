@@ -8,9 +8,8 @@
  
 ?>
 
-
-
-    <div class="col-md-6 jumbotron" style="background-color: white"> 
+<div class="col-md-6">
+    <div class="jumbotron no-select" style="background-color: white"> 
         <form role="form">
             <div class="form-group">
                 <label for="comment">Write your post</label>
@@ -30,3 +29,4 @@
             <p>this is the news</p>
         </div>
     </div>
+</div>
