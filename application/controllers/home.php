@@ -30,4 +30,11 @@ class Home extends CI_Controller {
             $this->load->view('templates/page_foot');
                 
         }
+        
+        public function notice_board(){
+            $this->load->view('templates/page_head');
+            $this->load->view('templates/nav');
+            $this->load->view('templates/left_nav');
+            $this->load->view('templates/notice_board');
+        }
 }
