@@ -118,6 +118,12 @@ class Welcome extends CI_Controller {
 		$this->form_validation->set_rules('firstname', 'First Name', 'required|trim');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'required|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required');
+		
+		if ($this->input->post('type') == '1') {
+			$this->form_validation->set_rules('rollno', 'Roll No.', 'required|is_unique[student.student_rollno]|trim');
+			$this->form_validation->set_rules('pin', 'PIN', 'required|numeric|max_length(5)|min_length(5)');
+		}
+		
 		return $this->form_validation->run();
 	}
 

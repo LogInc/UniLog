@@ -30,6 +30,13 @@ class Home extends CI_Controller {
                 
         }
         
+        public function notice_board(){
+            $this->load->view('templates/page_head');
+            $this->load->view('templates/nav');
+            $this->load->view('templates/left_nav');
+            $this->load->view('templates/notice_board');
+        }
+
         public function user()
         {
             $data['page_title'] = 'Profile';
