@@ -5,13 +5,29 @@
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
  */
-
-$notice_board = img(image_path('notice.jpg'), FALSE, 'class="img-rounded" width="200" alt="noticeboard"')
+$notice = image_path('notice.jpg');
+$image = image_path('sticky.jpg');
 ?>
-</div>
+
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+
 <div class="col-md-6" >
    
-    <div class="jumbotron" style="background-color: white; min-height: 200px; padding: 20px;border-radius:5px" >
+    <div class="jumbotron" style="background-color: white; min-height: 100px; padding: 20px;border-radius:5px" >
     <form class='form-group'>
         Post on the notice board:<br>
         <input type="text" name="post" >
@@ -21,8 +37,12 @@ $notice_board = img(image_path('notice.jpg'), FALSE, 'class="img-rounded" width=
     
     </div>
     
-    <div class="col-md-12" style=" background-image: <?php echo $notice_board?>; min-height: 200px;padding: 20px;border-radius:5px" >
-        asad
+    <img id="drag1" src="<?php echo $image; ?>" draggable="true"
+         ondragstart="drag(event)" style="width:125px;height:125px" >
+    
+    <div class="col-md-12" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" style="background-color: white;
+         background: url(<?php echo $notice; ?>) no-repeat 2px 2px; background-size: 100% 100%; min-height: 500px;padding: 20px;border-radius:5px" >
+        
     </div>
     
     
