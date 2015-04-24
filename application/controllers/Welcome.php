@@ -43,6 +43,7 @@ class Welcome extends CI_Controller {
 		$data['page_title'] = $signup ? 'Sign Up' : 'Sign In';
 		$data['signup'] = $signup;
 		$data['initial_form'] = $signup_initial;
+		$data['white'] = 1;
 		$this->load->view('templates/page_head', $data);
 		$this->load->view('templates/brand');
 		$this->load->view('sign', $data);
