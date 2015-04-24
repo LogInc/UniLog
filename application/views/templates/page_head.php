@@ -21,7 +21,7 @@
             body{
                 font-family:"Calibri Light";
                 font-size: 20px;
-                background-color: #eee;
+				background-color: <?php if (isset($white)) { echo '#fff'; } else { echo '#eee'; } ?>;
             }
 
             a:hover, a:focus {

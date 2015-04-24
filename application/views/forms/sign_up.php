@@ -46,7 +46,6 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
 
 <div class="col-md-5">
     <h4 class="text-danger"><?php echo validation_errors(); ?></h4>    
-
 	<div class = "Student-form" style = "display:none">
 		<div class="form-group form-group-lg ">
 			<label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="firstname">First Name:</label>
@@ -61,7 +60,6 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
 				<input class="form-control" type="text" name="lastname" value="<?php echo set_value('lastname'); ?>" placeholder="Enter your last name">
 			</div>
 		</div>
-
 
 		<div class="form-group form-group-lg roll_num" style = "display:none">
 			<label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="rollno">Roll No:</label>
