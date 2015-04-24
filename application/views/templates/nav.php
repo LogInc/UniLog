@@ -19,7 +19,7 @@ $bag_image = image_path('schoolbag.png');
 		padding-left:30px;
 	}
 	
-	nav > div {
+	#nav > div {
 		padding:5px;
 	}
 	
@@ -29,7 +29,7 @@ $bag_image = image_path('schoolbag.png');
 	}
 </style>
 
-<nav class="navbar navbar-default no-select" style='padding:10px'>
+<nav id='nav' class="navbar navbar-default no-select" style='padding:10px'>
 	<div class="col-sm-2 navbar-header">
 		<?php
 		$a = '<a href="' . base_url() . '" >';
@@ -49,7 +49,7 @@ $bag_image = image_path('schoolbag.png');
 		</form>
 	</div>
 
-	<div class="" style="font-size:17px;">
+	<div style="font-size:17px;">
 		<ul id="nav" class="navbar-nav pull-right">
 			<li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<strong>Ahmar Sultan</strong> <span class="caret"></span></a>
