@@ -46,8 +46,7 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
 
 <div class="col-md-5">
     <h4 class="text-danger"><?php echo validation_errors(); ?></h4>    
-
-	<div class = "Student-form" style = "display:none">
+	<div class="Student-form" style="display:none">
 		<div class="form-group form-group-lg ">
 			<label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="firstname">First Name:</label>
 			<div class="col-md-10 col-sm-9">
@@ -62,18 +61,17 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
 			</div>
 		</div>
 
-
-		<div class="form-group form-group-lg roll_num" style = "display:none">
+		<div id='rollno' class="form-group form-group-lg" style = "display:none">
 			<label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="rollno">Roll No:</label>
 			<div class="col-md-10 col-sm-9">
-				<input class="form-control" type="text" name="rollno" value="<?php echo set_value('rollno'); ?>" placeholder="Enter your roll no.">
+				<input class="form-control" type="text" name="rollno" value="<?php echo set_value('rollno'); ?>" placeholder="Enter your Roll No.">
 			</div>
 		</div>
 
-		<div class="form-group form-group-lg">
+		<div id='pin' class="form-group form-group-lg" style="display:none">
 			<label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="email">PIN:</label>
 			<div class="col-md-10 col-sm-9">
-				<input class="form-control" type="text" name="email" value="<?php echo set_value('pin'); ?>" placeholder="Enter your PIN">
+				<input class="form-control" type="text" name="email" value="<?php echo set_value('pin'); ?>" placeholder="Enter your 5 digit PIN">
 			</div>
 		</div>
 
@@ -113,7 +111,8 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
 		{
 			$("#form_type").hide();
 			$(".Student-form").fadeIn();
-			$(".roll_num").fadeIn();
+			$("#rollno").fadeIn();
+			$("#pin").fadeIn();
 		}
 		else if (value == "2")
 		{

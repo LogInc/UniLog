@@ -5,6 +5,8 @@
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
  */
+
+$notice_board = img(image_path('notice.jpg'), FALSE, 'class="img-rounded" width="200" alt="noticeboard"')
 ?>
 </div>
 <div class="col-md-6" >
@@ -19,7 +21,7 @@
     
     </div>
     
-    <div class="col-md-12" style=" background-image: url('notice.jpg'); min-height: 200px;padding: 20px;border-radius:5px" >
+    <div class="col-md-12" style=" background-image: <?php echo $notice_board?>; min-height: 200px;padding: 20px;border-radius:5px" >
         asad
     </div>
     
