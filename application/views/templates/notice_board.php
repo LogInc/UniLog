@@ -27,15 +27,15 @@ $image = image_path('sticky.png');
 <div class="col-md-8" >
 
     <div class="jumbotron" style="background-color: white; min-height: 100px; padding: 20px;border-radius:5px" >
-        <form class='form-group'>
-            <b>Notice Board</b>          
-            <hr style="height:2px;background-color: gray">
-
-            <input type="text" name="post" >
-            <button type="button" class="btn-primary">Submit</button>
-            <button class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                    colour <b class="caret"></b></a>
+    <form class='form-group'>
+        <b>Notice Board</b>          
+        <hr style="height:2px;background-color: gray">
+            
+        <input type="text" name="post" >
+        <button type="button" class="btn btn-primary">Submit</button>
+        <button class="dropdown btn btn-primary" type="button">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:white">
+                Color <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Green</a></li>
                     <li><a href="#">Pink</a></li>

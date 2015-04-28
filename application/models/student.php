@@ -1,5 +1,5 @@
 <?php
-
+include_once 'user.php';
 /*
  * UniLog project.
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
@@ -30,16 +30,19 @@ class Student extends User {
 		if ($temp_student->num_rows() != 1)
 			return null;
 		
+		$row = $temp_student->row();
+		$rollno = $row->student_rollno;
+		
 		$user_added = parent::add_user($key);
 		if (!$user_added)
 			return null;
 		
 		$data = array(
 			'user_id'			=> $user_added,
-			'student_rollno'	=> $temp_student->student_rollno
+			'student_rollno'	=> $rollno
 			);
 		
-		$student_added = $this->db-insert('student', $data);
+		$student_added = $this->db->insert('student', $data);
 		if (!$student_added)
 			return null;
 		
@@ -61,7 +64,7 @@ class Student extends User {
 			'student_pin'		=> clean_input($this->input->post('pin'))
 			);
 
-		$this->db->insert('temp_student', $data);
+		return $this->db->insert('temp_student', $data);
 	}
 	
 	/**
