@@ -15,7 +15,7 @@
         <li><a href="#">Control Systems </a></li>
         <li><a href="#">Web Technologies </a></li>
         <hr>
-        <li><a href="#" style="color: black"><b>Class Room</b></a></li>
+        <li><a href="#" style="color: black"><strong>Class Room</strong></a></li>
         <hr>
         <li><a href="#" style="color: black"><b>All Courses</b></a>
     </ul>

@@ -4,8 +4,9 @@
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
  */
-
 $bag_image = image_path('schoolbag.png');
+$profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" width="30" height="30" alt="unilog logo"')
+
 ?>
 
 <style>
@@ -29,8 +30,8 @@ $bag_image = image_path('schoolbag.png');
     }
 </style>
 
-<nav id='nav' class="navbar navbar-default no-select" style='padding:10px'>
-    <div class="col-sm-2 navbar-header">
+<nav id='nav' class="navbar navbar-default no-select" style='padding:5px'>
+    <div class="col-sm-2 navbar-header ">
 		<?php
 		$a = '<a href="' . base_url() . '" >';
 		$a .= img(image_path('unilog_logo.png'), FALSE, 'width="100" alt="unilog logo"');
@@ -52,9 +53,10 @@ $bag_image = image_path('schoolbag.png');
     <div style="font-size:17px;">
         <ul id="nav" class="navbar-nav pull-right">
             <li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <?php echo $profile_image ?>
                     <strong>Ahmar Sultan</strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="http://localhost/unilog/home/user">Profile</a></li>
                     <li><a href="#">Help</a></li>
                     <li><a href="#">Log Out</a></li>
                 </ul>
