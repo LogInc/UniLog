@@ -5,8 +5,7 @@
  * Copyright 2015 log inc.
  */
 $bag_image = image_path('schoolbag.png');
-
-if ($user_data->photo == null)
+if ($user_data->user_photo == null)
 	$profile_photo = img(image_path('default_profile.png'), FALSE, 'class="img-circle"');
 ?>
 
@@ -54,9 +53,9 @@ if ($user_data->photo == null)
     <div style="font-size:17px;">
         <ul id="nav" class="navbar-nav pull-right">
             <li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<?php echo $profile_image ?>
+					<?php echo $profile_photo ?>
                     <strong>
-						<?php echo $firstname; ?>
+						<?php echo $user_data->user_first_name; ?>
 					</strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="http://localhost/unilog/home/user">Profile</a></li>
