@@ -19,7 +19,17 @@ class Home extends CI_Controller {
 	}
 
 	public function wall() {
+		$this->load->model('user');
+		$user = $this->user->get_user($this->session->email);
+		if (!$user) {
+			show_message("Access denied!", 'Hey!');
+			return;
+		}
+
 		$data['page_title'] = 'Home';
+		$data['firstname'] = $user->user_first_name;
+		$data['lastname'] = $user->user_last_name;
+		
 		$this->load->view('templates/page_head', $data);
 		$this->load->view('templates/nav');
 		$this->load->view('templates/left_nav');
@@ -51,5 +61,5 @@ class Home extends CI_Controller {
 		$this->load->view('course_page.php');
 		$this->load->view('templates/page_foot');
 	}
-        
+
 }

@@ -54,7 +54,9 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
         <ul id="nav" class="navbar-nav pull-right">
             <li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <?php echo $profile_image ?>
-                    <strong>Ahmar Sultan</strong> <span class="caret"></span></a>
+                    <strong>
+						<?php echo $firstname; ?>
+					</strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="http://localhost/unilog/home/user">Profile</a></li>
                     <li><a href="#">Help</a></li>

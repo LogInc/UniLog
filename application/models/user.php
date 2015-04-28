@@ -93,6 +93,14 @@ class User extends CI_Model {
 		$this->db->delete('temp_user', array('user_email' => $mail));
 	}
 	
+	public function get_user($email) {
+		$query = $this->db->get_where('user', array('user_email' => clean_input($email)));
+		if (!$query || $query->num_rows() != 1)
+			return null;
+		else
+			return $query->row();
+	}
+	
 	/**
 	 * Authenticates a user given his/her email and password and returns the data.
 	 * @return true if user if user is authenticated, false otherwise.
