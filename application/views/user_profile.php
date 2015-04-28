@@ -8,19 +8,7 @@
 $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-rounded" width="200" alt="unilog logo"')
 ?>
 
-<style>
-    .thumbnail {
-        position:inherit;
-        overflow:hidden;
-    }
-    
-    .caption {
-        position:initial;          
-        display: none;
-        text-align:center;
-        color:#fff;
-    }
-</style>
+
 
 <div class="col-md-9 " >
     <div class="col-md-11" style="background-color: white;min-height: 261px;padding: 20px;border-radius:5px" >       
