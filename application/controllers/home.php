@@ -19,7 +19,7 @@ class Home extends CI_Controller {
 	}
 
 	public function wall() {
-		$data['page_title'] = 'Home';
+		$data['page_title'] = 'Wall';
 		$this->load->view('templates/page_head', $data);
 		$this->load->view('templates/nav');
 		$this->load->view('templates/left_nav');
@@ -28,10 +28,11 @@ class Home extends CI_Controller {
 	}
 
 	public function notice_board() {
-		$this->load->view('templates/page_head');
+		$data['page_title'] = 'Your NB';
+		$this->load->view('templates/page_head', $data);
 		$this->load->view('templates/nav');
-		$this->load->view('templates/left_nav');
 		$this->load->view('templates/notice_board');
+		$this->load->view('templates/page_foot');
 	}
 
 	public function user() {
@@ -40,6 +41,14 @@ class Home extends CI_Controller {
 		$this->load->view('templates/nav');
 		$this->load->view('templates/left_nav');
 		$this->load->view('user_profile');
+		$this->load->view('templates/page_foot');
+	}
+
+	public function course() {
+		$data['page_title'] = 'Course';
+		$this->load->view('templates/page_head', $data);
+		$this->load->view('templates/nav');
+		$this->load->view('course_page.php');
 		$this->load->view('templates/page_foot');
 	}
 

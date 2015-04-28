@@ -1,6 +1,5 @@
 <?php
-
-/* 
+/*
  * UniLog project.
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
@@ -10,23 +9,23 @@ $image = image_path('sticky.png');
 ?>
 
 <script>
-function allowDrop(ev) {
-    ev.preventDefault();
-}
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
 
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-}
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
 </script>
 
-<div class="col-md-6" >
-   
+<div class="col-md-12" >
+
     <div class="jumbotron" style="background-color: white; min-height: 100px; padding: 20px;border-radius:5px" >
     <form class='form-group'>
         <b>Notice Board</b>          
@@ -44,21 +43,22 @@ function drop(ev) {
                     <li class="divider"></li>
                     <li><a href="#">Yellow</a></li>
                 </ul>
-        </button>
-        <br>
-    </form>
-    
+            </button>
+            <br>
+        </form>
+
     </div>
-    
+
     <img id="drag1" src="<?php echo $image; ?>" draggable="true"
-         ondragstart="drag(event)" style="width:125px;height:125px" >
-    
+         ondragstart="drag(event)" style="width:175px;height:200px" >
+    <img id="drag1" src="<?php echo $image; ?>" draggable="true"
+         ondragstart="drag(event)" style="width:175px;height:200px" >
+
     <div class="col-md-12" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" style="background-color: white;
-         background: url(<?php echo $notice; ?>) no-repeat 2px 2px; background-size: 100% 100%; min-height: 500px;padding: 20px;border-radius:5px" >
-        
+         background: url(<?php echo $notice; ?>) no-repeat 2px 2px; background-size: 100% 100%; min-height: 700px;padding: 20px;border-radius:5px" >
     </div>
-    
-    
+
+
 
 </div>
 
