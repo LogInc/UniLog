@@ -54,7 +54,7 @@ class Welcome extends CI_Controller {
 	public function sign_in() {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');
-		$this->form_validation->set_rules('password', 'Password', 'required|callback_validate_credentials');
+		$this->form_validation->set_rules('password', 'Password', 'required|callback_validate_sign_in_credentials');
 
 		if ($this->form_validation->run()) {
 			$this->session->is_logged_in = true;
@@ -131,6 +131,21 @@ class Welcome extends CI_Controller {
 	}
 
 	/**
+	 * Callback back function to validate the sign-in credentials entered in the form.
+	 * @return boolean; true if the email and password are valid.
+	 */
+	public function validate_sign_in_credentials() {
+		$this->load->model('user');
+		$valid = $this->user->authenticate_user();
+		if ($valid)
+			return true;
+		else {
+			$this->form_validation->set_message('validate_credentials', 'Invalid email or password.');
+			return false;
+		}
+	}
+
+	/**
 	 * Registers a user in our database.
 	 * 
 	 * This method is called by the link that is sent in the email to the user.
@@ -141,16 +156,16 @@ class Welcome extends CI_Controller {
 		$key = $_GET['id'];
 
 		$this->load->model('student');
-
 		if ($this->student->valid_key($key)) {
-			if ($this->student->add_student($key)) {
+			$id = $this->student->add_student($key);
+			if ($id) {
 				show_message('Congratulations! You are now a part of UniLog!', 'Success');
 				$this->session->is_logged_in = true;
-				$this->session->email = clean_input($this->input->post('email'));
-				redirect('home');
+				$this->session->email = $this->student->get_user_by_id($id)->user_email;
+				//redirect('home');
 			}
 		} else
-			show_message('Invalid key', 'Error');
+			show_message('Invalid key.', 'Error');
 	}
 
 	/**
@@ -178,17 +193,6 @@ class Welcome extends CI_Controller {
 		$this->email->message($message);
 
 		return $this->email->send();
-	}
-
-	public function validate_credentials() {
-		$this->load->model('user');
-		$valid = $this->user->authenticate_user();
-		if ($valid)
-			return true;
-		else {
-			$this->form_validation->set_message('validate_credentials', 'Invalid email or password');
-			return false;
-		}
 	}
 
 	/**

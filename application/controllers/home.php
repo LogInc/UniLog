@@ -20,7 +20,7 @@ class Home extends CI_Controller {
 
 	public function wall() {
 		$this->load->model('user');
-		$user = $this->user->get_user($this->session->email);
+		$user = $this->user->get_user_by_email($this->session->email);
 		if (!$user) {
 			show_message("Access denied!", 'Hey!');
 			return;

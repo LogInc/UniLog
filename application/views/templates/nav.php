@@ -7,9 +7,9 @@
 $bag_image = image_path('schoolbag.png');
 
 if ($user_data->user_photo == null)
-	$profile_image_file = image_path('default_profile.png');
+	$profile_image_path = image_path('default_profile.png');
 else
-	$profile_image_file = upload_path ('profile_pics' . $user_data->user_photo);
+	$profile_image_path = upload_path ('profile_pics' . $user_data->user_photo);
 	
 	$profile_photo = img($profile_image_path, FALSE, 'class="img-circle"');
 ?>
