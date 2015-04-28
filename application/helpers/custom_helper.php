@@ -6,6 +6,10 @@
  * Copyright 2015 log inc.
  */
 
+function upload_path($file) {
+	return base_url() . 'uploads/' . $file;
+}
+
 function image_path($file) {
 	return base_url() . 'images/' . $file;
 }

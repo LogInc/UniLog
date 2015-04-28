@@ -57,7 +57,7 @@ CREATE TABLE user (
 									'user_type_student',
 									'user_type_instructor',
 									'user_type_viewer')		NOT NULL	DEFAULT 'user_type_viewer',
-	user_photo				LONGBLOB						NULL,
+	user_photo				VARCHAR(255)					NULL,
 	user_secret_question	VARCHAR(255)					NULL,
 	user_secret_answer		VARCHAR(255)					NULL,
 
