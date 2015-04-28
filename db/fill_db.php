@@ -85,12 +85,14 @@ INSERT INTO user (	user_email,
 					user_password,
 					user_first_name,
 					user_last_name,
-					user_type)
+					user_type,
+					user_photo)
 		
 		VALUES (	"ahmar_sultan@live.com",
 					"$password_ahmar",
 					"Ahmar",
 					"Sultan",
-					"user_type_student");
+					"user_type_student",
+					"ahmar.jpg");
 END;
 runQuery();

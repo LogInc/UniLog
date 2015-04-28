@@ -5,10 +5,10 @@
  * Copyright 2015 log inc.
  */
 
-if ($user_data->user_photo == null)
+if ($user_data->user_photo == null || $user_data->user_photo == "")
 	$profile_image_path = image_path('default_profile_200x.png');
 else
-	$profile_image_path = upload_path('profile_pics' . $user_data->user_photo);
+	$profile_image_path = upload_path('profile_pics/' . $user_data->user_photo);
 
 $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200" alt="unilog logo"')
 ?>

@@ -6,12 +6,12 @@
  */
 $bag_image = image_path('schoolbag.png');
 
-if ($user_data->user_photo == null)
+if ($user_data->user_photo == null || $user_data->user_photo == "")
 	$profile_image_path = image_path('default_profile_30x.png');
 else
-	$profile_image_path = upload_path ('profile_pics' . $user_data->user_photo);
+	$profile_image_path = upload_path ('profile_pics/' . $user_data->user_photo);
 	
-	$profile_photo = img($profile_image_path, FALSE, 'class="img-circle"');
+	$profile_photo = img($profile_image_path, FALSE, 'width="30" height="30" class="img-circle"');
 ?>
 
 <style>
