@@ -18,7 +18,7 @@
                 </p>
             </div>
             <div class="col-md-4">
-                <p><a href="" class="label label-warning" rel="tooltip" title="Ipload-file">Upload file</a>
+                <p><a href="" class="label label-warning" rel="tooltip" title="Upload-file">Upload file</a>
                 </p>
             </div>
         </div>
