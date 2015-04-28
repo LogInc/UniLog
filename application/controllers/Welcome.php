@@ -82,13 +82,13 @@ class Welcome extends CI_Controller {
 		// Input valid?
 		if ($this->validate_signup_fields()) {
 			$data['page_title'] = 'Sign Up';
-			$this->load->model('user');
+			$this->load->model('student');
 
 			// Generate a unique key for the user.
 			$key = password_hash(uniqid($this->input->post('email'), false), PASSWORD_BCRYPT);
 
 			// Attempt to add the key to the temp_user table.
-			if ($this->user->add_temp_user($key)) {				
+			if ($this->student->add_temp_student($key)) {				
 				if ($this->send_mail($key))
 					show_message('An email has been sent to you.', 'Thank You!');
 				else
@@ -101,7 +101,7 @@ class Welcome extends CI_Controller {
 			$data['page_title'] = 'Sign Up';
 			$data['key'] = $key;
 			$data['name'] = 'ab';
-			$this->load->view('templates/signup_mail');
+			$this->load->view('templates/signup_mail', $data);
 		} else {
 			// Keep us on sign-up page in case the user input is invalid.
 			$this->sign(1, $this->input->post('type'));
@@ -121,7 +121,7 @@ class Welcome extends CI_Controller {
 		
 		if ($this->input->post('type') == '1') {
 			$this->form_validation->set_rules('rollno', 'Roll No.', 'required|is_unique[student.student_rollno]|trim');
-			$this->form_validation->set_rules('pin', 'PIN', 'required|numeric|max_length(5)|min_length(5)');
+			$this->form_validation->set_rules('pin', 'PIN', 'required|numeric');
 		}
 		
 		return $this->form_validation->run();
@@ -137,10 +137,10 @@ class Welcome extends CI_Controller {
 	public function register_user() {
 		$key = $_GET['id'];
 		
-		$this->load->model('user');
+		$this->load->model('student');
 
-		if ($this->user->valid_key($key)) {
-			if ($this->user->add_user($key)) {
+		if ($this->student->valid_key($key)) {
+			if ($this->student->add_student($key)) {
 				show_message('Congratulations! You are now a part of UniLog!', 'Success');
 				//redirect('home');
 			}

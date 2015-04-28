@@ -69,9 +69,9 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
 		</div>
 
 		<div id='pin' class="form-group form-group-lg" style="display:none">
-			<label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="email">PIN:</label>
+			<label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="pin">PIN:</label>
 			<div class="col-md-10 col-sm-9">
-				<input class="form-control" type="text" name="email" value="<?php echo set_value('pin'); ?>" placeholder="Enter your 5 digit PIN">
+				<input class="form-control" type="text" name="pin" value="<?php echo set_value('pin'); ?>" placeholder="Enter your 5 digit PIN">
 			</div>
 		</div>
 
