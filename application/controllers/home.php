@@ -34,8 +34,8 @@ class Home extends CI_Controller {
             $data['page_title'] = 'Your NB';
             $this->load->view('templates/page_head',$data);
             $this->load->view('templates/nav');
-            $this->load->view('templates/left_nav');
             $this->load->view('templates/notice_board');
+            $this->load->view('templates/page_foot');
         }
 
         public function user()

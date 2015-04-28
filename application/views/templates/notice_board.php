@@ -24,7 +24,7 @@ $image = image_path('sticky.png');
     }
 </script>
 
-<div class="col-md-8" >
+<div class="col-md-12" >
 
     <div class="jumbotron" style="background-color: white; min-height: 100px; padding: 20px;border-radius:5px" >
     <form class='form-group'>
