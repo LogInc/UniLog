@@ -5,8 +5,13 @@
  * Copyright 2015 log inc.
  */
 $bag_image = image_path('schoolbag.png');
+
 if ($user_data->user_photo == null)
-	$profile_photo = img(image_path('default_profile.png'), FALSE, 'class="img-circle"');
+	$profile_image_file = image_path('default_profile.png');
+else
+	$profile_image_file = upload_path ('profile_pics' . $user_data->user_photo);
+	
+	$profile_photo = img($profile_image_path, FALSE, 'class="img-circle"');
 ?>
 
 <style>
