@@ -33,10 +33,10 @@ function drop(ev) {
         <hr style="height:2px;background-color: gray">
             
         <input type="text" name="post" >
-        <button type="button" class="btn-primary">Submit</button>
-        <button class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                colour <b class="caret"></b></a>
+        <button type="button" class="btn btn-primary">Submit</button>
+        <button class="dropdown btn btn-primary" type="button">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:white">
+                Color <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Green</a></li>
                     <li><a href="#">Pink</a></li>
