@@ -6,6 +6,7 @@
  * Copyright 2015 log inc.
  */
 $course_name = "Artificial Intelligence";
+$box = img(image_path('box-sketch.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"')
 
 ?>
 
@@ -23,7 +24,27 @@ $course_name = "Artificial Intelligence";
                 </p>
             </div>
         </div>
-        
+        <div class="row">
+            <div class="col-md-4">
+                <?php echo $box ?>
+                <a href="#">Notes</a>
+            </div>
+            <div class="col-md-4">
+                <?php echo $box ?>
+                <a href="#">Quizzes</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <?php echo $box ?>
+                <a href="#">Videos</a>
+            </div>
+            <div class="col-md-4">
+                <?php echo $box ?>
+                <a href="#">Past Papers</a>
+            </div>
+        </div>
+            
         
     </div>
     
