@@ -27,7 +27,10 @@ function runQuery() {
 }
 
 
-$password = password_hash("chateau", PASSWORD_BCRYPT);
+$password_admin = password_hash("chateau", PASSWORD_BCRYPT);
+$password_baig = password_hash("chateau", PASSWORD_BCRYPT);
+$password_asad = password_hash("applemac", PASSWORD_BCRYPT);
+$password_ahmar = password_hash("visionace", PASSWORD_BCRYPT);
 
 $query = <<<END
 INSERT INTO user (	user_email,
@@ -37,9 +40,57 @@ INSERT INTO user (	user_email,
 					user_type)
 		
 		VALUES (	"log.inc.827@gmail.com",
-					"$password",
+					"$password_admin",
 					"Admin",
 					"",
 					"user_type_admin");
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO user (	user_email,
+					user_password,
+					user_first_name,
+					user_last_name,
+					user_type)
+		
+		VALUES (	"abdullahbaig456@gmail.com",
+					"$password_baig",
+					"Abdullah",
+					"Baig",
+					"user_type_student");
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO user (	user_email,
+					user_password,
+					user_first_name,
+					user_last_name,
+					user_type)
+		
+		VALUES (	"asadazam93@gmail.com",
+					"$password_asad",
+					"Asad",
+					"Azam",
+					"user_type_student");
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO user (	user_email,
+					user_password,
+					user_first_name,
+					user_last_name,
+					user_type)
+		
+		VALUES (	"ahmar_sultan@live.com",
+					"$password_ahmar",
+					"Ahmar",
+					"Sultan",
+					"user_type_student");
 END;
 runQuery();
