@@ -5,8 +5,9 @@
  * Copyright 2015 log inc.
  */
 $bag_image = image_path('schoolbag.png');
-$profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" width="30" height="30" alt="unilog logo"')
 
+if ($user_data->photo == null)
+	$profile_photo = img(image_path('default_profile.png'), FALSE, 'class="img-circle"');
 ?>
 
 <style>
@@ -15,15 +16,15 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
         background-size: 30px;
         padding-left:35px;
     }
-    
+
     #nav li {
         padding-left:30px;
     }
-    
+
     #nav > div {
         padding:5px;
     }
-    
+
     ul#nav {
         list-style-type:none;
         padding-top:5px;
@@ -38,7 +39,7 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
 		echo $a . '</a>';
 		?>
     </div>
-    
+
     <div class='col-md-6 col-sm-4'>
         <form class="form-horizontal" role="form">
             <div class="col-sm-12 input-group">
@@ -49,11 +50,11 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
             </div>
         </form>
     </div>
-    
+
     <div style="font-size:17px;">
         <ul id="nav" class="navbar-nav pull-right">
             <li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $profile_image ?>
+					<?php echo $profile_image ?>
                     <strong>
 						<?php echo $firstname; ?>
 					</strong> <span class="caret"></span></a>

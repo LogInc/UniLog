@@ -27,8 +27,7 @@ class Home extends CI_Controller {
 		}
 
 		$data['page_title'] = 'Home';
-		$data['firstname'] = $user->user_first_name;
-		$data['lastname'] = $user->user_last_name;
+		$data['user_data'] = $user;
 		
 		$this->load->view('templates/page_head', $data);
 		$this->load->view('templates/nav');
