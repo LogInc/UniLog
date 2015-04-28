@@ -1,4 +1,5 @@
-# UniLog
+![unilog_logo.png](https://bitbucket.org/repo/X9xo4R/images/1175200072-unilog_logo.png)
+
 Education portal for University of Engineering and Technology, Lahore, Pakistan.
 
 
