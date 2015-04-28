@@ -35,9 +35,9 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
                 <p><a href="" class="label label-default" rel="tooltip" title="Zoom">Update Info</a>
                 </p>
             </div>
-            <h2><strong><?php echo "Ahmar Sultan" ?></strong></h2>
+            <h2><strong><?php echo $user_data->user_first_name . ' ' . $user_data->user_last_name ?></strong></h2>
             <h3><?php echo "Computer Engineering- University of Engineering and Technology" ?></h3>
-            <h4><?php echo "ahmar_sultan@live.com" ?></h4>
+            <h4><?php echo $user_data->user_email ?></h4>
             <p><strong>Session:</strong> <?php echo "University Student" ?></p>
             <p><strong>Session:</strong> <?php echo "2012" ?></p>
             <p><strong>Currently:</strong> <?php echo "2015/Fall/CE" ?></p>
