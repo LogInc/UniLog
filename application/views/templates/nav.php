@@ -61,7 +61,7 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
                     <li><a href="#">Log Out</a></li>
                 </ul>
             </li>
-            <li><a href="#"><strong>Notice Board</strong></a></li>
+            <li><a href="http://localhost/unilog/home/notice_board?post="><strong>Notice Board</strong></a></li>
         </ul>
     </div>
 </nav>

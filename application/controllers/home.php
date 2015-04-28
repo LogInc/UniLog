@@ -13,47 +13,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 class Home extends CI_Controller {
-	
+
 	public function index() {
+		$this->wall();
+	}
+
+	public function wall() {
+		$data['page_title'] = 'Wall';
+		$this->load->view('templates/page_head', $data);
+		$this->load->view('templates/nav');
+		$this->load->view('templates/left_nav');
 		$this->load->view('user_wall');
-                
+		$this->load->view('templates/page_foot');
+	}
+
+	public function notice_board() {
+		$data['page_title'] = 'Your NB';
+		$this->load->view('templates/page_head', $data);
+		$this->load->view('templates/nav');
+		$this->load->view('templates/notice_board');
+		$this->load->view('templates/page_foot');
+	}
+
+	public function user() {
+		$data['page_title'] = 'Profile';
+		$this->load->view('templates/page_head', $data);
+		$this->load->view('templates/nav');
+		$this->load->view('templates/left_nav');
+		$this->load->view('user_profile');
+		$this->load->view('templates/page_foot');
+	}
+
+	public function course() {
+		$data['page_title'] = 'Course';
+		$this->load->view('templates/page_head', $data);
+		$this->load->view('templates/nav');
+		$this->load->view('course_page.php');
+		$this->load->view('templates/page_foot');
 	}
         
-        public function wall()
-        {
-            $data['page_title'] = 'Wall';
-            $this->load->view('templates/page_head', $data);            
-            $this->load->view('templates/nav');
-	    $this->load->view('templates/left_nav');
-            $this->load->view('user_wall');
-            $this->load->view('templates/page_foot');
-                
-        }
-        
-        public function notice_board(){
-            $data['page_title'] = 'Your NB';
-            $this->load->view('templates/page_head',$data);
-            $this->load->view('templates/nav');
-            $this->load->view('templates/left_nav');
-            $this->load->view('templates/notice_board');
-        }
-
-        public function user()
-        {
-            $data['page_title'] = 'Profile';
-            $this->load->view('templates/page_head', $data);            
-            $this->load->view('templates/nav');
-            $this->load->view('templates/left_nav');
-            $this->load->view('user_profile');
-            $this->load->view('templates/page_foot');
-        }
-        
-         public function course()
-         {
-            $data['page_title'] = 'Course';
-            $this->load->view('templates/page_head', $data);            
-            $this->load->view('templates/nav');
-            $this->load->view('course_page.php');
-            $this->load->view('templates/page_foot');
-         }
 }

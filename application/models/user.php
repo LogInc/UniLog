@@ -61,7 +61,7 @@ class User extends CI_Model {
 	 */
 	public function add_temp_user($key) {
 		$key = clean_input($key);
-		$password = password_hash($this->input->post('pasword'), PASSWORD_BCRYPT);
+		$password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
 		$email = clean_input($this->input->post('email'));
 		$data = array(
 			'user_key' => $key,
@@ -91,6 +91,21 @@ class User extends CI_Model {
 	public function delete_temp_user($mail) {
 		$mail = clean_input($mail);
 		$this->db->delete('temp_user', array('user_email' => $mail));
+	}
+	
+	/**
+	 * Authenticates a user given his/her email and password and returns the data.
+	 * @return true if user if user is authenticated, false otherwise.
+	 */
+	public function authenticate_user() {
+		$password = clean_input($this->input->post('password'));
+		$data = array('user_email' => clean_input($this->input->post('email')));
+		$user = $this->db->get_where('user', $data);
+		
+		if (!$user || $user->num_rows() != 1)
+			return false;
+		else
+			return password_verify($password, $user->row()->user_password);
 	}
 
 	/**
