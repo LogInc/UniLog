@@ -5,8 +5,8 @@
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
  */
-$notice = image_path('notice.jpg');
-$image = image_path('sticky.jpg');
+$notice = image_path('NoticeBoard.png');
+$image = image_path('sticky.png');
 ?>
 
 <script>
@@ -29,9 +29,22 @@ function drop(ev) {
    
     <div class="jumbotron" style="background-color: white; min-height: 100px; padding: 20px;border-radius:5px" >
     <form class='form-group'>
-        Post on the notice board:<br>
+        <b>Notice Board</b>          
+        <hr style="height:2px;background-color: gray">
+            
         <input type="text" name="post" >
-        <button type="button">Submit</button>
+        <button type="button" class="btn-primary">Submit</button>
+        <button class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                colour <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Green</a></li>
+                    <li><a href="#">Pink</a></li>
+                    <li><a href="#">Blue</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Yellow</a></li>
+                </ul>
+        </button>
         <br>
     </form>
     
