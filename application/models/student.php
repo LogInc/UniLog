@@ -1,4 +1,5 @@
 <?php
+
 include_once 'user.php';
 /*
  * UniLog project.
@@ -15,7 +16,7 @@ include_once 'user.php';
  * should only be called as they automatically manage the underlying user object.
  */
 class Student extends User {
-	
+
 	/**
 	 * Adds a student user to the database.
 	 * @param type $key The user_key which exists in the temp_user table.
@@ -26,29 +27,29 @@ class Student extends User {
 		$temp_student = $this->db->get_where('temp_student', array('temp_user_key' => $key));
 		if (!$temp_student)
 			return null;
-		
+
 		if ($temp_student->num_rows() != 1)
 			return null;
-		
+
 		$row = $temp_student->row();
 		$rollno = $row->student_rollno;
-		
+
 		$user_added = parent::add_user($key);
 		if (!$user_added)
 			return null;
-		
+
 		$data = array(
-			'user_id'			=> $user_added,
-			'student_rollno'	=> $rollno
-			);
-		
+			'user_id' => $user_added,
+			'student_rollno' => $rollno
+		);
+
 		$student_added = $this->db->insert('student', $data);
 		if (!$student_added)
 			return null;
-		
+
 		return $user_added;
 	}
-	
+
 	/**
 	 * Adds a temporary student to the database.
 	 * @param string $key A unique key.
@@ -57,16 +58,16 @@ class Student extends User {
 	 */
 	public function add_temp_student($key) {
 		parent::add_temp_user($key);
-		
+
 		$data = array(
-			'temp_user_key'		=> clean_input($key),
-			'student_rollno'	=> clean_input($this->input->post('rollno')),
-			'student_pin'		=> clean_input($this->input->post('pin'))
-			);
+			'temp_user_key' => clean_input($key),
+			'student_rollno' => clean_input($this->input->post('rollno')),
+			'student_pin' => clean_input($this->input->post('pin'))
+		);
 
 		return $this->db->insert('temp_student', $data);
 	}
-	
+
 	/**
 	 * Adds a student authentication pin to the database.
 	 * 
@@ -77,15 +78,15 @@ class Student extends User {
 	 */
 	public function add_student_pin($pin) {
 		$data = array(
-			'student_email'		=> clean_input($this->input->post('email')),
-			'student_rollno'	=> clean_input($this->input->post('rollno')),
-			'student_pin'		=> $pin
-				);
-		
+			'student_email' => clean_input($this->input->post('email')),
+			'student_rollno' => clean_input($this->input->post('rollno')),
+			'student_pin' => $pin
+		);
+
 		$inserted = $this->db->insert('student_auth', $data);
 		return $inserted;
 	}
-	
+
 	/**
 	 * Validates a student input when signing up.
 	 * 
@@ -98,15 +99,16 @@ class Student extends User {
 		$email = clean_input($this->input->post('email'));
 		$rollno = clean_input($this->input->post('rollno'));
 		$pin = clean_input($this->input->post('pin'));
-		
-		$query = $this->db->get_where('student_auth', array('student_email'		=> $email,
-															'student_rollno'	=> $rollno,
-															'student_pin'		=> $pin));
+
+		$query = $this->db->get_where('student_auth', array('student_email' => $email,
+			'student_rollno' => $rollno,
+			'student_pin' => $pin));
 		if ($query)
 			return ($query->num_rows() == 1);
-		else return false;
+		else
+			return false;
 	}
-	
+
 	/**
 	 * Generates a unique student pin for student authentication.
 	 * @return int A unique pin.
@@ -121,4 +123,5 @@ class Student extends User {
 		}
 		return $pin;
 	}
+
 }

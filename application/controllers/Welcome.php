@@ -55,9 +55,10 @@ class Welcome extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required|callback_validate_credentials');
-		
+
 		if ($this->form_validation->run()) {
 			$this->session->is_logged_in = true;
+			$this->session->email = clean_input($this->input->post('email'));
 			redirect('home');
 		} else {
 			$this->sign();
@@ -144,7 +145,9 @@ class Welcome extends CI_Controller {
 		if ($this->student->valid_key($key)) {
 			if ($this->student->add_student($key)) {
 				show_message('Congratulations! You are now a part of UniLog!', 'Success');
-				//redirect('home');
+				$this->session->is_logged_in = true;
+				$this->session->email = clean_input($this->input->post('email'));
+				redirect('home');
 			}
 		} else
 			show_message('Invalid key', 'Error');
