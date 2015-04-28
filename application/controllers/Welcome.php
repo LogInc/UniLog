@@ -51,6 +51,10 @@ class Welcome extends CI_Controller {
 		$this->load->view('templates/page_foot');
 	}
 
+	/**
+	 * Signs in the user after validating his/her credentials. This function is called
+	 * by the submit button in the sign-in form.
+	 */
 	public function sign_in() {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');

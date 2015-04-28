@@ -19,17 +19,7 @@ class Home extends CI_Controller {
 	}
 
 	public function wall() {
-		$this->load->model('user');
-		$user = $this->user->get_user_by_email($this->session->email);
-		if (!$user) {
-			show_message("Access denied!", 'Hey!');
-			return;
-		}
-
-		$data['page_title'] = 'Home';
-		$data['user_data'] = $user;
-		
-		$this->load->view('templates/page_head', $data);
+		$this->load_page_head('Home');
 		$this->load->view('templates/nav');
 		$this->load->view('templates/left_nav');
 		$this->load->view('user_wall');
@@ -37,16 +27,14 @@ class Home extends CI_Controller {
 	}
 
 	public function notice_board() {
-		$data['page_title'] = 'Your NB';
-		$this->load->view('templates/page_head', $data);
+		$this->load_page_head('Notice Board');
 		$this->load->view('templates/nav');
 		$this->load->view('templates/notice_board');
 		$this->load->view('templates/page_foot');
 	}
 
-	public function user() {
-		$data['page_title'] = 'Profile';
-		$this->load->view('templates/page_head', $data);
+	public function profile() {
+		$this->load_page_head('Profile');
 		$this->load->view('templates/nav');
 		$this->load->view('templates/left_nav');
 		$this->load->view('user_profile');
@@ -54,11 +42,23 @@ class Home extends CI_Controller {
 	}
 
 	public function course() {
-		$data['page_title'] = 'Course';
-		$this->load->view('templates/page_head', $data);
+		$this->load_page_head('Course');
 		$this->load->view('templates/nav');
 		$this->load->view('course_page.php');
 		$this->load->view('templates/page_foot');
+	}
+
+	protected function load_page_head($title) {
+		$this->load->model('user');
+		$user = $this->user->get_user_by_email($this->session->email);
+		if (!$user) {
+			show_message("Access denied!", 'Hey!');
+			return;
+		}
+		
+		$data['page_title'] = $title;
+		$data['user_data'] = $user;
+		$this->load->view('templates/page_head', $data);
 	}
 
 }

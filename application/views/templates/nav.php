@@ -63,12 +63,12 @@ else
 						<?php echo $user_data->user_first_name; ?>
 					</strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="http://localhost/unilog/home/user">Profile</a></li>
+                    <li><a href="<?php echo base_url('home/profile') ?>">Profile</a></li>
                     <li><a href="#">Help</a></li>
                     <li><a href="#">Log Out</a></li>
                 </ul>
             </li>
-            <li><a href="http://localhost/unilog/home/notice_board?post="><strong>Notice Board</strong></a></li>
+            <li><a href="<?php echo base_url('home/notice-board?postid=') ?>"><strong>Notice Board</strong></a></li>
         </ul>
     </div>
 </nav>
