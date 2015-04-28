@@ -19,7 +19,7 @@ class Home extends CI_Controller {
 	}
 
 	public function wall() {
-		$data['page_title'] = 'Wall';
+		$data['page_title'] = 'Home';
 		$this->load->view('templates/page_head', $data);
 		$this->load->view('templates/nav');
 		$this->load->view('templates/left_nav');
