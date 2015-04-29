@@ -1,6 +1,6 @@
 <?php
 
-include_once 'user.php';
+require_once 'user.php';
 /*
  * UniLog project.
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.

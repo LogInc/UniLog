@@ -93,8 +93,26 @@ class User extends CI_Model {
 		$this->db->delete('temp_user', array('user_email' => $mail));
 	}
 	
-	public function get_user($email) {
+	/**
+	 * Gets a user from the database.
+	 * @param type $email
+	 * @return user if found, null otherwise.
+	 */
+	public function get_user_by_email($email) {
 		$query = $this->db->get_where('user', array('user_email' => clean_input($email)));
+		if (!$query || $query->num_rows() != 1)
+			return null;
+		else
+			return $query->row();
+	}
+	
+	/**
+	 * Gets a user from the database.
+	 * @param type $id
+	 * @return user if found, null otherwise.
+	 */
+	public function get_user_by_id($id) {
+		$query = $this->db->get_where('user', array('user_id' => $id));
 		if (!$query || $query->num_rows() != 1)
 			return null;
 		else

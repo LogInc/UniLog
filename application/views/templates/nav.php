@@ -5,8 +5,13 @@
  * Copyright 2015 log inc.
  */
 $bag_image = image_path('schoolbag.png');
-$profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" width="30" height="30" alt="unilog logo"')
 
+if ($user_data->user_photo == null)
+	$profile_image_path = image_path('default_profile_30x.png');
+else
+	$profile_image_path = upload_path ('profile_pics' . $user_data->user_photo);
+	
+	$profile_photo = img($profile_image_path, FALSE, 'class="img-circle"');
 ?>
 
 <style>
@@ -15,15 +20,15 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
         background-size: 30px;
         padding-left:35px;
     }
-    
+
     #nav li {
         padding-left:30px;
     }
-    
+
     #nav > div {
         padding:5px;
     }
-    
+
     ul#nav {
         list-style-type:none;
         padding-top:5px;
@@ -38,7 +43,7 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
 		echo $a . '</a>';
 		?>
     </div>
-    
+
     <div class='col-md-6 col-sm-4'>
         <form class="form-horizontal" role="form">
             <div class="col-sm-12 input-group">
@@ -49,21 +54,21 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
             </div>
         </form>
     </div>
-    
+
     <div style="font-size:17px;">
         <ul id="nav" class="navbar-nav pull-right">
             <li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $profile_image ?>
+					<?php echo $profile_photo ?>
                     <strong>
-						<?php echo $firstname; ?>
+						<?php echo $user_data->user_first_name; ?>
 					</strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="http://localhost/unilog/home/user">Profile</a></li>
+                    <li><a href="<?php echo base_url('home/profile') ?>">Profile</a></li>
                     <li><a href="#">Help</a></li>
-                    <li><a href="#">Log Out</a></li>
+                    <li><a href="<?php echo base_url('home/log_out'); ?>">Log Out</a></li>
                 </ul>
             </li>
-            <li><a href="http://localhost/unilog/home/notice_board?post="><strong>Notice Board</strong></a></li>
+            <li><a href="<?php echo base_url('home/notice-board?postid=') ?>"><strong>Notice Board</strong></a></li>
         </ul>
     </div>
 </nav>
