@@ -31,6 +31,7 @@ $password_admin = password_hash("chateau", PASSWORD_BCRYPT);
 $password_baig = password_hash("chateau", PASSWORD_BCRYPT);
 $password_asad = password_hash("applemac", PASSWORD_BCRYPT);
 $password_ahmar = password_hash("visionace", PASSWORD_BCRYPT);
+$password_hassan = password_hash("smhri007", PASSWORD_BCRYPT);
 
 $query = <<<END
 INSERT INTO user (	user_email,
@@ -63,6 +64,21 @@ INSERT INTO user (	user_email,
 END;
 runQuery();
 
+
+$query = <<<END
+INSERT INTO user (	user_email,
+					user_password,
+					user_first_name,
+					user_last_name,
+					user_type)
+		
+		VALUES (	"imamsb_007@hotmail.com",
+					"$password_hassan",
+					"Hassan",
+					"Imam",
+					"user_type_student");
+END;
+runQuery();
 
 $query = <<<END
 INSERT INTO user (	user_email,
