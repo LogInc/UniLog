@@ -20,15 +20,15 @@ else
         background-size: 30px;
         padding-left:35px;
     }
-
+    
     #nav li {
         padding-left:30px;
     }
-
+    
     #nav > div {
         padding:5px;
     }
-
+    
     ul#nav {
         list-style-type:none;
         padding-top:5px;
@@ -43,7 +43,7 @@ else
 		echo $a . '</a>';
 		?>
     </div>
-
+    
     <div class='col-md-6 col-sm-4'>
         <form class="form-horizontal" role="form">
             <div class="col-sm-12 input-group">
@@ -53,15 +53,16 @@ else
                 </div>
             </div>
         </form>
+        
     </div>
-
+    
     <div style="font-size:17px;">
         <ul id="nav" class="navbar-nav pull-right">
             <li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<?php echo $profile_photo ?>
                     <strong>
 						<?php echo $user_data->user_first_name; ?>
-					</strong> <span class="caret"></span></a>
+                    </strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url('home/profile') ?>">Profile</a></li>
                     <li><a href="#">Help</a></li>

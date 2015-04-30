@@ -30,11 +30,7 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
             </div>
 
         </div>
-        <div class="col-md-8 thumbnail" style="font-size: 17px;padding:10px">  
-            <div class="caption">                    
-                <p><a href="" class="label label-default" rel="tooltip" title="Zoom">Update Info</a>
-                </p>
-            </div>
+        <div class="col-md-8" style="font-size: 17px;padding:10px">  
             <h2><strong><?php echo $user_data->user_first_name . ' ' . $user_data->user_last_name ?></strong></h2>
             <h3><?php echo "Computer Engineering- University of Engineering and Technology" ?></h3>
             <h4><?php echo $user_data->user_email ?></h4>
@@ -66,12 +62,7 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
                 </div>
             </form>
         </div>
-        <div  class="col-md-12 aims-div thumbnail" style="display:none;font-size: 17px">
-
-            <div class="caption">                    
-                <p><a class="label label-default edit-label" type="button" rel="tooltip" title="Zoom">Edit</a>
-                </p>
-            </div>
+        <div  class="col-md-12 aims-div" style="display:none;font-size: 17px">
             <p id="aims-paragraph"></p>                
         </div>
     </div>

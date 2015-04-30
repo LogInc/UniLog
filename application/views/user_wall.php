@@ -13,18 +13,18 @@
 <div class="col-md-6">
     <div class="jumbotron no-select " style="background-color: white"> 
         <div class="row">
-            <div class="col-md-4 col-md-offset-2">
-                <p><a href="" class="label label-default" rel="tooltip" title="Upload-post">Upload Post</a>
+            <div class="col-md-5 col-md-offset-2">
+                <p><a href="" class="label label-default uploadpost" rel="tooltip" title="Upload-post">Upload Post</a>
                 </p>
             </div>
             <div class="col-md-4">
-                <p><a href="" class="label label-warning" rel="tooltip" title="Upload-file">Upload file</a>
+                <p><a href="" class="label label-warning uploadfile" rel="tooltip" title="Upload-file">Upload file</a>
                 </p>
             </div>
         </div>
             
         <form role="form">
-            <div class="form-group" style="margin-top:10px">
+            <div class="form-group post-form" style="margin-top:10px">
                 <label for="comment">Write your post</label>
                 <textarea class="form-control" rows="5" id="input_post" placeholder="Write a post or share information..."></textarea>
                 <div class="pull-right" style="margin-top:10px">
