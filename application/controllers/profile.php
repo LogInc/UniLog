@@ -15,10 +15,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Profile extends CI_Controller {
 	
 	public function index() {
-		$this->profile();
+		$this->profile_page();
 	}
 	
-	public function profile() {
+	/**
+	 * Displays the user's profile page.
+	 * @return void
+	 */
+	public function profile_page() {
 		if (!$this->load_page_head('Profile'))
 			return;
 		
@@ -28,6 +32,10 @@ class Profile extends CI_Controller {
 		$this->load->view('templates/page_foot');
 	}
 	
+	/**
+	 * Updates the user's summary field.
+	 * @return void
+	 */
 	public function update_summary() {
 		$this->load->model('user');
 		$user = $this->user->get_user_by_email($this->session->email);
@@ -38,6 +46,11 @@ class Profile extends CI_Controller {
 		$this->user->update_summary();
 	}
 	
+	/**
+	 * Loads the head of the page.
+	 * @param type $title Title of the page to set.
+	 * @return boolean true if successful.
+	 */
 	protected function load_page_head($title) {
 		$this->load->model('user');
 		$user = $this->user->get_user_by_email($this->session->email);

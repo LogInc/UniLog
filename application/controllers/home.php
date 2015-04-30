@@ -9,7 +9,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Description of home
+ * Home controller manages the user's home page, i.e. the wall.
  *
  */
 class Home extends CI_Controller {
@@ -34,16 +34,6 @@ class Home extends CI_Controller {
 		
 		$this->load->view('templates/nav');
 		$this->load->view('templates/notice_board');
-		$this->load->view('templates/page_foot');
-	}
-
-	public function profile() {
-		if (!$this->load_page_head('Profile'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('templates/left_nav');
-		$this->load->view('user_profile');
 		$this->load->view('templates/page_foot');
 	}
 
