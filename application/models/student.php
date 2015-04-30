@@ -23,7 +23,7 @@ class Student extends User {
 	 * @param type $key The user_key which exists in the temp_user table.
 	 * @return int	id of the the newly added user if success, null otherwise.
 	 */
-	public function add_student($key) {
+	public function add_user($key) {
 		// Look for the student in the temp_student table.
 		$temp_student = $this->db->get_where('temp_student', array('temp_user_key' => $key));
 		if (!$temp_student)
@@ -57,7 +57,7 @@ class Student extends User {
 	 * @return true if student added.
 	 *
 	 */
-	public function add_temp_student($key) {
+	public function add_temp_user($key) {
 		parent::add_temp_user($key);
 
 		$data = array(

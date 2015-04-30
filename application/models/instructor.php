@@ -9,20 +9,20 @@
 require_once 'user.php';
 
 /**
- * Description of Teacher
+ * Description of Instructor
  * 
- * Teacher is a subclass of student. For now teacher contains no additional functionality.
+ * Instructor is a subclass of student. For now instructor contains no additional functionality.
  */
-class Teacher extends User {
+class Instructor extends User {
 
 	/**
-	 * Adds a tacher user to the database.
+	 * Adds an instructor user to the database.
 	 * @param type $key The user_key which exists in the temp_user table.
 	 * @return int	id of the the newly added user if success, null otherwise.
 	 */
-	public function add_teacher($key) {
-		// Look for the teacher in the temp_student table.
-		$temp_user = $this->db->get_where('temp_user', array('temp_user_key' => $key));
+	public function add_user($key) {
+		// Look for the teacher in the temp_user table.
+		$temp_user = $this->db->get_where('temp_user', array('user_key' => $key));
 		if (!$temp_user)
 			return null;
 

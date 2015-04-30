@@ -86,16 +86,26 @@ class Welcome extends CI_Controller {
 	 * 	4- Report any errors back to the user.
 	 */
 	public function sign_up() {
+		$is_student = ($this->input->post('type') == 'student');
+		$is_instructor = ($this->input->post('type') == 'instructor');
+
 		// Input valid?
 		if ($this->validate_signup_fields()) {
 			$data['page_title'] = 'Sign Up';
-			$this->load->model('student');
+
+			// Load the appropriate model.
+			if ($is_student)
+				$this->load->model('student', 'user');
+			else if ($is_instructor)
+				$this->load->model('instructor', 'user');
+			else
+				show_error("Ooops! Something went wrong.");
 
 			// Generate a unique key for the user.
 			$key = password_hash(uniqid($this->input->post('email'), false), PASSWORD_BCRYPT);
 
-			// Attempt to add the key to the temp_user table.
-			if ($this->student->add_temp_student($key)) {
+			// Attempt to add the temp user.
+			if ($this->user->add_temp_user($key)) {
 				if ($this->send_mail($key))
 					show_message('An email has been sent to you.', 'Thank You!');
 				else
@@ -126,9 +136,8 @@ class Welcome extends CI_Controller {
 		$this->form_validation->set_rules('lastname', 'Last Name', 'required|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
-		if ($this->input->post('type') == '1') {
+		if ($this->input->post('type') == 'student') {
 			$this->form_validation->set_rules('rollno', 'Roll No.', 'required|is_unique[student.student_rollno]|trim');
-			$this->form_validation->set_rules('pin', 'PIN', 'required|numeric');
 		}
 
 		return $this->form_validation->run();
@@ -144,7 +153,7 @@ class Welcome extends CI_Controller {
 		if ($valid)
 			return true;
 		else {
-			$this->form_validation->set_message('validate_credentials', 'Invalid email or password.');
+			$this->form_validation->set_message('validate_sign_in_credentials', 'Invalid email or password.');
 			return false;
 		}
 	}
@@ -159,15 +168,30 @@ class Welcome extends CI_Controller {
 	public function register_user() {
 		$key = $_GET['id'];
 
-		$this->load->model('student');
-		if ($this->student->valid_key($key)) {
-			$id = $this->student->add_student($key);
-			if ($id) {
-				show_message('Congratulations! You are now a part of UniLog!', 'Success');
-				$this->session->is_logged_in = true;
-				$this->session->email = $this->student->get_user_by_id($id)->user_email;
-				//redirect('home');
-			}
+		$this->load->model('user');
+		$temp_user = $this->user->get_temp_user($key);
+
+		if (!$temp_user) {
+			show_error('Invalid call.');
+			return;
+		}
+		
+		if ($temp_user->user_type == 'user_type_student')
+			$this->load->model('student', 'selected_user');
+		else if ($temp_user->user_type == 'user_type_instructor')
+			$this->load->model('instructor', 'selected_user');
+		else {
+			show_error('Invalid call.');
+			return;
+		}
+
+		$id = $this->selected_user->add_user($key);
+		
+		if ($id) {
+			show_message('Congratulations! You are now a part of UniLog!', 'Success');
+			$this->session->is_logged_in = true;
+			$this->session->email = $temp_user->user_email;
+			//redirect('home');
 		} else
 			show_message('Invalid key.', 'Error');
 	}

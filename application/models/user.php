@@ -63,13 +63,16 @@ class User extends CI_Model {
 		$key = clean_input($key);
 		$password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
 		$email = clean_input($this->input->post('email'));
+		$type = clean_input($this->input->post('type'));
+		$type = 'user_type_' . $type;
+		
 		$data = array(
 			'user_key' => $key,
 			'user_first_name' => clean_input($this->input->post('firstname')),
 			'user_last_name' => clean_input($this->input->post('lastname')),
 			'user_email' => $email,
 			'user_password' => $password,
-			'user_type' => clean_input($this->input->post('user_type'))
+			'user_type' => $type
 		);
 		
 		// Delete any previous temp_user with the same email address.
@@ -164,6 +167,20 @@ class User extends CI_Model {
 
 		if ($query && $query->num_rows() == 1) {
 			return $query->row()->user_key;
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns a temp user record provided its key.
+	 * @param type $key the key.
+	 * @return array if a record is found, null otherwise.
+	 */
+	public function get_temp_user($key) {
+		$query = $this->db->get_where('temp_user', array('user_key' => $key));
+
+		if ($query && $query->num_rows() == 1) {
+			return $query->row();
 		}
 		return null;
 	}
