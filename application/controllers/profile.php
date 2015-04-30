@@ -9,48 +9,48 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Home controller manages the user's home page, i.e. the wall.
+ * Profile controller manages the user profile page.
  *
  */
-class Home extends CI_Controller {
-
+class Profile extends CI_Controller {
+	
 	public function index() {
-		$this->wall();
+		$this->profile_page();
 	}
-
-	public function wall() {
-		if (!$this->load_page_head('Home'))
+	
+	/**
+	 * Displays the user's profile page.
+	 * @return void
+	 */
+	public function profile_page() {
+		if (!$this->load_page_head('Profile'))
 			return;
 		
 		$this->load->view('templates/nav');
 		$this->load->view('templates/left_nav');
-		$this->load->view('user_wall');
-		$this->load->view('templates/page_foot');
-	}
-
-	public function notice_board() {
-		if (!$this->load_page_head('Notice Board'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('templates/notice_board');
-		$this->load->view('templates/page_foot');
-	}
-
-	public function course() {
-		if (!$this->load_page_head('Course'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('course_page.php');
+		$this->load->view('user_profile');
 		$this->load->view('templates/page_foot');
 	}
 	
-	public function log_out() {
-		session_destroy();
-		redirect('/');
+	/**
+	 * Updates the user's summary field.
+	 * @return void
+	 */
+	public function update_summary() {
+		$this->load->model('user');
+		$user = $this->user->get_user_by_email($this->session->email);
+		if (!$user) {
+			//show_message("Access denied!", 'Hey!');
+			return;
+		}
+		$this->user->update_summary();
 	}
-
+	
+	/**
+	 * Loads the head of the page.
+	 * @param type $title Title of the page to set.
+	 * @return boolean true if successful.
+	 */
 	protected function load_page_head($title) {
 		$this->load->model('user');
 		$user = $this->user->get_user_by_email($this->session->email);
@@ -64,5 +64,4 @@ class Home extends CI_Controller {
 		$this->load->view('templates/page_head', $data);
 		return true;
 	}
-
 }

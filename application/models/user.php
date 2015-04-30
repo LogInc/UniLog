@@ -167,5 +167,12 @@ class User extends CI_Model {
 		}
 		return null;
 	}
+	
+	public function update_summary() {
+		$email = $this->session->email;
+		$summary = $this->input->post('summary');
+		if ($this->session->is_logged_in)
+			$this->db->query("UPDATE user SET user_summary='$summary' WHERE user_email='$email'");
+	}
 
 }

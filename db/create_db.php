@@ -60,6 +60,7 @@ CREATE TABLE user (
 	user_photo				VARCHAR(255)					NOT NULL,
 	user_secret_question	VARCHAR(255)					NOT NULL,
 	user_secret_answer		VARCHAR(255)					NOT NULL,
+	user_summary			VARCHAR(2000)					NOT NULL,
 
 	PRIMARY KEY	(user_id)
 );

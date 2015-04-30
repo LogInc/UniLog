@@ -64,7 +64,7 @@ else
 						<?php echo $user_data->user_first_name; ?>
                     </strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url('home/profile') ?>">Profile</a></li>
+                    <li><a href="<?php echo base_url('profile') ?>">Profile</a></li>
                     <li><a href="#">Help</a></li>
                     <li><a href="<?php echo base_url('home/log_out'); ?>">Log Out</a></li>
                 </ul>
