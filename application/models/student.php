@@ -1,11 +1,12 @@
 <?php
 
-require_once 'user.php';
 /*
  * UniLog project.
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
  */
+
+require_once 'user.php';
 
 /**
  * Description of Student
