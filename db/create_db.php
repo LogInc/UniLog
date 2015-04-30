@@ -78,6 +78,7 @@ CREATE TABLE temp_user (
 								'user_type_student',
 								'user_type_instructor',
 								'user_type_viewer')		NOT NULL	DEFAULT 'user_type_viewer',
+	user_summary		VARCHAR(500)					NULL,
 	PRIMARY KEY (user_key)
 );
 END;
