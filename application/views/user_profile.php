@@ -69,7 +69,7 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
         <div  class="col-md-12 aims-div thumbnail" style="display:none;font-size: 17px">
 
             <div class="caption">                    
-                <p><a class="label label-default edit-label" type="button" rel="tooltip" title="Zoom">Edit</a>
+                <p><a class="label label-default edit-label" rel="tooltip" title="Zoom">Edit</a>
                 </p>
             </div>
             <p id="aims-paragraph"></p>                
@@ -85,6 +85,8 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
 			var aims = $("#aims-form").val();
 
 			document.getElementById("aims-paragraph").innerHTML = aims;
+
+			$.post('<?php echo base_url(); ?>userprofile/update_summary', { summary: aims });
 
 			if (aims.length !== 0) {
 				$(".a-brief-description").hide();

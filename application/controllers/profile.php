@@ -9,34 +9,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Description of home
+ * Profile controller manages the user profile page.
  *
  */
-class Home extends CI_Controller {
-
+class Profile extends CI_Controller {
+	
 	public function index() {
-		$this->wall();
+		$this->profile();
 	}
-
-	public function wall() {
-		if (!$this->load_page_head('Home'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('templates/left_nav');
-		$this->load->view('user_wall');
-		$this->load->view('templates/page_foot');
-	}
-
-	public function notice_board() {
-		if (!$this->load_page_head('Notice Board'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('templates/notice_board');
-		$this->load->view('templates/page_foot');
-	}
-
+	
 	public function profile() {
 		if (!$this->load_page_head('Profile'))
 			return;
@@ -46,21 +27,17 @@ class Home extends CI_Controller {
 		$this->load->view('user_profile');
 		$this->load->view('templates/page_foot');
 	}
-
-	public function course() {
-		if (!$this->load_page_head('Course'))
+	
+	public function update_summary() {
+		$this->load->model('user');
+		$user = $this->user->get_user_by_email($this->session->email);
+		if (!$user) {
+			//show_message("Access denied!", 'Hey!');
 			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('course_page.php');
-		$this->load->view('templates/page_foot');
+		}
+		$this->user->update_summary();
 	}
 	
-	public function log_out() {
-		session_destroy();
-		redirect('/');
-	}
-
 	protected function load_page_head($title) {
 		$this->load->model('user');
 		$user = $this->user->get_user_by_email($this->session->email);
@@ -74,5 +51,4 @@ class Home extends CI_Controller {
 		$this->load->view('templates/page_head', $data);
 		return true;
 	}
-
 }

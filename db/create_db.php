@@ -60,6 +60,7 @@ CREATE TABLE user (
 	user_photo				VARCHAR(255)					NOT NULL,
 	user_secret_question	VARCHAR(255)					NOT NULL,
 	user_secret_answer		VARCHAR(255)					NOT NULL,
+	user_summary			VARCHAR(2000)					NOT NULL,
 
 	PRIMARY KEY	(user_id)
 );
@@ -78,7 +79,6 @@ CREATE TABLE temp_user (
 								'user_type_student',
 								'user_type_instructor',
 								'user_type_viewer')		NOT NULL	DEFAULT 'user_type_viewer',
-	user_summary		VARCHAR(500)					NULL,
 	PRIMARY KEY (user_key)
 );
 END;
