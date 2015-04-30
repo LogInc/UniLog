@@ -25,12 +25,12 @@
             }
             
             .thumbnail {
-                position:inherit;
                 overflow:hidden;
+                top:0%;
             }
             
             .caption {
-                position:initial;          
+                position:fixed;
                 display: none;
                 text-align:center;
                 color:#fff;

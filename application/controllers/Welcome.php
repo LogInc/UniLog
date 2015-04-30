@@ -28,16 +28,17 @@ class Welcome extends CI_Controller {
 	public function index() {
 		if ($this->session->is_logged_in) {
 			redirect('home');
-		} else redirect('sign-in');
+		} else
+			redirect('sign-in');
 	}
 
 	/**
 	 * Displays the sign-in/up page. $signup flags dictates which form to show.
 	 * @param int $signup 0 displays the sign-in form, 1 outputs sign-up.
 	 * @param int $signup_initial	1 displays the university student form; 2 displays
-	 *	the open course student form.
+	 * 	the open course student form.
 	 */
-	public function sign($signup = 0, $signup_initial="0") {
+	public function sign($signup = 0, $signup_initial = "0") {
 		$this->load->helper('form');
 
 		$data['page_title'] = $signup ? 'Sign Up' : 'Sign In';
@@ -50,13 +51,19 @@ class Welcome extends CI_Controller {
 		$this->load->view('templates/page_foot');
 	}
 
+	/**
+	 * Signs in the user after validating his/her credentials. This function is called
+	 * by the submit button in the sign-in form.
+	 */
 	public function sign_in() {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');
-		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required|callback_validate_sign_in_credentials');
 
 		if ($this->form_validation->run()) {
-			$this->sign();
+			$this->session->is_logged_in = true;
+			$this->session->email = clean_input($this->input->post('email'));
+			redirect('home');
 		} else {
 			$this->sign();
 		}
@@ -88,7 +95,7 @@ class Welcome extends CI_Controller {
 			$key = password_hash(uniqid($this->input->post('email'), false), PASSWORD_BCRYPT);
 
 			// Attempt to add the key to the temp_user table.
-			if ($this->student->add_temp_student($key)) {				
+			if ($this->student->add_temp_student($key)) {
 				if ($this->send_mail($key))
 					show_message('An email has been sent to you.', 'Thank You!');
 				else
@@ -118,13 +125,28 @@ class Welcome extends CI_Controller {
 		$this->form_validation->set_rules('firstname', 'First Name', 'required|trim');
 		$this->form_validation->set_rules('lastname', 'Last Name', 'required|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		
+
 		if ($this->input->post('type') == '1') {
 			$this->form_validation->set_rules('rollno', 'Roll No.', 'required|is_unique[student.student_rollno]|trim');
 			$this->form_validation->set_rules('pin', 'PIN', 'required|numeric');
 		}
-		
+
 		return $this->form_validation->run();
+	}
+
+	/**
+	 * Callback back function to validate the sign-in credentials entered in the form.
+	 * @return boolean; true if the email and password are valid.
+	 */
+	public function validate_sign_in_credentials() {
+		$this->load->model('user');
+		$valid = $this->user->authenticate_user();
+		if ($valid)
+			return true;
+		else {
+			$this->form_validation->set_message('validate_credentials', 'Invalid email or password.');
+			return false;
+		}
 	}
 
 	/**
@@ -136,15 +158,18 @@ class Welcome extends CI_Controller {
 	 */
 	public function register_user() {
 		$key = $_GET['id'];
-		
-		$this->load->model('student');
 
+		$this->load->model('student');
 		if ($this->student->valid_key($key)) {
-			if ($this->student->add_student($key)) {
+			$id = $this->student->add_student($key);
+			if ($id) {
 				show_message('Congratulations! You are now a part of UniLog!', 'Success');
+				$this->session->is_logged_in = true;
+				$this->session->email = $this->student->get_user_by_id($id)->user_email;
 				//redirect('home');
 			}
-		} else show_message('Invalid key', 'Error');
+		} else
+			show_message('Invalid key.', 'Error');
 	}
 
 	/**
@@ -156,7 +181,7 @@ class Welcome extends CI_Controller {
 	 */
 	private function send_mail($key) {
 		$this->load->library('email', array('mailtype' => 'html'));
-		
+
 		$this->email->to($this->input->post('email'));
 		$this->email->from('', 'Admin');
 
@@ -164,16 +189,16 @@ class Welcome extends CI_Controller {
 		$data['page_title'] = 'Sign Up';
 		$data['key'] = $key;
 		$data['name'] = $this->input->post('firstname');
-		
+
 		// Load the mail page as the message. The mail page is a dynamic page.
 		// The TRUE argument returns the PHP output as a string instead of sending it
 		// to the client.
 		$message = $this->load->view('templates/signup_mail.php', $data, TRUE);
 		$this->email->message($message);
-		
+
 		return $this->email->send();
 	}
-	
+
 	/**
 	 * Displays the terms of service page.
 	 */

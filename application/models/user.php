@@ -61,7 +61,7 @@ class User extends CI_Model {
 	 */
 	public function add_temp_user($key) {
 		$key = clean_input($key);
-		$password = password_hash($this->input->post('pasword'), PASSWORD_BCRYPT);
+		$password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
 		$email = clean_input($this->input->post('email'));
 		$data = array(
 			'user_key' => $key,
@@ -91,6 +91,47 @@ class User extends CI_Model {
 	public function delete_temp_user($mail) {
 		$mail = clean_input($mail);
 		$this->db->delete('temp_user', array('user_email' => $mail));
+	}
+	
+	/**
+	 * Gets a user from the database.
+	 * @param type $email
+	 * @return user if found, null otherwise.
+	 */
+	public function get_user_by_email($email) {
+		$query = $this->db->get_where('user', array('user_email' => clean_input($email)));
+		if (!$query || $query->num_rows() != 1)
+			return null;
+		else
+			return $query->row();
+	}
+	
+	/**
+	 * Gets a user from the database.
+	 * @param type $id
+	 * @return user if found, null otherwise.
+	 */
+	public function get_user_by_id($id) {
+		$query = $this->db->get_where('user', array('user_id' => $id));
+		if (!$query || $query->num_rows() != 1)
+			return null;
+		else
+			return $query->row();
+	}
+	
+	/**
+	 * Authenticates a user given his/her email and password and returns the data.
+	 * @return true if user if user is authenticated, false otherwise.
+	 */
+	public function authenticate_user() {
+		$password = clean_input($this->input->post('password'));
+		$data = array('user_email' => clean_input($this->input->post('email')));
+		$user = $this->db->get_where('user', $data);
+		
+		if (!$user || $user->num_rows() != 1)
+			return false;
+		else
+			return password_verify($password, $user->row()->user_password);
 	}
 
 	/**
@@ -125,6 +166,13 @@ class User extends CI_Model {
 			return $query->row()->user_key;
 		}
 		return null;
+	}
+	
+	public function update_summary() {
+		$email = $this->session->email;
+		$summary = $this->input->post('summary');
+		if ($this->session->is_logged_in)
+			$this->db->query("UPDATE user SET user_summary='$summary' WHERE user_email='$email'");
 	}
 
 }

@@ -6,6 +6,10 @@
  * Copyright 2015 log inc.
  */
 
+function upload_path($file) {
+	return base_url() . 'uploads/' . $file;
+}
+
 function image_path($file) {
 	return base_url() . 'images/' . $file;
 }
@@ -22,7 +26,8 @@ function show_message($message, $heading, $title='Message') {
 	$data = array(
 		'page_title'	=> $title,
 		'message'		=> $message,
-		'heading'		=> $heading
+		'heading'		=> $heading,
+		'white'			=> 1
 			);
 	
 	get_instance()->load->view('message', $data);

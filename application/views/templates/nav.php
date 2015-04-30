@@ -5,8 +5,13 @@
  * Copyright 2015 log inc.
  */
 $bag_image = image_path('schoolbag.png');
-$profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" width="30" height="30" alt="unilog logo"')
 
+if ($user_data->user_photo == null || $user_data->user_photo == "")
+	$profile_image_path = image_path('default_profile_30x.png');
+else
+	$profile_image_path = upload_path ('profile_pics/' . $user_data->user_photo);
+	
+	$profile_photo = img($profile_image_path, FALSE, 'width="30" height="30" class="img-circle"');
 ?>
 
 <style>
@@ -48,20 +53,23 @@ $profile_image = img(image_path('profile_pic.jpg'), FALSE, 'class="img-circle" w
                 </div>
             </div>
         </form>
+        
     </div>
     
     <div style="font-size:17px;">
         <ul id="nav" class="navbar-nav pull-right">
             <li class="dropdown" style="padding-bottom:10px"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $profile_image ?>
-                    <strong>Ahmar Sultan</strong> <span class="caret"></span></a>
+					<?php echo $profile_photo ?>
+                    <strong>
+						<?php echo $user_data->user_first_name; ?>
+                    </strong> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="http://localhost/unilog/home/user">Profile</a></li>
+                    <li><a href="<?php echo base_url('profile') ?>">Profile</a></li>
                     <li><a href="#">Help</a></li>
-                    <li><a href="#">Log Out</a></li>
+                    <li><a href="<?php echo base_url('home/log_out'); ?>">Log Out</a></li>
                 </ul>
             </li>
-            <li><a href="#"><strong>Notice Board</strong></a></li>
+            <li><a href="<?php echo base_url('home/notice-board?postid=') ?>"><strong>Notice Board</strong></a></li>
         </ul>
     </div>
 </nav>
