@@ -6,14 +6,14 @@
  * Copyright 2015 log inc.
  */
 
-require_once 'user.php';
+require_once 'user_model.php';
 
 /**
  * Description of Instructor
  * 
  * Instructor is a subclass of student. For now instructor contains no additional functionality.
  */
-class Instructor extends User {
+class Instructor_Model extends User_Model {
 
 	/**
 	 * Adds an instructor user to the database.
