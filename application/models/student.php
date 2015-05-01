@@ -62,8 +62,7 @@ class Student extends User {
 
 		$data = array(
 			'temp_user_key' => clean_input($key),
-			'student_rollno' => clean_input($this->input->post('rollno')),
-			'student_pin' => clean_input($this->input->post('pin'))
+			'student_rollno' => clean_input($this->input->post('rollno'))
 		);
 
 		return $this->db->insert('temp_student', $data);

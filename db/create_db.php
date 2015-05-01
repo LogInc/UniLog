@@ -18,6 +18,7 @@
  *	instructor
  *	course
  *	course_enrollment
+ *	course_instructor
  *	upload
  *	post
  *	comment
@@ -60,7 +61,7 @@ CREATE TABLE user (
 	user_photo				VARCHAR(255)					NOT NULL,
 	user_secret_question	VARCHAR(255)					NOT NULL,
 	user_secret_answer		VARCHAR(255)					NOT NULL,
-	user_summary			VARCHAR(2000)					NOT NULL,
+	user_summary			TEXT							NOT NULL,
 
 	PRIMARY KEY	(user_id)
 );
@@ -89,7 +90,6 @@ $query = <<<END
 CREATE TABLE temp_student (
 	temp_user_key		VARCHAR(64)		NOT NULL,
 	student_rollno		VARCHAR(12)		NOT NULL	UNIQUE,
-	student_pin			SMALLINT(5)		NOT NULL	UNIQUE,
 
 	FOREIGN KEY (temp_user_key) REFERENCES temp_user(user_key) ON DELETE CASCADE ON UPDATE NO ACTION,
 	PRIMARY KEY (temp_user_key)
@@ -160,8 +160,29 @@ runQuery();
 
 
 $query = <<<END
+CREATE TABLE course_instructor (
+	user_id				INT						UNSIGNED	NOT NULL,
+	course_code			VARCHAR(6)							NOT NULL,
+	course_term			ENUM('spring', 'fall')				NOT NULL,
+	course_year			YEAR								NOT NULL,
+	course_type			ENUM('th', 'pr')					NOT NULL,
+		
+	FOREIGN KEY (user_id) REFERENCES instructor(user_id) ON DELETE CASCADE ON UPDATE NO ACTION,
+	
+	FOREIGN KEY (course_code, course_term, course_year, course_type)
+		REFERENCES course(course_code, course_term, course_year, course_type)
+		ON DELETE CASCADE ON UPDATE NO ACTION,
+	
+	PRIMARY KEY (user_id, course_code, course_term, course_year, course_type)
+);
+END;
+runQuery();
+
+
+$query = <<<END
 CREATE TABLE upload (
 	upload_id			INT			UNSIGNED	NOT NULL	AUTO_INCREMENT,
+	post_id				INT			UNSIGNED	NULL,
 	upload_type			ENUM(	'upload_pdf',
 								'upload_doc',
 								'upload_image',
@@ -171,7 +192,7 @@ CREATE TABLE upload (
 	upload_caption		VARCHAR(64)				NOT NULL,
 	upload_description	TEXT					NOT NULL,
 	upload_altext		VARCHAR(128)			NOT NULL,
-	upload_data			LONGBLOB				NOT NULL,
+	upload_file			VARCHAR(255)			NOT NULL,
 		
 	PRIMARY KEY (upload_id)
 );
@@ -210,6 +231,26 @@ CREATE TABLE comment (
 	FOREIGN KEY (post_id)			REFERENCES post(post_id),
 	FOREIGN KEY (comment_author)	REFERENCES user(user_id),
 	PRIMARY KEY (comment_id)
+);
+END;
+runQuery();
+
+
+$query = <<<END
+CREATE TABLE course_post (
+	post_id				INT						UNSIGNED	NOT NULL,
+	course_code			VARCHAR(6)							NOT NULL,
+	course_term			ENUM('spring', 'fall')				NOT NULL,
+	course_year			YEAR								NOT NULL,
+	course_type			ENUM('th', 'pr')					NOT NULL,
+		
+	FOREIGN KEY (post_id) REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE NO ACTION,
+	
+	FOREIGN KEY (course_code, course_term, course_year, course_type)
+		REFERENCES course(course_code, course_term, course_year, course_type)
+		ON DELETE CASCADE ON UPDATE NO ACTION,
+	
+	PRIMARY KEY (post_id, course_code, course_term, course_year, course_type)
 );
 END;
 runQuery();
