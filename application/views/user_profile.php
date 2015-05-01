@@ -19,24 +19,28 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
     <div class="col-md-11" style="background-color: white;min-height: 261px;padding: 20px;border-radius:5px" >       
         <h3><strong>Your Profile</strong></h3>          
         <hr style="height:2px;background-color: gray"> 
-
+        
         <div class="pull-right">
             <div class="thumbnail">
-                <div class="caption">                    
-                    <p><a href="" class="label label-default" rel="tooltip" title="Zoom">Update Photo</a>
-                    </p>
+                <div class="caption" style="top:80%;width: 100%;height: 100%;background:rgba(0,0,0,0.5)">                    
+                    <a href="" style="color:white"><i class="glyphicon glyphicon-camera"></i> Change Photo </a>
+                    
                 </div>
 				<?php echo $profile_image ?> 
             </div>
-
+            
         </div>
-        <div class="col-md-8" style="font-size: 17px;padding:10px">  
+        <div class="col-md-8 thumbnail" style="font-size: 17px;padding:10px"> 
+            <div class="caption">                    
+                <a href="#" ><i class="glyphicon glyphicon-pencil"></i></a>
+                
+            </div>
             <h2><strong><?php echo $user_data->user_first_name . ' ' . $user_data->user_last_name ?></strong></h2>
             <h3><?php echo "Computer Engineering- University of Engineering and Technology" ?></h3>
             <h4><?php echo $user_data->user_email ?></h4>
         </div>
     </div>
-
+    
     <div class="col-md-11" 
          style="background-color:white; min-height:261px; padding:20px; border-radius:5px; margin-top: 15px" >       
         <h3><strong>Summary</strong></h3>          
@@ -46,7 +50,7 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
                 <div class="form-group">
                     <label for="aims-form"></label>
                     <textarea class="form-control" id="aims-form" rows="8" placeholder="write something about you and your goals in life...">
-<?php echo trim($user_data->user_summary); ?></textarea>
+                    <?php echo trim($user_data->user_summary); ?></textarea>
                     <div class="pull-right" style="margin-top:10px">
                         <div class="row">
                             <div class="col-md-6">
@@ -60,52 +64,51 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
                 </div>
             </form>
         </div>
-		
-        <div  class="col-md-12" id="summary-display" style="font-size: 17px">
+        
+        <div  class="col-md-12 thumbnail" id="summary-display" style="font-size: 17px">
             <div class="caption">                    
-                <p><a class="label label-default" id="#edit-label" rel="tooltip" title="Zoom">Edit</a>
-                </p>
+                <a class="edit-label"><i class="glyphicon glyphicon-pencil"></i></a>
             </div>
             <p id="aims-paragraph"><?php echo trim($user_data->user_summary); ?></p>                
         </div>
     </div>
-
-
+    
+    
 </div>
 
 <script>
-	$(document).ready(function () {
-		var aims = $("#aims-form").val();
-		if (aims.length !== 0) {
-			$("#summary-edit").hide();
-			$("#summary-display").show();
-		} else {
-			$("#summary-edit").show();
-			$("#summary-display").hide();
-		}
+    $(document).ready(function () {
+        var aims = $("#aims-form").val();
+        if (aims.length !== 0) {
+            $("#summary-edit").hide();
+            $("#summary-display").show();
+        } else {
+            $("#summary-edit").show();
+            $("#summary-display").hide();
+        }
 		
-		$(".save-button").click(function () {
-			var aims = $("#aims-form").val();
-			document.getElementById("aims-paragraph").innerHTML = aims;
-			$.post('<?php echo base_url(); ?>profile/update_summary', { summary: aims });
+        $(".save-button").click(function () {
+            var aims = $("#aims-form").val();
+            document.getElementById("aims-paragraph").innerHTML = aims;
+            $.post('<?php echo base_url(); ?>profile/update_summary', { summary: aims });
 
-			if (aims.length !== 0) {
-				$("#summary-edit").hide();
-				$("#summary-display").fadeIn();
-			}
-		});
-		$("#edit-label").click(function () {
-			$("#summary-display").hide();
-			$("#summary-edit").fadeIn();
-		});
-	});
-	$('#summary-display').hover(
-			function () {
-				$(this).find('.caption').slideDown(250);
-			},
-			function () {
-				$(this).find('.caption').slideUp(250);
-			}
+            if (aims.length !== 0) {
+                $("#summary-edit").hide();
+                $("#summary-display").fadeIn();
+            }
+        });
+        $(".edit-label").click(function () {
+            $("#summary-display").hide();
+            $("#summary-edit").fadeIn();
+        });
+    });
+    $('.thumbnail').hover(
+            function () {
+                $(this).find('.caption').fadeIn();
+    },
+    function () {
+        $(this).find('.caption').fadeOut();
+    }
 
-	);
+            );
 </script>

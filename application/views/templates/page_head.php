@@ -5,7 +5,7 @@
  * Copyright 2015 log inc.
  */
 ?>
-    
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,15 +25,20 @@
             }
             
             .thumbnail {
+                position:relative;
                 overflow:hidden;
-                top:0%;
+                min-height:200%;
             }
             
             .caption {
-                position:fixed;
+                position:absolute;
+                top:0;
+                right:0;
+                background-color:lightgray;
                 display: none;
                 text-align:center;
-                color:#fff;
+               // color:#fff !important;
+                z-index:2;
             }
             
             a:hover, a:focus {
@@ -50,7 +55,7 @@
             }
         </style>
     </head>
-        
+    
     <body>
         <div class="container">
             <div style="min-height:500px">
