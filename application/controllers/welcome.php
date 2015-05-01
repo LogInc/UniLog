@@ -166,6 +166,10 @@ class Welcome extends CI_Controller {
 	 * temp_user table.
 	 */
 	public function register_user() {
+		if ($this->session->is_logged_in) {
+			show_message('You are not allowed to perform this operation.', 'Access denied');
+			return;
+		}
 		$key = $_GET['id'];
 
 		$this->load->model('user');

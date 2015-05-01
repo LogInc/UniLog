@@ -11,6 +11,18 @@ else
 	$profile_image_path = upload_path('profile_pics/' . $user_data->user_photo);
 
 $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200" alt="unilog logo"');
+
+switch ($user_data->user_type) {
+	case 'user_type_admin':
+		$user_type = 'Administrator';
+		break;
+	case 'user_type_student':
+		$user_type = 'Student';
+		break;
+	case 'user_type_instructor':
+		$user_type = 'Instructor';
+		break;
+}
 ?>
 
 
@@ -36,7 +48,7 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
                 <a href="#" ><i class="glyphicon glyphicon-pencil"></i></a>                
             </div>
             <h2><strong><?php echo $user_data->user_first_name . ' ' . $user_data->user_last_name ?></strong></h2>
-            <h3><?php echo "Computer Engineering- University of Engineering and Technology" ?></h3>
+            <h3><?php echo $user_type ?></h3>
             <h4><?php echo $user_data->user_email ?></h4>
         </div>
     </div>
