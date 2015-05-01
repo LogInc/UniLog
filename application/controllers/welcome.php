@@ -27,7 +27,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index() {
 		if ($this->session->is_logged_in) {
-			redirect('user');
+			redirect('user/wall');
 		} else
 			redirect('sign-in');
 	}

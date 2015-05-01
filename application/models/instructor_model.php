@@ -11,7 +11,7 @@ require_once 'user_model.php';
 /**
  * Description of Instructor
  * 
- * Instructor is a subclass of student. For now instructor contains no additional functionality.
+ * Instructor is a subclass of user. For now instructor contains no additional functionality.
  */
 class Instructor_Model extends User_Model {
 
