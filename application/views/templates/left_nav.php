@@ -7,7 +7,7 @@
 ?>
     
 <div class="col-md-3 no-select" style="background-color:white; border-radius:5px;" >
-    <ul style="list-style-type: none;padding-top: 10%;font-size: 18px;min-height: 500px">
+    <ul style="list-style-type: none;padding-top: 10%;font-size: 18px;min-height: 600px">
         <strong>Courses Now</strong>
         <li><a href="#">Artificial Intelligence </a></li>
         <li><a href="#">Computer Networks </a></li>
