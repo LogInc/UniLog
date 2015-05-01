@@ -64,6 +64,13 @@ class User extends CI_Controller {
 			$this->load->view('templates/page_foot');
 		}
 	}
+        public function course_doc() {
+		if ($this->load_page_head('Course_doc')) {
+			$this->load->view('templates/nav');
+			$this->load->view('course_doc.php');
+			$this->load->view('templates/page_foot');
+		}
+	}
 
 	/**
 	 * Logs out the user from the website and returns to home page.
