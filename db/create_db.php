@@ -18,9 +18,9 @@
  *	instructor
  *	course
  *	course_enrollment
- *	course_instructor
  *	upload
  *	post
+ *	course_post
  *	comment
  *	ci_session
  */
@@ -148,26 +148,6 @@ CREATE TABLE course_enrollment (
 	course_type			ENUM('th', 'pr')					NOT NULL,
 		
 	FOREIGN KEY (user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE NO ACTION,
-	
-	FOREIGN KEY (course_code, course_term, course_year, course_type)
-		REFERENCES course(course_code, course_term, course_year, course_type)
-		ON DELETE CASCADE ON UPDATE NO ACTION,
-	
-	PRIMARY KEY (user_id, course_code, course_term, course_year, course_type)
-);
-END;
-runQuery();
-
-
-$query = <<<END
-CREATE TABLE course_instructor (
-	user_id				INT						UNSIGNED	NOT NULL,
-	course_code			VARCHAR(6)							NOT NULL,
-	course_term			ENUM('spring', 'fall')				NOT NULL,
-	course_year			YEAR								NOT NULL,
-	course_type			ENUM('th', 'pr')					NOT NULL,
-		
-	FOREIGN KEY (user_id) REFERENCES instructor(user_id) ON DELETE CASCADE ON UPDATE NO ACTION,
 	
 	FOREIGN KEY (course_code, course_term, course_year, course_type)
 		REFERENCES course(course_code, course_term, course_year, course_type)
