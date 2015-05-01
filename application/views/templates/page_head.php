@@ -5,7 +5,7 @@
  * Copyright 2015 log inc.
  */
 ?>
-
+    
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,7 +27,6 @@
             .thumbnail {
                 position:relative;
                 overflow:hidden;
-                min-height:200%;
             }
             
             .caption {
@@ -37,7 +36,7 @@
                 background-color:lightgray;
                 display: none;
                 text-align:center;
-               // color:#fff !important;
+                //color:#fff !important;
                 z-index:2;
             }
             
@@ -55,7 +54,7 @@
             }
         </style>
     </head>
-    
+        
     <body>
         <div class="container">
             <div style="min-height:500px">

@@ -22,18 +22,18 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
         
         <div class="pull-right">
             <div class="thumbnail">
-                <div class="caption" style="top:80%;width: 100%;height: 100%;background:rgba(0,0,0,0.5)">                    
+                
+				<?php echo $profile_image ?> 
+                <div class="caption" style="width:100%;top:80%;background:rgba(0,0,0,0.5)">                    
                     <a href="" style="color:white"><i class="glyphicon glyphicon-camera"></i> Change Photo </a>
                     
                 </div>
-				<?php echo $profile_image ?> 
             </div>
             
         </div>
         <div class="col-md-8 thumbnail" style="font-size: 17px;padding:10px"> 
             <div class="caption">                    
-                <a href="#" ><i class="glyphicon glyphicon-pencil"></i></a>
-                
+                <a href="#" ><i class="glyphicon glyphicon-pencil"></i></a>                
             </div>
             <h2><strong><?php echo $user_data->user_first_name . ' ' . $user_data->user_last_name ?></strong></h2>
             <h3><?php echo "Computer Engineering- University of Engineering and Technology" ?></h3>
