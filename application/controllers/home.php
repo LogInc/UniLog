@@ -45,12 +45,20 @@ class Home extends CI_Controller {
 		}
 	}
 
+        public function course_doc() {
+		if ($this->load_page_head('Course_doc')) {
+			$this->load->view('templates/nav');
+			$this->load->view('course_doc.php');
+			$this->load->view('templates/page_foot');
+		}
+	}
+        
 	public function log_out() {
 		session_destroy();
 		redirect('/');
 	}
 
-	protected function load_page_head($title) {
+        protected function load_page_head($title) {
 		$this->load->model('user');
 		$user = $this->user->get_user_by_email($this->session->email);
 		if (!$user) {
