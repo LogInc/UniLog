@@ -69,6 +69,35 @@ class Student extends User {
 	}
 
 	/**
+	 * Returns the courses in which the user is currently enrolled and the instructor
+	 * of that course.
+	 * @return array
+	 */
+	public function get_current_course_enrollments() {
+		$id = $this->session->user_id;
+		
+		$query = <<<END
+			SELECT teacher.*, course.*
+			FROM user student
+			JOIN course_enrollment ON student.user_id = course_enrollment.user_id
+			JOIN course ON	(
+								course.course_code = course_enrollment.course_code AND
+								course.course_term = course_enrollment.course_term AND
+								course.course_year = course_enrollment.course_year AND
+								course.course_type = course_enrollment.course_type
+							)
+			JOIN user teacher ON teacher.user_id = course.course_instructor
+			WHERE student.user_id = '$id'
+			AND course.course_end_date IS NULL
+END;
+		$result = $this->db->query($query);
+		if (!$result)
+			return null;
+		
+		return $result->result_array();
+	}
+
+	/**
 	 * Adds a student authentication pin to the database.
 	 * 
 	 * Student users who attempt to sign-up must have a secret pin entry corresponding
