@@ -9,6 +9,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
+ * Description of Welcome
+ * 
  * Home controller manages the user's home page, i.e. the wall.
  *
  */

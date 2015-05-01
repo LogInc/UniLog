@@ -78,7 +78,7 @@ $profile_image = img($profile_image_path, FALSE, 'class="img-rounded" width="200
 		var aims = $("#aims-form").val();
 		if (aims.length !== 0) {
 			$("#summary-edit").hide();
-			("#summary-display").show();
+			$("#summary-display").show();
 		} else {
 			$("#summary-edit").show();
 			$("#summary-display").hide();

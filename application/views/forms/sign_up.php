@@ -10,8 +10,8 @@ if (!isset($initial_form))
 	$initial_form = "0";
             
 // After submitting the form with incorrect information
-$us_checked = $initial_form == '1' ? 'checked' : '';
-$os_checked = $initial_form == '2' ? 'checked' : '';
+$student_checked = $initial_form == 'student' ? 'checked' : '';
+$instructor_checked = $initial_form == 'instructor' ? 'checked' : '';
 ?>
     
 <?php echo form_open('sign-up', 'class="form-horizontal" role="form"') ?>
@@ -24,13 +24,13 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
         <p> Select account type </p>
         <div class ="col-lg-10 col-md-9">
             <div class="radio">
-                <label><input id ="U-S" type="radio" name="type" value="1" <?php echo $us_checked; ?>> University Student</label>
+                <label><input id ="U-S" type="radio" name="type" value="student" <?php echo $student_checked; ?>> University Student</label>
             </div>
         </div>
             
         <div class ="col-lg-10 col-md-9">
             <div class="radio">
-                <label><input type="radio" name="type" value=2 <?php echo $os_checked; ?>> Instructor</label>
+                <label><input type="radio" name="type" value="instructor" <?php echo $instructor_checked; ?>> Instructor</label>
             </div>
         </div>
             
@@ -100,14 +100,14 @@ $os_checked = $initial_form == '2' ? 'checked' : '';
     
 <script>
     function update(value) {
-        if (value === "1")
+        if (value === "student")
         {
             $("#form_type").hide();
             $(".Student-form").fadeIn();
             $("#rollno").fadeIn();
             $("#pin").fadeIn();
         }
-        else if (value == "2")
+        else if (value == "instructor")
         {
             $("#form_type").hide();
             $(".Student-form").fadeIn();

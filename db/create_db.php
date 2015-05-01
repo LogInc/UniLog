@@ -15,9 +15,9 @@
  *	temp_user
  *	temp_student
  *  student
- *	student_auth
  *	instructor
  *	course
+ *	course_enrollment
  *	upload
  *	post
  *	comment
@@ -111,18 +111,6 @@ runQuery();
 
 
 $query = <<<END
-CREATE TABLE student_auth (
-	student_email		VARCHAR(255)	NOT NULL	UNIQUE,
-	student_rollno		VARCHAR(12)		NOT NULL	UNIQUE,
-	student_pin			SMALLINT(5)		NOT NULL	UNIQUE,
-		
-	PRIMARY KEY (student_email, student_rollno, student_pin)
-);
-END;
-runQuery();
-
-
-$query = <<<END
 CREATE TABLE instructor (
 	user_id			INT		UNSIGNED		NOT NULL,
 		
@@ -146,6 +134,26 @@ CREATE TABLE course (
 		
 	FOREIGN KEY	(course_instructor) REFERENCES user(user_id),
 	PRIMARY KEY (course_code, course_term, course_year, course_type)
+);
+END;
+runQuery();
+
+
+$query = <<<END
+CREATE TABLE course_enrollment (
+	user_id				INT						UNSIGNED	NOT NULL,
+	course_code			VARCHAR(6)							NOT NULL,
+	course_term			ENUM('spring', 'fall')				NOT NULL,
+	course_year			YEAR								NOT NULL,
+	course_type			ENUM('th', 'pr')					NOT NULL,
+		
+	FOREIGN KEY (user_id) REFERENCES student(user_id) ON DELETE CASCADE ON UPDATE NO ACTION,
+	
+	FOREIGN KEY (course_code, course_term, course_year, course_type)
+		REFERENCES course(course_code, course_term, course_year, course_type)
+		ON DELETE CASCADE ON UPDATE NO ACTION,
+	
+	PRIMARY KEY (user_id, course_code, course_term, course_year, course_type)
 );
 END;
 runQuery();
