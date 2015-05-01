@@ -9,7 +9,7 @@
 <div class="col-md-3 no-select" style="background-color:white; border-radius:5px;" >
     <ul style="list-style-type: none;padding-top: 10%;font-size: 18px;min-height: 600px">
         <strong>Courses Now</strong>
-        <li><a href="http://localhost/unilog/home/course">Artificial Intelligence </a></li>
+        <li><a href="#">Artificial Intelligence </a></li>
         <li><a href="#">Computer Networks </a></li>
         <li><a href="#">Embedded Systems </a></li>
         <li><a href="#">Control Systems </a></li>

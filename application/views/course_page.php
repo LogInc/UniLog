@@ -20,7 +20,7 @@ $box_video = img(image_path('Box_Videos.png'), FALSE, 'class="img-rounded" width
         <div class="row">
             <div class="col-md-4">
                 <?php echo $box_notes ?>
-                <a href="http://localhost/unilog/home/course_doc">Notes</a>
+                <a href="http://localhost/unilog/user/course_doc">Notes</a>
             </div>
             <div class="col-md-4">
                 <?php echo $box_quiz ?>

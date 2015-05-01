@@ -29,6 +29,23 @@
                 overflow:hidden;
             }
             
+            .courses{
+                margin-top: 20px;
+                background-color: white;
+                text-align: center;
+            }
+            
+            .pic-caption{
+                width:100%;
+                height:100%;
+                background:rgba(0,0,0,0.5);
+                position:absolute;
+                top:0;
+                right:0;
+                display: none;
+                text-align:center;
+                z-index:2;                
+            }
             .caption {
                 position:absolute;
                 top:0;
