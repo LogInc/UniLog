@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * UniLog project.
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
@@ -21,26 +21,30 @@ $database = 'unilog';
 mysql_connect($server, $user, $pass) or die('Unable to connect to MySQL server');
 mysql_select_db($database) or die('Unable to select database');
 
+/*
 function runQuery() {
 	global $query;
-	mysql_query($query) or die('Query failed: ' . mysql_error()); 
+	mysql_query($query) or die('Query failed: ' . mysql_error());
 }
-
+ */
 
 $password_admin = password_hash("chateau", PASSWORD_BCRYPT);
 $password_baig = password_hash("chateau", PASSWORD_BCRYPT);
 $password_asad = password_hash("applemac", PASSWORD_BCRYPT);
 $password_ahmar = password_hash("visionace", PASSWORD_BCRYPT);
 $password_hassan = password_hash("smhri007", PASSWORD_BCRYPT);
+$password_teacher = password_hash("abc123", PASSWORD_BCRYPT);
 
 $query = <<<END
-INSERT INTO user (	user_email,
+INSERT INTO user (	user_id,
+					user_email,
 					user_password,
 					user_first_name,
 					user_last_name,
 					user_type)
 		
-		VALUES (	"log.inc.827@gmail.com",
+		VALUES (	1,
+					"log.inc.827@gmail.com",
 					"$password_admin",
 					"Admin",
 					"",
@@ -50,13 +54,15 @@ runQuery();
 
 
 $query = <<<END
-INSERT INTO user (	user_email,
+INSERT INTO user (	user_id,
+					user_email,
 					user_password,
 					user_first_name,
 					user_last_name,
 					user_type)
 		
-		VALUES (	"abdullahbaig456@gmail.com",
+		VALUES (	2,
+					"abdullahbaig456@gmail.com",
 					"$password_baig",
 					"Abdullah",
 					"Baig",
@@ -66,13 +72,15 @@ runQuery();
 
 
 $query = <<<END
-INSERT INTO user (	user_email,
+INSERT INTO user (	user_id,
+					user_email,
 					user_password,
 					user_first_name,
 					user_last_name,
 					user_type)
 		
-		VALUES (	"imamsb_007@hotmail.com",
+		VALUES (	3,
+					"imamsb_007@hotmail.com",
 					"$password_hassan",
 					"Hassan",
 					"Imam",
@@ -81,13 +89,15 @@ END;
 runQuery();
 
 $query = <<<END
-INSERT INTO user (	user_email,
+INSERT INTO user (	user_id,
+					user_email,
 					user_password,
 					user_first_name,
 					user_last_name,
 					user_type)
 		
-		VALUES (	"asadazam93@gmail.com",
+		VALUES (	4,
+					"asadazam93@gmail.com",
 					"$password_asad",
 					"Asad",
 					"Azam",
@@ -97,18 +107,197 @@ runQuery();
 
 
 $query = <<<END
-INSERT INTO user (	user_email,
+INSERT INTO user (	user_id,
+					user_email,
 					user_password,
 					user_first_name,
 					user_last_name,
 					user_type,
 					user_photo)
 		
-		VALUES (	"ahmar_sultan@live.com",
+		VALUES (	5,
+					"ahmar_sultan@live.com",
 					"$password_ahmar",
 					"Ahmar",
 					"Sultan",
 					"user_type_student",
 					"ahmar.jpg");
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO user (	user_id,
+					user_email,
+					user_password,
+					user_first_name,
+					user_last_name,
+					user_type)
+		
+		VALUES (	6,
+					"ysaleem@gmail.com",
+					"$password_teacher",
+					"Yasir",
+					"Saleem",
+					"user_type_instructor");
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO user (	user_id,
+					user_email,
+					user_password,
+					user_first_name,
+					user_last_name,
+					user_type)
+		
+		VALUES (	7,
+					"kk@gmail.com",
+					"$password_teacher",
+					"Khuldoon",
+					"Khurshid",
+					"user_type_instructor");
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO user (	user_id,
+					user_email,
+					user_password,
+					user_first_name,
+					user_last_name,
+					user_type)
+		
+		VALUES (	8,
+					"fhayat@gmail.com",
+					"$password_teacher",
+					"Faisal",
+					"Hayat",
+					"user_type_instructor");
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT into student (	user_id,
+						student_rollno)
+					VALUES (2, '2012-CE-27');
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT into student (	user_id,
+						student_rollno)
+					VALUES (3, '2012-CE-26');
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT into student (	user_id,
+						student_rollno)
+					VALUES (4, '2012-CE-11');
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT into student (	user_id,
+						student_rollno)
+					VALUES (5, '2012-CE-08');
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT into instructor (user_id) VALUES (6);
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT into instructor (user_id) VALUES (7);
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT into instructor (user_id) VALUES (8);
+END;
+runQuery();
+
+
+
+$query = <<<END
+INSERT INTO course (	course_code,
+						course_term,
+						course_year,
+						course_type,
+						course_start_date,
+						course_end_date,
+						course_name,
+						course_instructor
+					)
+			VALUES	(
+						'CE101',
+						'spring',
+						'2013',
+						'th',
+						'2013-9-15',
+						'2014-1-1',
+						'Digital Logic Design',
+						6
+					);
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO course (	course_code,
+						course_term,
+						course_year,
+						course_type,
+						course_start_date,
+						course_end_date,
+						course_name,
+						course_instructor
+					)
+			VALUES	(
+						'CS301',
+						'spring',
+						'2014',
+						'th',
+						'2014-9-15',
+						'2015-1-1',
+						'Database and Management',
+						7
+					);
+END;
+runQuery();
+
+
+$query = <<<END
+INSERT INTO course (	course_code,
+						course_term,
+						course_year,
+						course_type,
+						course_start_date,
+						course_end_date,
+						course_name,
+						course_instructor
+					)
+			VALUES	(
+						'CS402',
+						'fall',
+						'2015',
+						'th',
+						'2015-1-3',
+						'null',
+						'Computer Networks',
+						8
+					);
 END;
 runQuery();
