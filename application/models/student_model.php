@@ -6,7 +6,7 @@
  * Copyright 2015 log inc.
  */
 
-require_once 'user.php';
+require_once 'user_model.php';
 
 /**
  * Description of Student
@@ -16,7 +16,7 @@ require_once 'user.php';
  * When managing (insertion/deletion) students in the database, functions of this class
  * should only be called as they automatically manage the underlying user object.
  */
-class Student extends User {
+class Student_Model extends User_Model {
 
 	/**
 	 * Adds a student user to the database.

@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 
  * This controller class is the starting point of the website. The controller checks if
  * a user is already logged on. If that is the case, then the site is redirected to the
- * home controller. Otherwise the sign-in page is displayed.
+ * user controller. Otherwise the sign-in page is displayed.
  * This controller also handles user sign-up.
  */
 class Welcome extends CI_Controller {
@@ -27,7 +27,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index() {
 		if ($this->session->is_logged_in) {
-			redirect('home');
+			redirect('user');
 		} else
 			redirect('sign-in');
 	}
@@ -61,13 +61,13 @@ class Welcome extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'required|callback_validate_sign_in_credentials');
 
 		if ($this->form_validation->run()) {
-			$this->load->model('user');
+			$this->load->model('user_model');
 			$this->session->is_logged_in = true;
 			$this->session->email = clean_input($this->input->post('email'));
-			$id = $this->user->get_user_by_email($this->session->email)->user_id;
+			$id = $this->user_model->get_user_by_email($this->session->email)->user_id;
 			$this->session->user_id = $id;
 			
-			redirect('home');
+			redirect('user');
 		} else {
 			$this->sign();
 		}
@@ -99,9 +99,9 @@ class Welcome extends CI_Controller {
 
 			// Load the appropriate model.
 			if ($is_student)
-				$this->load->model('student', 'user');
+				$this->load->model('student_model', 'user');
 			else if ($is_instructor)
-				$this->load->model('instructor', 'user');
+				$this->load->model('instructor_model', 'user');
 			else
 				show_error("Ooops! Something went wrong.");
 
@@ -152,8 +152,8 @@ class Welcome extends CI_Controller {
 	 * @return boolean; true if the email and password are valid.
 	 */
 	public function validate_sign_in_credentials() {
-		$this->load->model('user');
-		$valid = $this->user->authenticate_user();
+		$this->load->model('user_model');
+		$valid = $this->user_model->authenticate_user();
 		if ($valid)
 			return true;
 		else {
@@ -176,8 +176,8 @@ class Welcome extends CI_Controller {
 		}
 		$key = $_GET['id'];
 
-		$this->load->model('user');
-		$temp_user = $this->user->get_temp_user($key);
+		$this->load->model('user_model');
+		$temp_user = $this->user_model->get_temp_user($key);
 
 		if (!$temp_user) {
 			show_error('Invalid call.');
@@ -185,9 +185,9 @@ class Welcome extends CI_Controller {
 		}
 		
 		if ($temp_user->user_type == 'user_type_student')
-			$this->load->model('student', 'selected_user');
+			$this->load->model('student_model', 'selected_user');
 		else if ($temp_user->user_type == 'user_type_instructor')
-			$this->load->model('instructor', 'selected_user');
+			$this->load->model('instructor_model', 'selected_user');
 		else {
 			show_error('Invalid call.');
 			return;
@@ -200,7 +200,7 @@ class Welcome extends CI_Controller {
 			$this->session->is_logged_in = true;
 			$this->session->email = $temp_user->user_email;
 			$this->session->user_id = $id;
-			//redirect('home');
+			//redirect('user');
 		} else
 			show_message('Invalid key.', 'Error');
 	}

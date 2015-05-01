@@ -9,12 +9,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Description of Welcome
+ * Description of User
  * 
- * Home controller manages the user's home page, i.e. the wall.
+ * User controller manages the user specific pages, e.g. the wall, profile, etc.
  *
  */
-class Home extends CI_Controller {
+class User extends CI_Controller {
 
 	private $user_data;
 	
@@ -78,13 +78,13 @@ class Home extends CI_Controller {
 	 * @return void
 	 */
 	public function update_summary() {
-		$this->load->model('user');
+		$this->load->model('user_model');
 		if ($this->session->is_logged_in) {
-			$user = $this->user->get_user_by_email($this->session->email);
+			$user = $this->user_model->get_user_by_email($this->session->email);
 			if (!$user) {
 				return;
 			}
-			$this->user->update_summary();
+			$this->user_model->update_summary();
 		}
 	}
 	
@@ -97,8 +97,8 @@ class Home extends CI_Controller {
 	 * @return boolean.
 	 */
 	protected function load_page_head($title) {
-		$this->load->model('user');
-		$user = $this->user->get_user_by_email($this->session->email);
+		$this->load->model('user_model');
+		$user = $this->user_model->get_user_by_email($this->session->email);
 		if (!$user) {
 			show_message("You must be logged in to access this page.", 'Access denied');
 			return false;
@@ -117,8 +117,8 @@ class Home extends CI_Controller {
 	 */
 	protected function display_left_nav() {
 		if ($this->user_data->user_type == 'user_type_student') {
-			$this->load->model('student');
-			$courses['courses'] = $this->student->get_current_course_enrollments();
+			$this->load->model('student_model');
+			$courses['courses'] = $this->student_model->get_current_course_enrollments();
 			$this->load->view('widgets/courses.php', $courses);
 		} else
 			$this->load->view('templates/left_nav.php');

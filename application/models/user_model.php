@@ -12,7 +12,7 @@
  * This model represents a UniLog user.
  * Includes functionality to create new users, verify a user's existence.
  */
-class User extends CI_Model {
+class User_Model extends CI_Model {
 
 	/**
 	 * Adds a user in the database.
