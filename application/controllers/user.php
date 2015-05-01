@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
 
 	private $user_data;
-	
+
 	public function index() {
 		$this->wall();
 	}
@@ -33,22 +33,20 @@ class User extends CI_Controller {
 			$this->load->view('templates/page_foot');
 		}
 	}
-	
+
 	/**
 	 * Displays the user's profile page.
 	 * @return void
 	 */
 	public function profile() {
-		if (!$this->load_page_head('Profile'))
-			return;
-
-		$this->load->view('templates/nav');
-		$this->display_left_nav();
-		$this->load->view('user_profile');
-		$this->load->view('templates/page_foot');
+		if (!$this->load_page_head('Profile')) {
+			$this->load->view('templates/nav');
+			$this->display_left_nav();
+			$this->load->view('user_profile');
+			$this->load->view('templates/page_foot');
+		}
 	}
 
-	
 	public function notice_board() {
 		if ($this->load_page_head('Home')) {
 			$this->load->view('templates/nav');
@@ -65,6 +63,14 @@ class User extends CI_Controller {
 		}
 	}
 
+	public function course_doc() {
+		if ($this->load_page_head('Course_doc')) {
+			$this->load->view('templates/nav');
+			$this->load->view('course_doc.php');
+			$this->load->view('templates/page_foot');
+		}
+	}
+
 	/**
 	 * Logs out the user from the website and returns to home page.
 	 */
@@ -72,7 +78,7 @@ class User extends CI_Controller {
 		session_destroy();
 		redirect('/');
 	}
-	
+
 	/**
 	 * Updates the user's summary field.
 	 * @return void
@@ -87,7 +93,7 @@ class User extends CI_Controller {
 			$this->user_model->update_summary();
 		}
 	}
-	
+
 	/**
 	 * Checks if the user is logged on and returns his/her record from the db.
 	 * 
@@ -108,7 +114,7 @@ class User extends CI_Controller {
 		$data['user_data'] = $user;
 		$this->load->view('templates/page_head', $data);
 		$this->user_data = $data['user_data'];
-		
+
 		return true;
 	}
 
