@@ -24,9 +24,6 @@ switch ($user_data->user_type) {
 		break;
 }
 ?>
-
-
-
 <div class="col-md-9 " >
     <div class="col-md-11" style="background-color: white;min-height: 261px;padding: 20px;border-radius:5px" >       
         <h3><strong>Your Profile</strong></h3>          
@@ -34,58 +31,55 @@ switch ($user_data->user_type) {
         
         <div class="pull-right">
             <div class="thumbnail">
-                <div class="caption" style="top:80%;width: 100%;height: 100%;background:rgba(0,0,0,0.5)">                    
-                    <a href="" style="color:white"><i class="glyphicon glyphicon-camera"></i> Change Photo </a>
-                    
-                </div>
-				<?php echo $profile_image ?> 
-            </div>
-            
-        </div>
-        <div class="col-md-8 thumbnail" style="font-size: 17px;padding:10px"> 
-            <div class="caption">                    
-                <a href="#" ><i class="glyphicon glyphicon-pencil"></i></a>
                 
-            </div>
+				<?php echo $profile_image ?> 
+                <div class="caption" style="width:100%;top:80%;background:rgba(0,0,0,0.5)">                    
+                    <a href="" style="color:white"><i class="glyphicon glyphicon-camera"></i> Change Photo </a>                    
+                </div>
+            </div>            
+        </div>
+        <div class="col-md-8" style="font-size: 17px;padding:10px">        
             <h2><strong><?php echo $user_data->user_first_name . ' ' . $user_data->user_last_name ?></strong></h2>
             <h3><?php echo $user_type ?></h3>
             <h4><?php echo $user_data->user_email ?></h4>
         </div>
+        
     </div>
-    
-    <div class="col-md-11" 
-         style="background-color:white; min-height:261px; padding:20px; border-radius:5px; margin-top: 15px" >       
-        <h3><strong>Summary</strong></h3>          
-        <hr style="height:2px;background-color: gray">            
-        <div class="col-md-12" id="summary-edit" style="font-size: 17px">
-            <form role="form">
-                <div class="form-group">
-                    <label for="aims-form"></label>
-                    <textarea class="form-control" id="aims-form" rows="8" placeholder="write something about you and your goals in life...">
+
+
+<div class="col-md-11" 
+     style="background-color:white; min-height:261px; padding:20px; border-radius:5px; margin-top: 15px" >       
+    <h3><strong>Summary</strong></h3>          
+    <hr style="height:2px;background-color: gray">            
+    <div class="col-md-12" id="summary-edit" style="font-size: 17px">
+        <form role="form">
+            <div class="form-group">
+                <label for="aims-form"></label>
+                <textarea class="form-control" id="aims-form" rows="8" placeholder="write something about you and your goals in life...">
                     <?php echo trim($user_data->user_summary); ?></textarea>
-                    <div class="pull-right" style="margin-top:10px">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-primary btn-group-justified save-button" type="button">Save</button>                           
-                            </div>
-                            <div class="col-md-6 col-md">
-                                <button class="btn btn-default btn-group-justified cancel-button" type="button" name="cancel_post">Cancel</button>                           
-                            </div>
+                <div class="pull-right" style="margin-top:10px">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-group-justified save-button" type="button">Save</button>                           
+                        </div>
+                        <div class="col-md-6 col-md">
+                            <button class="btn btn-default btn-group-justified cancel-button" type="button" name="cancel_post">Cancel</button>                           
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-        
-        <div  class="col-md-12 thumbnail" id="summary-display" style="font-size: 17px">
-            <div class="caption">                    
-                <a class="edit-label"><i class="glyphicon glyphicon-pencil"></i></a>
             </div>
-            <p id="aims-paragraph"><?php echo trim($user_data->user_summary); ?></p>                
-        </div>
+        </form>
     </div>
     
-    
+    <div  class="col-md-12 thumbnail" id="summary-display" style="font-size: 17px">
+        <div class="caption">                    
+            <a class="edit-label"><i class="glyphicon glyphicon-pencil"></i></a>
+        </div>
+        <p id="aims-paragraph"><?php echo trim($user_data->user_summary); ?></p>                
+    </div>
+</div>
+
+
 </div>
 
 <script>
