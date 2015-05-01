@@ -113,18 +113,3 @@ INSERT INTO course_enrollment	(
 								( 5, 'CS402', 'fall', '2015', 'th' );
 END;
 runQuery();
-
-
-$query = <<<END
-INSERT INTO course_instructor	(
-									user_id,
-									course_code,
-									course_term,
-									course_year,
-									course_type
-								)
-						VALUES	( 6, 'CE101', 'spring', '2013', 'th' ),
-								( 7, 'CS301', 'spring', '2014', 'th' ),
-								( 8, 'CS402', 'fall', '2015', 'th' );
-END;
-runQuery();
