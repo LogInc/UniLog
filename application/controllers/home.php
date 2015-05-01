@@ -21,33 +21,30 @@ class Home extends CI_Controller {
 	}
 
 	public function wall() {
-		if (!$this->load_page_head('Home'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('templates/left_nav');
-		$this->load->view('user_wall');
-		$this->load->view('templates/page_foot');
+		if ($this->load_page_head('Home')) {
+			$this->load->view('templates/nav');
+			$this->load->view('templates/left_nav');
+			$this->load->view('user_wall');
+			$this->load->view('templates/page_foot');
+		}
 	}
 
 	public function notice_board() {
-		if (!$this->load_page_head('Notice Board'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('templates/notice_board');
-		$this->load->view('templates/page_foot');
+		if ($this->load_page_head('Notice Board')) {
+			$this->load->view('templates/nav');
+			$this->load->view('templates/notice_board');
+			$this->load->view('templates/page_foot');
+		}
 	}
 
 	public function course() {
-		if (!$this->load_page_head('Course'))
-			return;
-		
-		$this->load->view('templates/nav');
-		$this->load->view('course_page.php');
-		$this->load->view('templates/page_foot');
+		if ($this->load_page_head('Course')) {
+			$this->load->view('templates/nav');
+			$this->load->view('course_page.php');
+			$this->load->view('templates/page_foot');
+		}
 	}
-	
+
 	public function log_out() {
 		session_destroy();
 		redirect('/');
@@ -57,10 +54,10 @@ class Home extends CI_Controller {
 		$this->load->model('user');
 		$user = $this->user->get_user_by_email($this->session->email);
 		if (!$user) {
-			show_message("Access denied!", 'Hey!');
+			show_message("You must be logged in to access this page.", 'Access denied');
 			return false;
 		}
-		
+
 		$data['page_title'] = $title;
 		$data['user_data'] = $user;
 		$this->load->view('templates/page_head', $data);
