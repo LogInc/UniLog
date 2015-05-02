@@ -28,8 +28,7 @@ $ES = image_path('embedded-systems.jpg');
                             <i class="glyphicon glyphicon-book"></i><strong> Learn More</strong>
                         </div>                            
                     </div>                        
-                    <div style ='background:url(<?php echo $CN; ?>);background-color: white;
-                         background-size: 100% 100%; min-height: 200px;'>
+                    <div class="img-wrapper" style ='background-image:url(<?php echo $CN; ?>);'>
                     </div>                        
                     <div>   
                         <hr style="height:2px;background-color: gray"> 
@@ -48,8 +47,7 @@ $ES = image_path('embedded-systems.jpg');
                             <i class="glyphicon glyphicon-book"></i><strong> Learn More</strong>
                         </div>                            
                     </div>                        
-                    <div style ='background:url(<?php echo $AI; ?>);background-color: white;
-                         background-size: 100% 100%; min-height: 200px;'>
+                    <div class="img-wrapper "style ='background-image:url(<?php echo $AI; ?>);'>
                     </div>                        
                     <div>   
                         <hr style="height:2px;background-color: gray"> 
@@ -72,8 +70,7 @@ $ES = image_path('embedded-systems.jpg');
                             
                     </div>
                         
-                    <div style ='background:url(<?php echo $WT; ?>);background-color: white;
-                         background-size: 100% 100%; min-height: 200px;'>
+                    <div class="img-wrapper" style ='background-image:url(<?php echo $WT; ?>);'>
                     </div>                        
                     <div>   
                         <hr style="height:2px;background-color: gray"> 
@@ -97,8 +94,7 @@ $ES = image_path('embedded-systems.jpg');
                             
                     </div>
                         
-                    <div style ='background:url(<?php echo $ES; ?>);background-color: white;
-                         background-size: 100% 100%; min-height: 200px;'>
+                    <div class="img-wrapper" style ='background-image:url(<?php echo $ES; ?>);'>
                     </div>                        
                     <div>   
                         <hr style="height:2px;background-color: gray"> 

@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="<?php echo style_path('custom_nav.css') ?>">
         <script src="<?php echo script_path('jquery-2.1.1.min.js') ?>"></script>
         <script src="<?php echo script_path('bootstrap.min.js') ?>"></script>
-       
+            
         <style>
             body{
                 font-family:"Calibri Light";
@@ -28,8 +28,14 @@
             .thumbnail {
                 position:relative;
                 overflow:hidden;
-            }
+            }    
                 
+            .img-wrapper{
+                background-color: white;
+                background-repeat:no-repeat;
+                background-size:contain;
+                background-position:center; min-height: 200px;
+            }
             .courses{
                 margin-top: 20px;
                 background-color: white;
