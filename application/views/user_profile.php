@@ -99,8 +99,6 @@ switch ($user_data->user_type) {
 		
 		$("#upload-overlay").click(function() { $('#upload-input').click(); });
 		
-		$("#photo-upload-form").ajaxForm();
-		
 		$('#upload-input').change(function() {
 			var file = this.files[0];
 			var imagefile = file.type;
@@ -118,7 +116,7 @@ switch ($user_data->user_type) {
 			$('#profile-pic').attr('style', 'width:200px;');
 			$('#nav-profile-photo').attr('src', e.target.result);
 			$('#nav-profile-photo').attr('style', 'width:20;');
-			$('#upload-photo-submit').click();
+			$("#photo-upload-form").ajaxSubmit();
 		}
 
 		$(".save-button").click(function () {
