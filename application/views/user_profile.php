@@ -35,8 +35,9 @@ switch ($user_data->user_type) {
 				<button class="caption" id="upload-overlay" style="width:100%; top:80%; padding:5px 10%; border:none; background-color:rgba(0,0,0,0.8); color:white">
 					<i class="glyphicon glyphicon-camera" style="margin-top:2%; float:left"></i> Change Photo
 				</button>
-				<form id='photo-upload-form' hidden="">
+				<form id='photo-upload-form' method="post" action="<?php echo base_url('user/update_photo'); ?>" enctype="multipart/form-data" hidden="">
 					<input type="file" id="upload-input" name="photo">
+					<button type="submit" id="upload-photo-submit"></button>
 				</form>
             </div>
         </div>
@@ -84,9 +85,10 @@ switch ($user_data->user_type) {
 
 </div>
 
+<script src="<?php echo script_path('jquery.form.js'); ?>"></script>
 <script>
 	$(document).ready(function () {
-		var aims = $("#aims-form").val();
+		var aims = $("#aims-paragraph").val();
 		if (aims.length !== 0) {
 			$("#summary-edit").hide();
 			$("#summary-display").show();
@@ -96,6 +98,9 @@ switch ($user_data->user_type) {
 		}
 		
 		$("#upload-overlay").click(function() { $('#upload-input').click(); });
+		
+		$("#photo-upload-form").ajaxForm();
+		
 		$('#upload-input').change(function() {
 			var file = this.files[0];
 			var imagefile = file.type;
@@ -110,7 +115,8 @@ switch ($user_data->user_type) {
 		
 		function profilePhotoUploaded(e) {
 			$('#profile-pic').attr('src', e.target.result);
-			$('#profile-pic').attr('style', 'width:200px;height:200px');
+			$('#profile-pic').attr('style', 'width:200px;');
+			$('#upload-photo-submit').click();
 		}
 
 		$(".save-button").click(function () {
