@@ -116,6 +116,8 @@ switch ($user_data->user_type) {
 		function profilePhotoUploaded(e) {
 			$('#profile-pic').attr('src', e.target.result);
 			$('#profile-pic').attr('style', 'width:200px;');
+			$('#nav-profile-photo').attr('src', e.target.result);
+			$('#nav-profile-photo').attr('style', 'width:20;');
 			$('#upload-photo-submit').click();
 		}
 

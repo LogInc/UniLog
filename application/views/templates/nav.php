@@ -11,7 +11,7 @@ if ($user_data->user_photo == null || $user_data->user_photo == "")
 else
 	$profile_image_path = upload_path ('profile_pics/' . $user_data->user_photo);
 	
-	$profile_photo = img($profile_image_path, FALSE, 'width="30" height="30" class="img-circle"');
+	$profile_photo = img($profile_image_path, FALSE, 'id="nav-profile-photo" width="30" height="30" class="img-circle"');
 ?>
 
 <style>
