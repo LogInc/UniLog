@@ -191,5 +191,12 @@ class User_Model extends CI_Model {
 		if ($this->session->is_logged_in)
 			$this->db->query("UPDATE user SET user_summary='$summary' WHERE user_email='$email'");
 	}
+	
+	public function update_photo($filename) {
+		$email = $this->session->email;
+		$filename = clean_input($filename);
+		if ($this->session->is_logged_in)
+			$this->db->query("UPDATE user SET user_photo='$filename' WHERE user_email='$email'");
+	}
 
 }

@@ -6,6 +6,6 @@
  * Copyright 2015 log inc.
  */
 
-$config['upload_path']		= './uploads.php/';
+$config['upload_path']		= './uploads/';
 $config['allowed_types']	= 'gif|jpg|png|mp4|pdf|doc|docx|ppt|pptx|';
 $config['max_size']			= '512000';
