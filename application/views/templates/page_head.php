@@ -17,18 +17,44 @@
         <link rel="stylesheet" href="<?php echo style_path('custom_nav.css') ?>">
         <script src="<?php echo script_path('jquery-2.1.1.min.js') ?>"></script>
         <script src="<?php echo script_path('bootstrap.min.js') ?>"></script>
+       
         <style>
             body{
                 font-family:"Calibri Light";
                 font-size: 20px;
                 background-color: <?php if (isset($white)) { echo '#fff'; } else { echo '#eee'; } ?>;
             }
-            
+                
             .thumbnail {
                 position:relative;
                 overflow:hidden;
             }
-            
+                
+            .courses{
+                margin-top: 20px;
+                background-color: white;
+                text-align: center;
+                border-style:outset;
+                border-width:3px;
+                // margin-left:25px;
+            }
+            .post-div{
+                background-color: white;
+                border-style:outset;
+                border-width:2px;
+                padding: 20px;
+            }            
+            .pic-caption{
+                width:100%;
+                height:100%;
+                background:rgba(0,0,0,0.5);
+                position:absolute;
+                top:0;
+                right:0;
+                display: none;
+                text-align:center;
+                z-index:2;                
+            }
             .caption {
                 position:absolute;
                 top:0;
@@ -39,11 +65,11 @@
                 //color:#fff !important;
                 z-index:2;
             }
-            
+                
             a:hover, a:focus {
                 text-decoration: none;
             }
-            
+                
             .no-select {
                 -webkit-touch-callout: none;
                 -webkit-user-select: none;
