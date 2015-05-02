@@ -6,7 +6,7 @@
  */
 ?>
 
-<div class="col-md-3 no-select" style="background-color:white; border-radius:5px;" >
+<div class="col-md-3 no-select post-div" style="background-color:white; border-radius:5px;" >
     <ul style="list-style-type: none;padding-top: 10%;font-size: 18px;min-height: 600px">
         <strong>Courses Now</strong>
 		<?php
