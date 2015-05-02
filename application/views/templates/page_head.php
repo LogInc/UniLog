@@ -34,7 +34,10 @@
                 background-color: white;
                 background-repeat:no-repeat;
                 background-size:contain;
-                background-position:center; min-height: 200px;
+                background-position:center; 
+                min-height: 200px;
+                text-align: center;
+                color:#4472c4
             }
             .courses{
                 margin-top: 20px;
@@ -53,7 +56,7 @@
             .pic-caption{
                 width:100%;
                 height:100%;
-                background:rgba(0,0,0,0.5);
+                background:rgba(0,0,0,0.3);
                 position:absolute;
                 top:0;
                 right:0;

@@ -50,7 +50,7 @@ class User extends CI_Controller {
 
 	
 	public function notice_board() {
-		if ($this->load_page_head('Home')) {
+		if ($this->load_page_head('NB')) {
 			$this->load->view('templates/nav');
 			$this->load->view('templates/notice_board');
 			$this->load->view('templates/page_foot');
@@ -58,7 +58,7 @@ class User extends CI_Controller {
 	}
 
 	public function course() {
-		if ($this->load_page_head('Home')) {
+		if ($this->load_page_head('Course')) {
 			$this->load->view('templates/nav');
 			$this->load->view('course_page.php');
 			$this->load->view('templates/page_foot');
@@ -73,7 +73,7 @@ class User extends CI_Controller {
 	}
         
         public function all_courses(){
-            if ($this->load_page_head('all_courses')) {
+            if ($this->load_page_head('All Courses')) {
 			$this->load->view('templates/nav');
 			$this->load->view('all_courses.php');
 			$this->load->view('templates/page_foot');

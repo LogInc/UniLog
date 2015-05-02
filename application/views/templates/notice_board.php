@@ -47,45 +47,49 @@ $image = image_path('sticky-blue.png');
 </script>
 
 <div class="col-md-12" >
-
+    
     <div class="jumbotron" style="background-color: white; min-height: 100px; padding: 20px;border-radius:5px" >
+        
+        <b>Notice Board</b>          
+        <hr style="height:2px;background-color: gray">
         <form class='form-group' >
-            <b>Notice Board</b>          
-            <hr style="height:2px;background-color: gray">
-
-            <input type="text" name="post" value="name" >
-            <button type="button" class="btn btn-primary">Submit</button>
-            <button class="dropdown btn btn-primary" type="button">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:white">
-                    Color <b class="caret"></b></a>
-                <ul value="blue" onchange="change_image(this.value)" class="dropdown-menu">
-                    <li><a href="#">Green</a></li>
-                    <li><a href="#">Pink</a></li>
-                    <li><a href="#">Blue</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Yellow</a></li>
-                </ul>
-            </button>
-            <br>
+            <div class="row">
+                <div class="col-md-4">                
+                    <input class="form-control" type="text" name="post" placeholder="write your notice here..." >
+                </div>
+                <div class="col-md-4">                  
+                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button class="dropdown btn btn-primary" type="button">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:white">
+                            Color <b class="caret"></b></a>
+                        <ul value="blue" onchange="change_image(this.value)" class="dropdown-menu">
+                            <li><a href="#">Green</a></li>
+                            <li><a href="#">Pink</a></li>
+                            <li><a href="#">Blue</a></li>
+                            <li><a href="#">Yellow</a></li>
+                        </ul>
+                    </button>
+                </div>          
+            </div>
         </form>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-            Select image to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <input type="submit" value="Upload Image" name="submit">
-        </form>
-
+        
     </div>
-    <div >
-    <img id="drag1" src="<?php echo $image; ?>" draggable="true"
-         ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px" >
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+    <div>
+        <img id="drag1" src="<?php echo $image; ?>" draggable="true"
+             ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px" >
     </div>
-
-
+    
+    
     <div class="col-md-12" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" style="background-color: white;
          background: url(<?php echo $notice; ?>) no-repeat 2px 2px; background-size: 100% 100%; min-height: 700px;padding: 20px;border-radius:5px" >
     </div>
-
-
-
+    
+    
+    
 </div>
 

@@ -10,6 +10,7 @@ $CN = image_path('computer-networks.jpg');
 $AI = image_path('artificial-intelligence.png');
 $WT = image_path('web_tech.jpg');
 $ES = image_path('embedded-systems.jpg');
+$CS = image_path('control-systems.jpg');
     
 ?>
 <div class="col-md-8">
@@ -105,7 +106,26 @@ $ES = image_path('embedded-systems.jpg');
                         </div>                        
                     </div> 
                 </div>
-            </a> 
+            </a>
+            <a href="#">
+                <div class="col-md-4 thumbnail courses">                    
+                    <div class="pic-caption" >                        
+                        <div style="margin-top:60%;color: white">
+                            <i class="glyphicon glyphicon-book"></i><strong> Learn More</strong>
+                        </div>                            
+                    </div>                        
+                    <div class="img-wrapper" style ='background-image:url(<?php echo $CS; ?>);'>
+                    </div>                        
+                    <div>   
+                        <hr style="height:2px;background-color: gray"> 
+                        <h3> <?php echo "Control Systems" ?></h3>
+                        <div>
+                            <p>Started On </p>
+                            <h4> 23-May-2012 </h4>                            
+                        </div>                        
+                    </div> 
+                </div>
+            </a>
         </div>  
             
     </div>
