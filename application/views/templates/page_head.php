@@ -33,6 +33,9 @@
                 margin-top: 20px;
                 background-color: white;
                 text-align: center;
+                border-style:outset;
+                border-width:5px;
+               // margin-left:25px;
             }
             
             .pic-caption{
