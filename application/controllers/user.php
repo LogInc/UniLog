@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
 
 	private $user_data;
-	
+
 	public function index() {
 		$this->wall();
 	}
@@ -33,7 +33,7 @@ class User extends CI_Controller {
 			$this->load->view('templates/page_foot');
 		}
 	}
-	
+
 	/**
 	 * Displays the user's profile page.
 	 * @return void
@@ -48,7 +48,6 @@ class User extends CI_Controller {
 		$this->load->view('templates/page_foot');
 	}
 
-	
 	public function notice_board() {
 		if ($this->load_page_head('NB')) {
 			$this->load->view('templates/nav');
@@ -64,21 +63,24 @@ class User extends CI_Controller {
 			$this->load->view('templates/page_foot');
 		}
 	}
-        public function course_doc() {
+
+	public function course_doc() {
 		if ($this->load_page_head('Course_doc')) {
 			$this->load->view('templates/nav');
 			$this->load->view('course_doc.php');
 			$this->load->view('templates/page_foot');
 		}
 	}
-        
-        public function all_courses(){
-            if ($this->load_page_head('All Courses')) {
+
+	public function all_courses() {
+		if ($this->load_page_head('All Courses')) {
 			$this->load->view('templates/nav');
-			$this->load->view('all_courses.php');
+			$this->load->model('course_model');
+			$data['current_courses'] = $this->course_model->get_current_courses();
+			$this->load->view('all_courses.php', $data);
 			$this->load->view('templates/page_foot');
 		}
-        }
+	}
 
 	/**
 	 * Logs out the user from the website and returns to home page.
@@ -87,7 +89,7 @@ class User extends CI_Controller {
 		session_destroy();
 		redirect('/');
 	}
-	
+
 	/**
 	 * Updates the user's summary field.
 	 * @return void
@@ -102,7 +104,32 @@ class User extends CI_Controller {
 			$this->user_model->update_summary();
 		}
 	}
-	
+
+	public function update_photo() {
+		$this->load->model('user_model');
+		if ($this->session->is_logged_in) {
+			$user = $this->user_model->get_user_by_email($this->session->email);
+			if (!$user) {
+				return;
+			}
+
+			$config['upload_path'] = './uploads/profile_pics/';
+			$config['allowed_types'] = 'gif|jpg|png|mp4|pdf|doc|docx|ppt|pptx|';
+			$config['max_size'] = '512000';
+			$config['encrypt_name'] = true;
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('photo')) {
+				$user = $this->user_model->get_user_by_id($this->session->user_id);
+				
+				$old = './uploads/profile_pics/' . $user->user_photo;
+				if (file_exists($old))
+					unlink('./uploads/profile_pics/' . $user->user_photo);
+
+				$this->user_model->update_photo($this->upload->data('file_name'));
+			}
+		}
+	}
+
 	/**
 	 * Checks if the user is logged on and returns his/her record from the db.
 	 * 
@@ -123,7 +150,7 @@ class User extends CI_Controller {
 		$data['user_data'] = $user;
 		$this->load->view('templates/page_head', $data);
 		$this->user_data = $data['user_data'];
-		
+
 		return true;
 	}
 

@@ -5,8 +5,8 @@
  * Copyright 2015 log inc.
  */
 
-$notice = image_path('NoticeBoard.png');
-$image = image_path('sticky-blue.png');
+$notice = image_uri('NoticeBoard.png');
+$image = image_uri('sticky-blue.png');
 ?>
 
 <script>

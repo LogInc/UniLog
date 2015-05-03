@@ -4,14 +4,14 @@
  * UniLog is an on-line educational courseware for the University of Engineering and Technology, Lahore.
  * Copyright 2015 log inc.
  */
-$bag_image = image_path('schoolbag.png');
+$bag_image = image_uri('schoolbag.png');
 
 if ($user_data->user_photo == null || $user_data->user_photo == "")
-	$profile_image_path = image_path('default_profile_30x.png');
+	$profile_image_path = image_uri('default_profile_30x.png');
 else
-	$profile_image_path = upload_path ('profile_pics/' . $user_data->user_photo);
+	$profile_image_path = upload_uri ('profile_pics/' . $user_data->user_photo);
 	
-	$profile_photo = img($profile_image_path, FALSE, 'width="30" height="30" class="img-circle"');
+	$profile_photo = img($profile_image_path, FALSE, 'id="nav-profile-photo" width="30" height="30" class="img-circle"');
 ?>
 
 <style>
@@ -39,7 +39,7 @@ else
     <div class="col-sm-2 navbar-header ">
 		<?php
 		$a = '<a href="' . base_url() . '" >';
-		$a .= img(image_path('unilog_logo.png'), FALSE, 'width="100" alt="unilog logo"');
+		$a .= img(image_uri('unilog_logo.png'), FALSE, 'width="100" alt="unilog logo"');
 		echo $a . '</a>';
 		?>
     </div>

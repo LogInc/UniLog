@@ -127,10 +127,11 @@ CREATE TABLE course (
 	course_term			ENUM('spring', 'fall')				NOT NULL,
 	course_year			YEAR								NOT NULL,
 	course_type			ENUM('th', 'pr')					NOT NULL,
+	course_instructor	INT						UNSIGNED	NOT NULL,
 	course_start_date	DATE								NOT NULL,
 	course_end_date		DATE								NULL,
 	course_name			VARCHAR(128)						NOT NULL,
-	course_instructor	INT						UNSIGNED	NOT NULL,
+	course_photo		VARCHAR(255)						NOT NULL,
 		
 	FOREIGN KEY	(course_instructor) REFERENCES user(user_id),
 	PRIMARY KEY (course_code, course_term, course_year, course_type)

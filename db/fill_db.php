@@ -80,11 +80,12 @@ INSERT INTO course (	course_code,
 						course_start_date,
 						course_end_date,
 						course_name,
-						course_instructor
+						course_instructor,
+						course_photo
 					)
-	VALUES	('CE101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6),
-			('CS301', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7),
-			('CS402', 'fall', '2015', 'th', '2015-1-3', null, 'Computer Networks', 8);
+	VALUES	('CE101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6, ''),
+			('CS301', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7, ''),
+			('CS402', 'fall', '2015', 'th', '2015-1-3', null, 'Computer Networks', 8, 'fixed_cn.jpg');
 END;
 runQuery();
 

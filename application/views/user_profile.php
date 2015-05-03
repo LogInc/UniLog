@@ -5,10 +5,12 @@
  * Copyright 2015 log inc.
  */
 
-if ($user_data->user_photo == null || $user_data->user_photo == "")
-	$profile_image_path = image_path('default_profile_200x.png');
+if ($user_data->user_photo == "")
+	$profile_image_path = image_uri('default_profile_200x.png');
+else if (file_exists(upload_path('profile_pics/' . $user_data->user_photo)))
+	$profile_image_path = upload_uri('profile_pics/' . $user_data->user_photo);
 else
-	$profile_image_path = upload_path('profile_pics/' . $user_data->user_photo);
+	$profile_image_path = image_uri('default_profile_200x.png');
 
 $profile_image = img($profile_image_path, FALSE, 'id="profile-pic" class="img-rounded" width="200" alt="unilog logo"');
 
@@ -35,8 +37,9 @@ switch ($user_data->user_type) {
 				<button class="caption" id="upload-overlay" style="width:100%; top:80%; padding:5px 10%; border:none; background-color:rgba(0,0,0,0.8); color:white">
 					<i class="glyphicon glyphicon-camera" style="margin-top:2%; float:left"></i> Change Photo
 				</button>
-				<form id='photo-upload-form' hidden="">
+				<form id='photo-upload-form' method="post" action="<?php echo base_url('user/update_photo'); ?>" enctype="multipart/form-data" hidden="">
 					<input type="file" id="upload-input" name="photo">
+					<button type="submit" id="upload-photo-submit"></button>
 				</form>
             </div>
         </div>
@@ -57,8 +60,7 @@ switch ($user_data->user_type) {
 			<form role="form">
 				<div class="form-group">
 					<label for="aims-form"></label>
-					<textarea class="form-control" id="aims-form" rows="8" placeholder="write something about you and your goals in life...">
-						<?php echo trim($user_data->user_summary); ?></textarea>
+					<textarea class="form-control" id="aims-form" rows="8" placeholder="write something about you and your goals in life..."><?php echo trim($user_data->user_summary); ?></textarea>
 					<div class="pull-right" style="margin-top:10px">
 						<div class="row">
 							<div class="col-md-6">
@@ -84,9 +86,10 @@ switch ($user_data->user_type) {
 
 </div>
 
+<script src="<?php echo script_uri('jquery.form.js'); ?>"></script>
 <script>
 	$(document).ready(function () {
-		var aims = $("#aims-form").val();
+		var aims = $("#aims-paragraph").val();
 		if (aims.length !== 0) {
 			$("#summary-edit").hide();
 			$("#summary-display").show();
@@ -94,29 +97,35 @@ switch ($user_data->user_type) {
 			$("#summary-edit").show();
 			$("#summary-display").hide();
 		}
-		
-		$("#upload-overlay").click(function() { $('#upload-input').click(); });
-		$('#upload-input').change(function() {
+
+		$("#upload-overlay").click(function () {
+			$('#upload-input').click();
+		});
+
+		$('#upload-input').change(function () {
 			var file = this.files[0];
 			var imagefile = file.type;
 			var match = ['image/jpeg', 'image/png', 'image/jpg'];
-			if (!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))) {
+			if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]))) {
 				return false;
 			}
 			var reader = new FileReader();
 			reader.onload = profilePhotoUploaded;
 			reader.readAsDataURL(this.files[0]);
 		});
-		
+
 		function profilePhotoUploaded(e) {
 			$('#profile-pic').attr('src', e.target.result);
-			$('#profile-pic').attr('style', 'width:200px;height:200px');
+			$('#profile-pic').attr('style', 'width:200px;');
+			$('#nav-profile-photo').attr('src', e.target.result);
+			$('#nav-profile-photo').attr('style', 'width:20;');
+			$("#photo-upload-form").ajaxSubmit();
 		}
 
 		$(".save-button").click(function () {
 			var aims = $("#aims-form").val();
 			document.getElementById("aims-paragraph").innerHTML = aims;
-			$.post('<?php echo base_url(); ?>profile/update_summary', {summary: aims});
+			$.post('<?php echo base_url(); ?>user/update_summary', {summary: aims});
 
 			if (aims.length !== 0) {
 				$("#summary-edit").hide();
