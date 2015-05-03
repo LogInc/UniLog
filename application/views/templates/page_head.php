@@ -28,12 +28,12 @@
 	echo '#eee';
 } ?>;
             }
-            
+
             .thumbnail {
                 position:relative;
                 overflow:hidden;
             }    
-            
+
             .img-wrapper{
                 background-color: white;
                 background-repeat:no-repeat;
