@@ -61,6 +61,25 @@ class Course extends CI_Controller {
 		}
 	}
 
+	public function course_description($code, $term, $year, $type) {
+		if ($this->load_page_head($code)) {
+			$data['course_data']= $this->course_model->get_course($code, $term, $year, $type);
+			$this->load->view('templates/nav');
+			$this->load->view('course_page', $data);
+			$this->load->view('templates/page_foot');
+		}
+	}
+
+	public function my_course($code, $term, $year, $type) {
+		if ($this->load_page_head($code)) {
+			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
+			//var_dump($data['course']);
+			$this->load->view('templates/nav');
+			//$this->load->view('course_page', $data);
+			$this->load->view('templates/page_foot');
+		}
+	}
+
 	/**
 	 * Displays the tiles of all the current courses hosted on the site.
 	 * @param type $whose. The user whose courses to display. 0 means display irrespective of user.

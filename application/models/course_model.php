@@ -44,7 +44,7 @@ class course_model extends CI_Model {
 	 */
 	public function get_current_courses($user_id = 0, $limit = null, $offset = null) {
 		$this->db->select('*');
-		
+
 		if ($user_id) {
 			$this->make_student_course_query($user_id);
 		} else
@@ -77,12 +77,12 @@ class course_model extends CI_Model {
 	 */
 	public function get_archived_courses($user_id = 0, $limit = null, $offset = null) {
 		$this->db->select('*');
-		
+
 		if ($user_id)
 			$this->make_student_course_query($user_id);
 		else
 			$this->db->from('course');
-		
+
 		$this->db->join('instructor', 'instructor.user_id = course.course_instructor');
 		$this->db->join('user', 'user.user_id = instructor.user_id');
 		$this->db->where('course_end_date !=', null);

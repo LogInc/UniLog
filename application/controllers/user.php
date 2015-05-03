@@ -31,6 +31,7 @@ class User extends CI_Controller {
 			$this->display_left_nav();
 			$this->load->view('user_wall');
 			$this->load->view('templates/page_foot');
+			$my_course = '';
 		}
 	}
 

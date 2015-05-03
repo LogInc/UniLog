@@ -27,8 +27,13 @@
 							$term = ucfirst($course->course_term);
 							$name = ucwords($course->course_name);
 							$type = $course->course_type == 'th' ? 'Theory' : 'Lab';
+							if (isset($my_course))
+								$base = 'my-courses';
+							else
+								$base = 'course';
+							$a = base_url("$base/$course->course_code/$course->course_term/$course->course_year/$course->course_type");
 							$out = <<<END
-            <a href="#">
+            <a href="$a">
                 <div class="col-md-6 thumbnail course-tile" style="min-height:500px;">                    
                     <div class="course-tile-pic-caption" >                        
                         <div style="margin-top:60%;color: white">

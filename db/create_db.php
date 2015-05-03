@@ -132,6 +132,7 @@ CREATE TABLE course (
 	course_end_date		DATE								NULL,
 	course_name			VARCHAR(128)						NOT NULL,
 	course_photo		VARCHAR(255)						NOT NULL,
+	course_intro		TEXT								NOT NULL,
 		
 	FOREIGN KEY	(course_instructor) REFERENCES user(user_id),
 	PRIMARY KEY (course_code, course_term, course_year, course_type)

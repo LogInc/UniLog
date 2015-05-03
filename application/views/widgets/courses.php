@@ -17,6 +17,8 @@
         <hr>
         <li><a href="#" style="color: black"><strong>Class Room</strong></a></li>
         <hr>
-        <li><a href="<?php echo base_url('course/all/' . $user_data->user_id) ?>" style="color: black"><b>All Courses</b></a>
+        <li><a href="<?php echo base_url('course/all/' . $user_data->user_id) ?>" style="color: black"><b>My Courses</b></a>
+        <hr>
+		<li><a href="<?php echo base_url('courses') ?>" style="color: black"><b>All Courses</b></a>
     </ul>
 </div>
