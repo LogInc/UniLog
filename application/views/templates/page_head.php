@@ -39,7 +39,7 @@
                 background-repeat:no-repeat;
                 background-size:contain;
                 background-position:center; 
-                min-height: 200px;
+                min-height: 150px;
                 text-align: center;
                 color:#4472c4
             }
