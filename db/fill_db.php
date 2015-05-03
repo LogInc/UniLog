@@ -50,7 +50,12 @@ INSERT INTO user (	user_id,
 			(5, "ahmar_sultan@live.com", "$password_ahmar", "Ahmar", "Sultan", "user_type_student"),
 			(6, "ysaleem@gmail.com", "$password_teacher", "Yasir", "Saleem", "user_type_instructor"),
 			(7, "kk@gmail.com", "$password_teacher", "Khuldoon", "Khurshid", "user_type_instructor"),
-			(8, "fhayat@gmail.com", "$password_teacher", "Faisal", "Hayat", "user_type_instructor");
+			(8, "faisal@gmail.com", "$password_teacher", "Faisal", "Hayat", "user_type_instructor"),
+			(9, "taniya@gmail.com", "$password_teacher", "Tania", "Habib", "user_type_instructor"),
+			(10, "asim@gmail.com", "$password_teacher", "Asim", "Rehmat", "user_type_instructor"),
+			(11, "amjad@gmail.com", "$password_teacher", "Amjad", "Farooq", "user_type_instructor"),
+			(12, "shahbaz@gmail.com", "$password_teacher", "Muhammad", "Shahbaz", "user_type_instructor"),
+			(13, "ammar@gmail.com", "$password_teacher", "Ammar", "Khalid", "user_type_instructor");
 END;
 runQuery();
 
@@ -67,7 +72,7 @@ runQuery();
 
 
 $query = <<<END
-INSERT into instructor (user_id) VALUES (6), (7), (8);
+INSERT into instructor (user_id) VALUES (6), (7), (8), (9), (10), (11), (12), (13);
 END;
 runQuery();
 
@@ -83,9 +88,14 @@ INSERT INTO course (	course_code,
 						course_instructor,
 						course_photo
 					)
-	VALUES	('CE101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6, ''),
-			('CS301', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7, ''),
-			('CS402', 'fall', '2015', 'th', '2015-1-3', null, 'Computer Networks', 8, 'fixed_cn.jpg');
+	VALUES	('CS101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6, ''),
+			('CS102', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7, ''),
+			('CS103', 'fall', '2015', 'th', '2015-1-3', null, 'Computer Networks', 8, 'fixed_cn.jpg'),
+			('CS104', 'fall', '2015', 'th', '2015-1-3', null, 'Artificial Intelligence', 12, 'fixed_ai.png'),
+			('CS104', 'fall', '2015', 'pr', '2015-1-3', null, 'Artificial Intelligence', 13, 'fixed_ai.png'),
+			('CS105', 'fall', '2015', 'th', '2015-1-3', null, 'Control Systems', 9, 'fixed_cs.jpg'),
+			('CS106', 'fall', '2015', 'th', '2015-1-3', null, 'Embedded Systems Design', 10, 'fixed_esd.jpg'),
+			('CS107', 'fall', '2015', 'th', '2015-1-3', null, 'Web Technologies', 11, 'fixed_wt.jpg');
 END;
 runQuery();
 
@@ -98,19 +108,26 @@ INSERT INTO course_enrollment	(
 									course_year,
 									course_type
 								)
-						VALUES	( 2, 'CE101', 'spring', '2013', 'th' ),
-								( 3, 'CE101', 'spring', '2013', 'th' ),
-								( 4, 'CE101', 'spring', '2013', 'th' ),
-								( 5, 'CE101', 'spring', '2013', 'th' ),
+						VALUES	( 2, 'CS101', 'spring', '2013', 'th' ),
+								( 3, 'CS101', 'spring', '2013', 'th' ),
+								( 4, 'CS101', 'spring', '2013', 'th' ),
+								( 5, 'CS101', 'spring', '2013', 'th' ),
 								
-								( 2, 'CS301', 'spring', '2014', 'th' ),
-								( 3, 'CS301', 'spring', '2014', 'th' ),
-								( 4, 'CS301', 'spring', '2014', 'th' ),
-								( 5, 'CS301', 'spring', '2014', 'th' ),
+								( 2, 'CS102', 'spring', '2014', 'th' ),
+								( 3, 'CS102', 'spring', '2014', 'th' ),
+								( 4, 'CS102', 'spring', '2014', 'th' ),
+								( 5, 'CS102', 'spring', '2014', 'th' ),
 								
-								( 2, 'CS402', 'fall', '2015', 'th' ),
-								( 3, 'CS402', 'fall', '2015', 'th' ),
-								( 4, 'CS402', 'fall', '2015', 'th' ),
-								( 5, 'CS402', 'fall', '2015', 'th' );
+								( 2, 'CS103', 'fall', '2015', 'th' ),
+								( 3, 'CS103', 'fall', '2015', 'th' ),
+								( 4, 'CS103', 'fall', '2015', 'th' ),
+								( 5, 'CS103', 'fall', '2015', 'th' ),
+		
+								( 2, 'CS104', 'fall', '2015', 'th' ),
+								( 3, 'CS104', 'fall', '2015', 'th' ),
+								( 4, 'CS104', 'fall', '2015', 'th' ),
+								( 5, 'CS104', 'fall', '2015', 'th' ),
+		
+								( 3, 'CS104', 'fall', '2015', 'pr' );
 END;
 runQuery();

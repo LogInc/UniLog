@@ -6,50 +6,38 @@
  * Copyright 2015 log inc.
  */
 ?>
-<!DOCTYPE html> 
-<html >
-    <head>
-        <style type="text/css">
-            .button 
-            { 
-                width: 150px; 
-                padding: 10px;
-                background-color: 
-                    #FF8C00; box-shadow: -8px 8px 10px 3px rgba(0,0,0,0.2); font-weight:bold; text-decoration:none; 
-            } 
-            #cover{ 
-                position:fixed; 
-                top:0; 
-                left:0; 
-                background:rgba(0,0,0,0.5); z-index:5; width:100%; height:100%; display:none; 
-            }
-            #loginScreen 
-            { 
-                height:380px;
-                width:340px; margin:0 auto; position:relative; z-index:10; display:none; background: url(login.png) no-repeat;
-                border:5px solid #cccccc; border-radius:10px;
-            } 
-            #loginScreen:target, #loginScreen:target + #cover
-            { display:block;
-              opacity:2; 
-            }
-            .cancel { 
-                display:block; position:absolute; top:3px; right:2px; background:rgb(245,245,245);
-                color:black; height:30px; width:35px; font-size:30px; text-decoration:none; text-align:center; font-weight:bold; 
-            } 
-        </style> 
-    </head> 
-    <body> 
-        <div align="center"> 
-            <br><br><br><br>
-            <a href="#loginScreen" class="button">Click here to Log In</a> 
-        </div> 
-        <div id="loginScreen"> 
-            <a href="#" class="cancel">&times;</a>
-            <p style="color:white">something</p>
-        </div>
-        <div id="cover"> 
+<div id="addcourseScreen"> 
+    <div class="formScreen col-md-12">
+        <a href="#" class="cancel">&times;</a>
+        <h3><strong>Add a Course</strong></h3>
+        <hr style="height:2px;background-color: gray"> 
+        
+        <div class="row">
+            <div class="form-group form-group-lg">
+                <label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="course title">Title:</label>
+                <div class="col-md-12 col-sm-9">
+                    <input class="form-control" type="text" name="title" placeholder="Enter Course Title">
+                </div>            
+            </div> 
             
+            <div class="form-group form-group-lg">
+                <label class="control-label col-lg-1 col-md-4 col-sm-0 sr-only" for="course title">Title:</label>
+                <div class="col-md-12 col-sm-9">
+                    <input class="form-control" type="text" name="title" placeholder="Enter Course Title">
+                </div>            
+            </div>
+            <div class ="form-group form-group-lg form-inline">
+                <div class="radio col-md-2">
+                    <label><input type="radio" name="type" value="fall"> Fall</label>
+                </div>
+                <div class="radio col-md-4">
+                    <label><input type="radio" name="type" value="fall"> Spring</label>                    
+                </div>
+            </div>
         </div>
-    </body>
-</html> 
+    </div>
+    
+</div>
+<div id="cover"> 
+</div>
+
