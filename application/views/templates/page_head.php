@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="<?php echo style_uri('custom_nav.css') ?>">
         <script src="<?php echo script_uri('jquery-2.1.1.min.js') ?>"></script>
         <script src="<?php echo script_uri('bootstrap.min.js') ?>"></script>
-
+        
         <style>
             body{
                 font-family:"Calibri Light";
@@ -43,7 +43,7 @@
                 text-align: center;
                 color:#4472c4
             }
-			.post-div{
+            .post-div{
                 background-color: white;
                 border-style:outset;
                 border-width:2px;
@@ -78,11 +78,41 @@
                 //color:#fff !important;
                 z-index:2;
             }
-
+            
             a:hover, a:focus {
                 text-decoration: none;
             }
-
+            #cover{ 
+                position:fixed; 
+                top:0; 
+                left:0; 
+                background:rgba(0,0,0,0.5); 
+                z-index:5; 
+                width:100%; height:100%; display:none; 
+            }  
+            #addcourseScreen 
+            { 
+                height:500px;
+                width:600px; margin:0 auto; position:relative; z-index:10; display:none; 
+                border:5px solid #cccccc; border-radius:10px;
+                background:url('/unilog/images/add_course.jpg') no-repeat ;
+            } 
+            #addcourseScreen:target, #addcourseScreen:target + #cover
+            { 
+                display:block;
+                opacity:2; 
+            }
+            .cancel { 
+                display:block; position:absolute; top:3px; right:2px;
+                color:black; height:30px; width:35px; font-size:30px; text-decoration:none; text-align:center; font-weight:bold; 
+            } 
+            .formScreen
+            {
+                display:block; 
+                position:absolute;
+                padding:20px;
+            }
+            
             .no-select {
                 -webkit-touch-callout: none;
                 -webkit-user-select: none;
@@ -93,7 +123,7 @@
             }
         </style>
     </head>
-
+    
     <body>
         <div class="container">
             <div style="min-height:500px">

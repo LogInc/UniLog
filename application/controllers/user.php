@@ -28,9 +28,13 @@ class User extends CI_Controller {
 	public function wall() {
 		if ($this->load_page_head('Home')) {
 			$this->load->view('templates/nav');
-			$this->display_left_nav();
+                        $this->display_left_nav();
 			$this->load->view('user_wall');
-			$this->load->view('templates/page_foot');
+
+                        $this->load->view('templates/add_course');
+                        $this->load->view('templates/page_foot');
+			$my_course = '';
+
 		}
 	}
 
@@ -43,8 +47,9 @@ class User extends CI_Controller {
 			return;
 
 		$this->load->view('templates/nav');
-		$this->display_left_nav();
+                $this->display_left_nav();
 		$this->load->view('user_profile');
+                $this->load->view('templates/add_course');
 		$this->load->view('templates/page_foot');
 	}
 
@@ -71,7 +76,6 @@ class User extends CI_Controller {
 			$this->load->view('templates/page_foot');
 		}
 	}
-
 	/**
 	 * Logs out the user from the website and returns to home page.
 	 */
