@@ -63,7 +63,7 @@ $image = image_uri('sticky-blue.png');
                     <input class="form-control" type="text" name="post" id="user_input" placeholder="write your notice here..." >
                 </div>
                 <div class="col-md-4">                  
-                    <button type="submit"  onclick="showInput();"class="btn btn-primary">Submit</button>
+                    <button type="button"  onclick="showInput();"class="btn btn-primary">Submit</button>
                     <button class="dropdown btn btn-primary" type="button">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:white">
                             Color <b class="caret"></b></a>
