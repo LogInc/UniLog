@@ -42,10 +42,7 @@
 						<h2>$name</h2>
 						<h4>$type</h4>
 						<h3>By $course->user_first_name $course->user_last_name</h3>
-                        <div>
-                            <p>Started On </p>
-                            <h4>$course->course_start_date</h4>                            
-                        </div>                        
+						<h4>Started $course->course_start_date</h4>
                     </div> 
                 </div>
             </a>
@@ -93,10 +90,7 @@ END;
 						<h2>$name</h2>
 						<h4>$type</h4>
 						<h3>By $course->user_first_name $course->user_last_name</h3>
-                        <div>
-                            <p>Started On </p>
-                            <h4>$course->course_start_date</h4>                            
-                        </div>                        
+                        <h4>Ended $course->course_end_date</h4>                   
                     </div> 
                 </div>
             </a>
