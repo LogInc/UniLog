@@ -128,7 +128,7 @@ switch ($user_data->user_type) {
 			$("#summary-edit").fadeIn();
 		});
 	});
-	$('#photobox').hover(
+	$('.thumbnail').hover(
 			function () {
 				$(this).find('.caption').fadeIn(100);
 			},
