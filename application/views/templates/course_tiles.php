@@ -27,6 +27,13 @@
 							$term = ucfirst($course->course_term);
 							$name = ucwords($course->course_name);
 							$type = $course->course_type == 'th' ? 'Theory' : 'Lab';
+							if ($show_date == 'started')
+								$date = 'Started ' . $course->course_start_date;
+							else if ($show_date == 'ended')
+								$date = 'Ended ' . $course->course_end_date;
+							else
+								$date = '';
+							
 							if (isset($my_course))
 								$base = 'my-courses';
 							else
@@ -48,7 +55,7 @@
 						<h3>$name</h3>
 						<p>$type</p>
 						<p>By $course->user_first_name $course->user_last_name</p>
-						<h4>Started $course->course_start_date</h4>
+						<h4>$date</h4>
                     </div> 
                 </div>
             </a>
