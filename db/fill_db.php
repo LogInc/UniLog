@@ -88,8 +88,8 @@ INSERT INTO course (	course_code,
 						course_instructor,
 						course_photo
 					)
-	VALUES	('CS101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6, ''),
-			('CS102', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7, ''),
+	VALUES	('CS101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6, 'fixed_dld.jpg'),
+			('CS102', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7, 'fixed_db.jpg'),
 			('CS103', 'fall', '2015', 'th', '2015-1-3', null, 'Computer Networks', 8, 'fixed_cn.jpg'),
 			('CS104', 'fall', '2015', 'th', '2015-1-3', null, 'Artificial Intelligence', 12, 'fixed_ai.png'),
 			('CS104', 'fall', '2015', 'pr', '2015-1-3', null, 'Artificial Intelligence', 13, 'fixed_ai.png'),
