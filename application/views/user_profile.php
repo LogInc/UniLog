@@ -5,10 +5,12 @@
  * Copyright 2015 log inc.
  */
 
-if ($user_data->user_photo == null || $user_data->user_photo == "")
-	$profile_image_path = image_path('default_profile_200x.png');
+if ($user_data->user_photo == "")
+	$profile_image_path = image_uri('default_profile_200x.png');
+else if (file_exists(upload_path('profile_pics/' . $user_data->user_photo)))
+	$profile_image_path = upload_uri('profile_pics/' . $user_data->user_photo);
 else
-	$profile_image_path = upload_path('profile_pics/' . $user_data->user_photo);
+	$profile_image_path = image_uri('default_profile_200x.png');
 
 $profile_image = img($profile_image_path, FALSE, 'id="profile-pic" class="img-rounded" width="200" alt="unilog logo"');
 
@@ -84,7 +86,7 @@ switch ($user_data->user_type) {
 
 </div>
 
-<script src="<?php echo script_path('jquery.form.js'); ?>"></script>
+<script src="<?php echo script_uri('jquery.form.js'); ?>"></script>
 <script>
 	$(document).ready(function () {
 		var aims = $("#aims-paragraph").val();

@@ -6,10 +6,10 @@
  * Copyright 2015 log inc.
  */
 $course_name = "Artificial Intelligence";
-$box_notes = img(image_path('Box_Notes.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
-$box_pp = img(image_path('Box_PastPapers.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
-$box_quiz = img(image_path('Box_Quizzes.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
-$box_video = img(image_path('Box_Videos.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
+$box_notes = img(image_uri('Box_Notes.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
+$box_pp = img(image_uri('Box_PastPapers.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
+$box_quiz = img(image_uri('Box_Quizzes.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
+$box_video = img(image_uri('Box_Videos.png'), FALSE, 'class="img-rounded" width="150" alt="unilog logo"');
 $Course_description = "In this course, you will learn the foundational principles that drive these applications and practice implementing some of these systems. Specific topics include machine learning, search, game playing, Markov decision processes, constraint satisfaction, graphical models, and logic. The main goal of the course is to equip you with the tools to tackle new AI problems you might encounter in life.";
 ?>
 
