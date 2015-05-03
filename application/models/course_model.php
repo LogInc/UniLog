@@ -35,11 +35,24 @@ class course_model extends CI_Model {
 			return $query->row();
 	}
 
-	public function get_current_courses($limit = null, $offset = null) {
+	/**
+	 * Retrieves the current courses i.e. courses which are currently being carried out.
+	 * @param type $user_id Optional user id. If non-zero retrieves courses of the specified user.
+	 * @param type $limit. Optional limit on the number of records to retrieve.
+	 * @param type $offset. Optional offset on the starting record to retrieve.
+	 * @return array of objects containing all the fields.
+	 */
+	public function get_current_courses($user_id = 0, $limit = null, $offset = null) {
 		$this->db->select('*');
-		$this->db->from('course');
+		
+		if ($user_id) {
+			$this->make_student_course_query($user_id);
+		} else
+			$this->db->from('course');
+
 		$this->db->join('instructor', 'instructor.user_id = course.course_instructor');
 		$this->db->join('user', 'user.user_id = instructor.user_id');
+
 		$this->db->where('course_end_date', null);
 
 		if ($limit)
@@ -55,9 +68,21 @@ class course_model extends CI_Model {
 			return $query->result();
 	}
 
-	public function get_archived_courses($limit = null, $offset = null) {
+	/**
+	 * Retrieves the archived courses i.e. courses which have been completed.
+	 * @param type $user_id Optional user id. If non-zero retrieves courses of the specified user.
+	 * @param type $limit. Optional limit on the number of records to retrieve.
+	 * @param type $offset. Optional offset on the starting record to retrieve.
+	 * @return array of objects containing all the fields.
+	 */
+	public function get_archived_courses($user_id = 0, $limit = null, $offset = null) {
 		$this->db->select('*');
-		$this->db->from('course');
+		
+		if ($user_id)
+			$this->make_student_course_query($user_id);
+		else
+			$this->db->from('course');
+		
 		$this->db->join('instructor', 'instructor.user_id = course.course_instructor');
 		$this->db->join('user', 'user.user_id = instructor.user_id');
 		$this->db->where('course_end_date !=', null);
@@ -73,6 +98,24 @@ class course_model extends CI_Model {
 			return null;
 		else
 			return $query->result();
+	}
+
+	/**
+	 * Makes a query that joins the courses table with the students table so that all the
+	 * courses in which a student has enrolled can be retrieved.
+	 * @param int $user_id The user_id of the student in the db.
+	 */
+	protected function make_student_course_query($user_id) {
+		$course_on = <<<END
+					course_enrollment.course_code = course.course_code AND
+					course_enrollment.course_term = course.course_term AND
+					course_enrollment.course_year = course.course_year AND
+					course_enrollment.course_type = course.course_type
+END;
+		$this->db->from('student');
+		$this->db->where('student.user_id', $user_id);
+		$this->db->join('course_enrollment', 'course_enrollment.user_id = student.user_id');
+		$this->db->join('course', $course_on);
 	}
 
 }
