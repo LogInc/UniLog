@@ -87,7 +87,7 @@ $image = image_uri('sticky-blue.png');
 
     <div>
         <p id="drag1" draggable="true"
-           ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px;
+           ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px; padding-top: 10px;
            background: url(<?php echo $image; ?>) no-repeat 2px 2px; background-size: 100% 100%;" >
             asad
         </p>
@@ -95,7 +95,9 @@ $image = image_uri('sticky-blue.png');
 
 
     <div class="col-md-12" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" style="background-color: white;
-         background: url(<?php echo $notice; ?>); no-repeat 2px 2px; background-size: 100% 100%; min-height: 700px;padding: 20px;border-radius:5px" >
+         background: url(<?php echo $notice; ?>); no-repeat 2px 2px;
+         background-size: 100% 100%; min-height: 700px;padding-left: 70px; padding-top:60px;
+         border-radius:5px" >
     </div>
 
 
