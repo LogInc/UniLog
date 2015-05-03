@@ -55,4 +55,24 @@ class course_model extends CI_Model {
 			return $query->result();
 	}
 
+	public function get_archived_courses($limit = null, $offset = null) {
+		$this->db->select('*');
+		$this->db->from('course');
+		$this->db->join('instructor', 'instructor.user_id = course.course_instructor');
+		$this->db->join('user', 'user.user_id = instructor.user_id');
+		$this->db->where('course_end_date !=', null);
+
+		if ($limit)
+			if ($offset)
+				$this->db->limit($limit);
+			else
+				$this->db->limit($limit, $offset);
+
+		$query = $this->db->get();
+		if (!$query || $query->num_rows() == 0)
+			return null;
+		else
+			return $query->result();
+	}
+
 }
