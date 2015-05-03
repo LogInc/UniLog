@@ -34,16 +34,21 @@ class course_model extends CI_Model {
 		else
 			return $query->row();
 	}
-	
 
-	public function get_current_courses($limit=null, $offset=null) {
+	public function get_current_courses($limit = null, $offset = null) {
+		$this->db->select('*');
+		$this->db->from('course');
+		$this->db->join('instructor', 'instructor.user_id = course.course_instructor');
+		$this->db->join('user', 'user.user_id = instructor.user_id');
 		$this->db->where('course_end_date', null);
-		
+
 		if ($limit)
-			$query = $this->db->get('course', $limit, $offset);
-		else
-			$query = $this->db->get('course');
-		
+			if ($offset)
+				$this->db->limit($limit);
+			else
+				$this->db->limit($limit, $offset);
+
+		$query = $this->db->get();
 		if (!$query || $query->num_rows() == 0)
 			return null;
 		else

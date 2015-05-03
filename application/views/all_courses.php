@@ -6,7 +6,7 @@
  */
 ?>
 <div class="col-md-8">
-    <h1> <strong> Viewing all <?php echo count($current_courses); ?> courses </strong></h1>    
+    <h1> <strong> Viewing <?php echo count($current_courses); ?> course(s) </strong></h1>    
 </div>
 
 <div class="col-md-12" style=" margin-top:20px;background-color:#FFFFFF; min-height:500px ;padding: 25px;border-radius:5px" > 
@@ -14,7 +14,6 @@
     <hr style="height:2px;background-color: gray"> 
     <div class='col-md-12'>
         <div class='row'>
-
 			<?php
 			foreach ($current_courses as $course) {
 				if ($course->course_photo != "")
@@ -43,6 +42,7 @@
                         <h3>$course->course_code $term $course->course_year</h3>
 						<h2>$name</h2>
 						<h4>$type</h4>
+						<h3>By $course->user_first_name $course->user_last_name</h3>
                         <div>
                             <p>Started On </p>
                             <h4>$course->course_start_date</h4>                            
