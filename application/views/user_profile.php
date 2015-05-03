@@ -58,8 +58,7 @@ switch ($user_data->user_type) {
 			<form role="form">
 				<div class="form-group">
 					<label for="aims-form"></label>
-					<textarea class="form-control" id="aims-form" rows="8" placeholder="write something about you and your goals in life...">
-						<?php echo trim($user_data->user_summary); ?></textarea>
+					<textarea class="form-control" id="aims-form" rows="8" placeholder="write something about you and your goals in life..."><?php echo trim($user_data->user_summary); ?></textarea>
 					<div class="pull-right" style="margin-top:10px">
 						<div class="row">
 							<div class="col-md-6">
@@ -96,21 +95,23 @@ switch ($user_data->user_type) {
 			$("#summary-edit").show();
 			$("#summary-display").hide();
 		}
-		
-		$("#upload-overlay").click(function() { $('#upload-input').click(); });
-		
-		$('#upload-input').change(function() {
+
+		$("#upload-overlay").click(function () {
+			$('#upload-input').click();
+		});
+
+		$('#upload-input').change(function () {
 			var file = this.files[0];
 			var imagefile = file.type;
 			var match = ['image/jpeg', 'image/png', 'image/jpg'];
-			if (!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))) {
+			if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]))) {
 				return false;
 			}
 			var reader = new FileReader();
 			reader.onload = profilePhotoUploaded;
 			reader.readAsDataURL(this.files[0]);
 		});
-		
+
 		function profilePhotoUploaded(e) {
 			$('#profile-pic').attr('src', e.target.result);
 			$('#profile-pic').attr('style', 'width:200px;');
@@ -122,7 +123,7 @@ switch ($user_data->user_type) {
 		$(".save-button").click(function () {
 			var aims = $("#aims-form").val();
 			document.getElementById("aims-paragraph").innerHTML = aims;
-			$.post('<?php echo base_url(); ?>profile/update_summary', {summary: aims});
+			$.post('<?php echo base_url(); ?>user/update_summary', {summary: aims});
 
 			if (aims.length !== 0) {
 				$("#summary-edit").hide();

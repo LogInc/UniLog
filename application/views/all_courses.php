@@ -11,7 +11,6 @@ $AI = image_path('artificial-intelligence.png');
 $WT = image_path('web_tech.jpg');
 $ES = image_path('embedded-systems.jpg');
 $CS = image_path('control-systems.jpg');
-    
 ?>
 <div class="col-md-8">
     <h1> <strong> Viewing all <?php echo $total_courses ?> courses </strong></h1>    
