@@ -6,7 +6,6 @@
  */
 ?>
 
-<!--<pre><?php var_dump($courses); ?></pre>-->
 <div class="col-md-9">
 	<div class="row">
 		<div class="col-md-12" style=" margin-top:20px;background-color:#FFFFFF; min-height:500px ;padding: 25px;border-radius:5px" > 
@@ -30,8 +29,8 @@
 							$type = $course->course_type == 'th' ? 'Theory' : 'Lab';
 							$out = <<<END
             <a href="#">
-                <div class="col-md-6 thumbnail courses" style="min-height:500px;">                    
-                    <div class="pic-caption" >                        
+                <div class="col-md-6 thumbnail course-tile" style="min-height:500px;">                    
+                    <div class="course-tile-pic-caption" >                        
                         <div style="margin-top:60%;color: white">
                             <i class="glyphicon glyphicon-book"></i><strong> Learn More</strong>
                         </div>                            
@@ -58,3 +57,15 @@ END;
 		</div>
 	</div>
 </div>
+
+<script>
+	$('.thumbnail').hover(
+			function () {
+				$(this).find('.course-tile-pic-caption').fadeIn(100);
+			},
+			function () {
+				$(this).find('.course-tile-pic-caption').fadeOut(100);
+			}
+
+	);
+</script>
