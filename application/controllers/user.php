@@ -31,7 +31,6 @@ class User extends CI_Controller {
 			$this->display_left_nav();
 			$this->load->view('user_wall');
 			$this->load->view('templates/page_foot');
-			$my_course = '';
 		}
 	}
 
@@ -69,16 +68,6 @@ class User extends CI_Controller {
 		if ($this->load_page_head('Course_doc')) {
 			$this->load->view('templates/nav');
 			$this->load->view('course_doc.php');
-			$this->load->view('templates/page_foot');
-		}
-	}
-
-	public function all_courses() {
-		if ($this->load_page_head('All Courses')) {
-			$this->load->view('templates/nav');
-			$this->load->model('course_model');
-			$data['current_courses'] = $this->course_model->get_current_courses();
-			$this->load->view('all_courses.php', $data);
 			$this->load->view('templates/page_foot');
 		}
 	}
