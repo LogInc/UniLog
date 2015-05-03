@@ -82,6 +82,12 @@ class User extends CI_Controller {
 		}
 	}
 
+        public function add_course() {
+		if ($this->load_page_head('Add Courses')) {
+                    
+			$this->load->view('templates/add_course');
+		}
+	}
 	/**
 	 * Logs out the user from the website and returns to home page.
 	 */

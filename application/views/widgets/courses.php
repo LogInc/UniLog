@@ -18,5 +18,7 @@
         <li><a href="#" style="color: black"><strong>Class Room</strong></a></li>
         <hr>
         <li><a href="http://localhost/unilog/user/all_courses" style="color: black"><b>All Courses</b></a>
+        <hr>
+        <li><a href="http://localhost/unilog/user/add_course" style="color: black"><b>Add a Course</b></a>
     </ul>
 </div>
