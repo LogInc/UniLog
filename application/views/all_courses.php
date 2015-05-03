@@ -21,7 +21,35 @@ $CS = image_path('control-systems.jpg');
     <hr style="height:2px;background-color: gray"> 
     <div class='col-md-12'>
         <div class='row'>
+			
+			<?php
+			foreach ($current_courses as $course) {
+			$out = <<<END
             <a href="#">
+                <div class="col-md-4 thumbnail courses">                    
+                    <div class="pic-caption" >                        
+                        <div style="margin-top:60%;color: white">
+                            <i class="glyphicon glyphicon-book"></i><strong> Learn More</strong>
+                        </div>                            
+                    </div>                        
+                    <div class="img-wrapper" style ='background-image:url($CN);'>
+                    </div>                        
+                    <div>   
+                        <hr style="height:2px;background-color: gray"> 
+                        <h3>$course->course_name</h3>
+                        <div>
+                            <p>Started On </p>
+                            <h4>$course->course_start_date</h4>                            
+                        </div>                        
+                    </div> 
+                </div>
+            </a>
+END;
+			echo $out;
+			}
+			?>
+			
+<!--            <a href="#">
                 <div class="col-md-4 thumbnail courses">                    
                     <div class="pic-caption" >                        
                         <div style="margin-top:60%;color: white">
@@ -124,7 +152,7 @@ $CS = image_path('control-systems.jpg');
                         </div>                        
                     </div> 
                 </div>
-            </a>
+            </a>-->
         </div>  
             
     </div>
