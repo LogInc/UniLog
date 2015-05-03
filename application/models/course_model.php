@@ -37,7 +37,7 @@ class course_model extends CI_Model {
 	
 
 	public function get_current_courses($limit=null, $offset=null) {
-		$this->db->where('course_end_date =', null);
+		$this->db->where('course_end_date', null);
 		
 		if ($limit)
 			$query = $this->db->get('course', $limit, $offset);
