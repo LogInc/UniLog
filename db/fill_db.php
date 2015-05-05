@@ -89,8 +89,8 @@ INSERT INTO course (	course_code,
 						course_photo,
 						course_intro
 					)
-	VALUES	('CS101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6, 'fixed_dld', 'Digital Logic Design introduces you to the knowledge on which the structure of the modern digital world rests.'),
-			('CS102', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7, 'fixed_db', "It's all about database systems that are crucial is storing the behemoth of information that runs our world."),
+	VALUES	('CS101', 'spring', '2013', 'th', '2013-9-15', '2014-1-1', 'Digital Logic Design', 6, 'fixed_dld.jpg', 'Digital Logic Design introduces you to the knowledge on which the structure of the modern digital world rests.'),
+			('CS102', 'spring', '2014', 'th', '2014-9-15', '2015-1-1', 'Database and Management', 7, 'fixed_db.jpg', "It's all about database systems that are crucial is storing the behemoth of information that runs our world."),
 			('CS103', 'fall', '2015', 'th', '2015-1-3', null, 'Computer Networks', 8, 'fixed_cn.jpg', 'Dive in to explore the nuts and bolts of the greatest invention of 20th century: the Internet.'),
 			('CS104', 'fall', '2015', 'th', '2015-1-3', null, 'Artificial Intelligence', 12, 'fixed_ai.png', 'Learn theortical aspects of the classical and new artificial intelligence.'),
 			('CS104', 'fall', '2015', 'pr', '2015-1-3', null, 'Artificial Intelligence', 13, 'fixed_ai.png', 'Implement fundamentals of artificial intelligence in Java.'),

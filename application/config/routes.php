@@ -57,5 +57,6 @@ $route['sign-in'] = 'welcome/sign_in';
 $route['sign-up'] = 'welcome/sign_up';
 $route['terms'] = 'welcome/terms_of_service';
 $route['courses'] = 'course/all';
+$route['user/my-courses'] = 'course/all/home';
 $route['course/(:any)/(:any)/(:any)/(:any)'] = 'course/course_description/$1/$2/$3/$4';
 $route['user/course/(:any)/(:any)/(:any)/(:any)'] = 'course/course_home/$1/$2/$3/$4';

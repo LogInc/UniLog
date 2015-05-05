@@ -28,13 +28,11 @@ class User extends CI_Controller {
 	public function wall() {
 		if ($this->load_page_head('Home')) {
 			$this->load->view('templates/nav');
-                        $this->display_left_nav();
+			$this->display_left_nav();
 			$this->load->view('user_wall');
 
-                        $this->load->view('templates/add_course');
-                        $this->load->view('templates/page_foot');
-			$my_course = '';
-
+			$this->load->view('templates/add_course');
+			$this->load->view('templates/page_foot');
 		}
 	}
 
@@ -47,9 +45,9 @@ class User extends CI_Controller {
 			return;
 
 		$this->load->view('templates/nav');
-                $this->display_left_nav();
+		$this->display_left_nav();
 		$this->load->view('user_profile');
-                $this->load->view('templates/add_course');
+		$this->load->view('templates/add_course');
 		$this->load->view('templates/page_foot');
 	}
 
@@ -76,6 +74,7 @@ class User extends CI_Controller {
 			$this->load->view('templates/page_foot');
 		}
 	}
+
 	/**
 	 * Logs out the user from the website and returns to home page.
 	 */
@@ -114,7 +113,7 @@ class User extends CI_Controller {
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('photo')) {
 				$user = $this->user_model->get_user_by_id($this->session->user_id);
-				
+
 				$old = './uploads/profile_pics/' . $user->user_photo;
 				if (file_exists($old))
 					unlink('./uploads/profile_pics/' . $user->user_photo);
@@ -133,7 +132,6 @@ class User extends CI_Controller {
 	 * @return boolean.
 	 */
 	protected function load_page_head($title) {
-		$this->load->model('user_model');
 		$user = $this->user_model->get_user_by_email($this->session->email);
 		if (!$user) {
 			show_message("You must be logged in to access this page.", 'Access denied');
