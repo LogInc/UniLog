@@ -20,9 +20,16 @@
         <hr>
         <li><a href="<?php echo base_url('user/my-courses') ?>" style="color: black"><b>My Courses</b></a></li>
         <hr>
-        <li><a href="<?php echo base_url('courses') ?>" style="color: black"><b>All Courses</b></a></li>
-        <hr>
-        <li><a href="<?php echo base_url('#addcourseScreen'); ?>" style="color: black"><b>Add Course</b></a></li>
-        <hr>
+		<?php
+		if ($user_data->user_type == 'user_type_student') {
+			echo '<li><a href="' . base_url('courses') . '" style="color:black"><b>All Course</b></a></li>';
+			echo '<hr>';
+		}
+
+		if ($user_data->user_type != 'user_type_student') {
+			echo '<li><a href="' . base_url('#addcourseScreen') . '" style="color:black"><b>Add Course</b></a></li>';
+			echo '<hr>';
+		}
+		?>
     </ul>
 </div>
