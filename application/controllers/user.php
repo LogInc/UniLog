@@ -76,16 +76,6 @@ class User extends CI_Controller {
 			$this->load->view('templates/page_foot');
 		}
 	}
-
-	public function all_courses() {
-		if ($this->load_page_head('All Courses')) {
-			$this->load->view('templates/nav');
-			$this->load->model('course_model');
-			$data['current_courses'] = $this->course_model->get_current_courses();
-			$this->load->view('all_courses.php', $data);
-			$this->load->view('templates/page_foot');
-		}
-	}
 	/**
 	 * Logs out the user from the website and returns to home page.
 	 */

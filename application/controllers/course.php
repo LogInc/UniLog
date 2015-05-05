@@ -87,6 +87,7 @@ class Course extends CI_Controller {
 	protected function current_courses_tiles($whose) {
 		$data['courses'] = $this->course_model->get_current_courses($whose);
 		$data['title'] = 'Current Courses';
+		$data['show_date'] = 'started';
 		$this->load->view('templates/course_tiles', $data);
 	}
 
@@ -97,6 +98,7 @@ class Course extends CI_Controller {
 	protected function archived_courses_tiles($whose) {
 		$data['courses'] = $this->course_model->get_archived_courses($whose);
 		$data['title'] = 'Archived Courses';
+		$data['show_date'] = 'ended';
 		$this->load->view('templates/course_tiles', $data);
 	}
 
