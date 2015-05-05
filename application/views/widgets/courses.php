@@ -10,13 +10,15 @@
     <ul style="list-style-type: none;padding-top: 10%;font-size: 18px;min-height: 600px">
         <strong><a style="color:black" href="<?php echo base_url('course/current/' . $user_data->user_id) ?>">Current Courses</a></strong>
 		<?php
-		foreach ($courses as $course)
-			echo "<li><a href='#'>" . $course['course_name'] . '</a></li>';
+		foreach ($courses as $course) {
+			$url = base_url('user/course/' . $course['course_code'] . '/' . $course['course_term'] . '/' . $course['course_year'] . '/' . $course['course_type']);
+			echo "<li><a href='$url'>" . $course['course_name'] . "</a></li>";
+		}
 		?>
         <hr>
         <li><a href="#" style="color: black"><strong>Class Room</strong></a></li>
         <hr>
-        <li><a href="<?php echo base_url('course/all/home') ?>" style="color: black"><b>My Courses</b></a></li>
+        <li><a href="<?php echo base_url('user/my-courses') ?>" style="color: black"><b>My Courses</b></a></li>
         <hr>
         <li><a href="<?php echo base_url('courses') ?>" style="color: black"><b>All Courses</b></a></li>
         <hr>

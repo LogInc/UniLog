@@ -27,9 +27,11 @@ class Course extends CI_Controller {
 	/**
 	 * Displays a page containing tiles of all the courses hosted on the site.
 	 * @param type $whose. The user whose courses to display. 0 means display irrespective of user.
+	 * A special case is 'home', this displays the tiles of the current signed in user
+	 * and clicking the tiles direct the user to the course's home page. 	
 	 */
 	public function all($whose = '0') {
-		if ($this->load_page_head("All Courses")) {
+		if ($this->load_page_head($whose == 'home' ? 'My Courses' : "All Courses")) {
 			$this->load->view('templates/nav');
 			$this->current_courses_tiles($whose);
 			$this->archived_courses_tiles($whose);
@@ -75,7 +77,7 @@ class Course extends CI_Controller {
 			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
 			//var_dump($data['course']);
 			$this->load->view('templates/nav');
-			//$this->load->view('course_page', $data);
+			$this->display_left_nav();
 			$this->load->view('templates/page_foot');
 		}
 	}
@@ -136,6 +138,18 @@ class Course extends CI_Controller {
 		$this->user_data = $data['user_data'];
 
 		return true;
+	}
+	
+		/**
+	 * Outputs the appropriate left nav widget for the logged in user.
+	 */
+	protected function display_left_nav() {
+		if ($this->user_data->user_type == 'user_type_student') {
+			$this->load->model('student_model');
+			$courses['courses'] = $this->student_model->get_current_course_enrollments();
+			$this->load->view('widgets/courses.php', $courses);
+		} else
+			$this->load->view('templates/left_nav.php');
 	}
 
 }
