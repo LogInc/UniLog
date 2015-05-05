@@ -34,8 +34,8 @@
 							else
 								$date = '';
 							
-							if (isset($my_course))
-								$base = 'my-courses';
+							if (isset($course_home))
+								$base = 'user/course';
 							else
 								$base = 'course';
 							$a = base_url("$base/$course->course_code/$course->course_term/$course->course_year/$course->course_type");

@@ -63,14 +63,14 @@ class Course extends CI_Controller {
 
 	public function course_description($code, $term, $year, $type) {
 		if ($this->load_page_head($code)) {
-			$data['course_data']= $this->course_model->get_course($code, $term, $year, $type);
+			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
 			$this->load->view('templates/nav');
 			$this->load->view('course_page', $data);
 			$this->load->view('templates/page_foot');
 		}
 	}
 
-	public function my_course($code, $term, $year, $type) {
+	public function course_home($code, $term, $year, $type) {
 		if ($this->load_page_head($code)) {
 			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
 			//var_dump($data['course']);
@@ -83,8 +83,14 @@ class Course extends CI_Controller {
 	/**
 	 * Displays the tiles of all the current courses hosted on the site.
 	 * @param type $whose. The user whose courses to display. 0 means display irrespective of user.
+	 * A special case is 'home', this displays the tiles of the current signed in user
+	 * and clicking the tiles direct the user to the course's home page. 					
 	 */
 	protected function current_courses_tiles($whose) {
+		if ($whose == 'home') {
+			$data['course_home'] = 1;
+			$whose = $this->session->user_id;
+		}
 		$data['courses'] = $this->course_model->get_current_courses($whose);
 		$data['title'] = 'Current Courses';
 		$data['show_date'] = 'started';
@@ -94,8 +100,14 @@ class Course extends CI_Controller {
 	/**
 	 * Displays the tiles of all the archived courses hosted on the site.
 	 * @param type $whose. The user whose courses to display. 0 means display irrespective of user.
+	 * A special case is 'home', this displays the tiles of the current signed in user
+	 * and clicking the tiles direct the user to the course's home page. 	
 	 */
 	protected function archived_courses_tiles($whose) {
+		if ($whose == 'home') {
+			$data['course_home'] = 1;
+			$whose = $this->session->user_id;
+		}
 		$data['courses'] = $this->course_model->get_archived_courses($whose);
 		$data['title'] = 'Archived Courses';
 		$data['show_date'] = 'ended';
