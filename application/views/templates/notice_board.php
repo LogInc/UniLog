@@ -6,7 +6,11 @@
  */
 
 $notice = image_uri('NoticeBoard.png');
-$image = image_uri('sticky-blue.png');
+$note = image_uri('sticky-blue.png');
+$sticky_pink = image_uri('sticky-pink.png');
+//$note= image_uri('sticky-yellow.png');
+$sticky_green = image_uri('sticky-green.png');
+
 ?>
 
 <script>
@@ -16,16 +20,17 @@ $image = image_uri('sticky-blue.png');
         document.getElementById('drag1').innerHTML = message_entered;
     }
     function change_image(color) {
+        
         var dynamic_src = "/unilog/images/";
         switch (color) {
-            case "red":
-                dynamic_src += "sticky-blue.png";
-                break;
             case "blue":
-                dynamic_src += "sticky-green.png";
+                
+                break;
+            case "pink":
+                dynamic_src += "sticky-pink.png";
                 break;
             case "green":
-                dynamic_src += "sticky-pink.png";
+                $note = $sticky_green;
                 break;
         }
 
@@ -67,11 +72,11 @@ $image = image_uri('sticky-blue.png');
                     <button class="dropdown btn btn-primary" type="button">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:white">
                             Color <b class="caret"></b></a>
-                        <ul value="blue" onchange="change_image(this.value)" class="dropdown-menu">
-                            <li><a href="#">Green</a></li>
-                            <li><a href="#">Pink</a></li>
-                            <li><a href="#">Blue</a></li>
-                            <li><a href="#">Yellow</a></li>
+                        <ul  class="dropdown-menu">
+                            <li><a href="#" id="green">Green</a></li>
+                            <li><a href="#" id="pink">Pink</a></li>
+                            <li><a href="#" id="blue">Blue</a></li>
+                            <li><a href="#" id="yellow">Yellow</a></li>
                         </ul>
                     </button>
                 </div>          
@@ -85,10 +90,10 @@ $image = image_uri('sticky-blue.png');
         <input type="submit" value="Upload Image" name="submit">
     </form>
 
-    <div>
-        <p id="drag1" draggable="true"
-           ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px; padding-top: 10px;
-           background: url(<?php echo $image; ?>) no-repeat 2px 2px; background-size: 100% 100%;" >
+    <div class="col-md-2"id="drag1" draggable="true"
+           ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px; padding-top: 13px; padding-right: 10px;
+           background: url(<?php echo $note; ?>) no-repeat 2px 2px; background-size: 100% 100%; ">
+        <p>
             asad
         </p>
     </div>
