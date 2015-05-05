@@ -6,11 +6,10 @@
  */
 
 $notice = image_uri('NoticeBoard.png');
-$note = image_uri('sticky-blue.png');
+$sticky_blue = image_uri('sticky-blue.png');
 $sticky_pink = image_uri('sticky-pink.png');
-//$note= image_uri('sticky-yellow.png');
+$sticky_yellow = image_uri('sticky-yellow.png');
 $sticky_green = image_uri('sticky-green.png');
-
 ?>
 
 <script>
@@ -19,22 +18,21 @@ $sticky_green = image_uri('sticky-green.png');
 
         document.getElementById('drag1').innerHTML = message_entered;
     }
-    function change_image(color) {
-        
-        var dynamic_src = "/unilog/images/";
-        switch (color) {
-            case "blue":
-                
-                break;
-            case "pink":
-                dynamic_src += "sticky-pink.png";
-                break;
-            case "green":
-                $note = $sticky_green;
-                break;
+    function changeColor()
+    {
+        var e = document.getElementById("color_id");
+        var strUser = e.options[e.selectedIndex].text;
+        document.getElementById('drag1').innerHTML = strUser;
+        if (strUser === "blue")
+        {
+            
+            document.getElementById('drag1').body.style.backgroundImage = 'url(<?php echo $sticky_blue; ?>)';
         }
-
-        $('#drag1').attr('src', dynamic_src);
+        if (strUser ===  "yellow")
+        {
+            document.getElementById('drag1').innerHTML = "i should change";
+            document.getElementById('drag1').body.style.backgroundImage = 'url(<?php echo $sticky_yellow; ?>)';
+        }
     }
     function allowDrop(ev) {
         ev.preventDefault();
@@ -69,16 +67,15 @@ $sticky_green = image_uri('sticky-green.png');
                 </div>
                 <div class="col-md-4">                  
                     <button type="button"  onclick="showInput();"class="btn btn-primary">Submit</button>
-                    <button class="dropdown btn btn-primary" type="button">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color:white">
-                            Color <b class="caret"></b></a>
-                        <ul  class="dropdown-menu">
-                            <li><a href="#" id="green">Green</a></li>
-                            <li><a href="#" id="pink">Pink</a></li>
-                            <li><a href="#" id="blue">Blue</a></li>
-                            <li><a href="#" id="yellow">Yellow</a></li>
-                        </ul>
-                    </button>
+                    <form action="">
+                    <select id="color_id" name="patient[color_id]" onchange="changeColor()">
+                        <option selected="selected" value="blue">blue</option>
+                        <option value="yellow">yellow</option>
+                        <option value="3">green</option>
+                        <option value="4">red</option>
+                    </select>
+                    </form>
+                    
                 </div>          
             </div>
         </form>
@@ -91,8 +88,8 @@ $sticky_green = image_uri('sticky-green.png');
     </form>
 
     <div class="col-md-2"id="drag1" draggable="true"
-           ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px; padding-top: 13px; padding-right: 10px;
-           background: url(<?php echo $note; ?>) no-repeat 2px 2px; background-size: 100% 100%; ">
+         ondragstart="drag(event)" style="width:200px;height:225px; padding-left: 25px; padding-bottom: 5px; padding-top: 18px; padding-right: 10px;
+         background-image: url(<?php echo $sticky_blue; ?>) no-repeat 2px 2px; background-size: 100% 100%; ">
         <p>
             asad
         </p>
