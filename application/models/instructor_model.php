@@ -48,4 +48,35 @@ class Instructor_Model extends User_Model {
 		return $user_added;
 	}
 
+	/**
+	 * Returns the courses in which the instructor is currently teaching.
+	 * @param string $which 'current' returns currently running courses. 'archived' returns
+	 * archived courses only. Any other value returns all the courses.
+	 * @return array
+	 */
+	public function get_courses($which='all') {
+		$id = $this->session->user_id;
+		
+		$query = <<<END
+			SELECT *
+			FROM course
+			JOIN instructor ON instructor.user_id = course.course_instructor
+			JOIN user ON user.user_id = instructor.user_id
+			WHERE user.user_id = '$id'
+END;
+		switch ($which) {
+			case 'current':
+				$query .= 'AND course.course_end_date IS NULL';
+				break;
+			case 'archived':
+				$query .= 'AND course.course_end_date IS NOT NULL';
+				break;
+		}
+		
+		$result = $this->db->query($query);
+		if (!$result)
+			return null;
+		
+		return $result->result_array();
+	}
 }

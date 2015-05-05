@@ -22,7 +22,7 @@
         <hr>
         <li><a href="<?php echo base_url('courses') ?>" style="color: black"><b>All Courses</b></a></li>
         <hr>
-        <li><a href="http://localhost/unilog/#addcourseScreen" style="color: black"><b>Add Course</b></a></li>
+        <li><a href="<?php echo base_url('#addcourseScreen'); ?>" style="color: black"><b>Add Course</b></a></li>
         <hr>
     </ul>
 </div>
