@@ -146,10 +146,12 @@ class Course extends CI_Controller {
 	protected function display_left_nav() {
 		if ($this->user_data->user_type == 'user_type_student') {
 			$this->load->model('student_model');
-			$courses['courses'] = $this->student_model->get_current_course_enrollments();
-			$this->load->view('widgets/courses.php', $courses);
-		} else
-			$this->load->view('templates/left_nav.php');
+			$data['courses'] = $this->student_model->get_current_course_enrollments();
+		} else {
+			$this->load->model('instructor_model');
+			$data['courses'] = $this->instructor_model->get_courses('');
+		}
+		$this->load->view('widgets/courses', $data);
 	}
 
 }
