@@ -36,7 +36,7 @@
         <div class="upload-file-area"  style="display: none">            
                 <a href="#">
                     <div class="thumbnail" style="display:centre" >
-                        <div class="pic-caption" >                        
+                        <div class="course-tile-pic-caption" >                        
                             <div style="color: white">
                             </div>                            
                         </div>                        
@@ -93,10 +93,10 @@
     $('.thumbnail').hover(
             
             function(){
-                $(this).find('.pic-caption').fadeIn(); 
+                $(this).find('.course-tile-pic-caption').fadeIn(); 
     },
     function(){
-        $(this).find('.pic-caption').fadeOut(); 
+        $(this).find('.course-tile-pic-caption').fadeOut(); 
     }
             
             );
