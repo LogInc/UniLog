@@ -57,9 +57,9 @@ class course_model extends CI_Model {
 
 		if ($limit)
 			if ($offset)
-				$this->db->limit($limit);
-			else
 				$this->db->limit($limit, $offset);
+			else
+				$this->db->limit($limit);
 
 		$query = $this->db->get();
 		if (!$query || $query->num_rows() == 0)
@@ -89,15 +89,22 @@ class course_model extends CI_Model {
 
 		if ($limit)
 			if ($offset)
-				$this->db->limit($limit);
-			else
 				$this->db->limit($limit, $offset);
+			else
+				$this->db->limit($limit);
 
 		$query = $this->db->get();
 		if (!$query || $query->num_rows() == 0)
 			return null;
 		else
 			return $query->result();
+	}
+	
+	protected function get_user_type($user_id) {
+		$query = $this->db->get_where(array('user' => $user_id));
+		if (!$query || $query->num_rows() != 1)
+			return '';
+		else return $query->row()['user_type'];
 	}
 
 	/**

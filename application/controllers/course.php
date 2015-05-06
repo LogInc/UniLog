@@ -75,7 +75,6 @@ class Course extends CI_Controller {
 	public function course_home($code, $term, $year, $type) {
 		if ($this->load_page_head($code)) {
 			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
-			//var_dump($data['course']);
 			$this->load->view('templates/nav');
 			$this->display_left_nav();
 			$this->load->view('templates/page_foot');
@@ -147,7 +146,7 @@ class Course extends CI_Controller {
 		if ($this->user_data->user_type == 'user_type_student') {
 			$this->load->model('student_model');
 			$data['courses'] = $this->student_model->get_current_course_enrollments();
-		} else {
+		} else if ($this->user_data->user_type == 'user_type_instructor') {
 			$this->load->model('instructor_model');
 			$data['courses'] = $this->instructor_model->get_courses('current');
 		}
