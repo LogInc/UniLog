@@ -96,6 +96,48 @@ END;
 		
 		return $result->result_array();
 	}
+	
+	/**
+	 * Returns true if the student is enrolled in the given course.
+	 * @param type $code
+	 * @param type $term
+	 * @param type $year
+	 * @param type $type
+	 * @return boolean
+	 */
+	public function is_enrolled_in_course($code, $term, $year, $type) {
+		$data = array(	'user_id'		=> $this->session->user_id,
+						'course_code'	=> $code,
+						'course_term'	=> $term,
+						'course_year'	=> $year,
+						'course_type'	=> $type
+						);
+		
+		$result = $this->db->get_where('course_enrollment', $data);
+		if ($result && $result->num_rows() == 1)
+			return true;
+		
+		return false;
+	}
+	
+	/**
+	 * Enrolls a student in the given course.
+	 * @param type $code
+	 * @param type $term
+	 * @param type $year
+	 * @param type $type
+	 * @return boolean
+	 */
+	public function enroll_in_course($code, $term, $year, $type) {
+		$data = array(	'user_id'		=> $this->session->user_id,
+						'course_code'	=> $code,
+						'course_term'	=> $term,
+						'course_year'	=> $year,
+						'course_type'	=> $type
+						);
+		
+		return $this->db->insert('course_enrollment', $data);
+	}
 
 	/**
 	 * Adds a student authentication pin to the database.

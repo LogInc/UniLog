@@ -14,6 +14,8 @@
  */
 class course_model extends CI_Model {
 
+	public function add_course() {
+	}
 	/**
 	 * Retrieves a course from the db.
 	 * @param string $code

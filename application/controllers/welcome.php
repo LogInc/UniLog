@@ -64,8 +64,9 @@ class Welcome extends CI_Controller {
 			$this->load->model('user_model');
 			$this->session->is_logged_in = true;
 			$this->session->email = clean_input($this->input->post('email'));
-			$id = $this->user_model->get_user_by_email($this->session->email)->user_id;
-			$this->session->user_id = $id;
+			$user = $this->user_model->get_user_by_email($this->session->email);
+			$this->session->user_id = $user->user_id;
+			$this->session->user_type = $user->user_type;
 			
 			redirect('user');
 		} else {

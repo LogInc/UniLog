@@ -24,6 +24,32 @@ class Course extends CI_Controller {
 		$this->all();
 	}
 
+	public function enroll($code, $term, $year, $type) {
+		$course = $this->course_model->get_course($code, $term, $year, $type);
+		if ($course == null) {
+			show_error("Course not found.");
+			return;
+		}
+
+		if ($this->session->user_type != 'user_type_student') {
+			show_message("Only students can enroll in a course.", "Ooops!");
+			return;
+		}
+
+		$this->load->model('student_model');
+
+		if ($this->student_model->is_enrolled_in_course($code, $term, $year, $type)) {
+			show_message("You are already enrolled in this course.", "Ooops!");
+			return;
+		}
+
+		$enrolled = $this->student_model->enroll_in_course($code, $term, $year, $type);
+		if ($enrolled)
+			redirect("user/course/$code/$term/$year/$type");
+		else
+			show_error("Unable to enroll in course.");
+	}
+
 	/**
 	 * Displays a page containing tiles of all the courses hosted on the site.
 	 * @param type $whose. The user whose courses to display. 0 means display irrespective of user.
@@ -63,6 +89,17 @@ class Course extends CI_Controller {
 		}
 	}
 
+	/**
+	 * Displays the introduction page of a course. This page gives a description of the
+	 * course and an enroll button which a student user can click to enroll in that
+	 * particular course.
+	 * Access to this method is re-routed as follows:
+	 * /course/code/term/year/type
+	 * @param type $code	Course code
+	 * @param type $term	Course term	(fall / spring)
+	 * @param type $year	Course year
+	 * @param type $type	Course type (th / pr)
+	 */
 	public function course_description($code, $term, $year, $type) {
 		if ($this->load_page_head($code)) {
 			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
@@ -72,9 +109,24 @@ class Course extends CI_Controller {
 		}
 	}
 
+	/**
+	 * Displays the course home page. This page is different for student and instructor
+	 * user types.
+	 * Access to this method is re-routed as follows:
+	 * /user/course/code/term/year/type
+	 * @param type $code
+	 * @param type $term
+	 * @param type $year
+	 * @param type $type
+	 */
 	public function course_home($code, $term, $year, $type) {
+		$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
+		if (!$data['course_data']) {
+			show_error('Course not found.');
+			return;
+		}
+		
 		if ($this->load_page_head($code)) {
-			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
 			$this->load->view('templates/nav');
 			$this->display_left_nav();
 			$this->load->view('templates/page_foot');
@@ -138,8 +190,8 @@ class Course extends CI_Controller {
 
 		return true;
 	}
-	
-		/**
+
+	/**
 	 * Outputs the appropriate left nav widget for the logged in user.
 	 */
 	protected function display_left_nav() {

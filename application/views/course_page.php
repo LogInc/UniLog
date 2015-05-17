@@ -19,8 +19,10 @@ $box_video = img(image_uri('Box_Videos.png'), FALSE, 'class="img-rounded" width=
                     <h3><strong><?php echo $course_data->course_name ?></strong></h3>
                 </div>
                 <div class="col-md-4" style="float: right;margin-top: 10px">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit_signin">Enroll!</button>
-                </div>
+					<form method='post' action='<?php echo base_url("course/enroll/$course_data->course_code/$course_data->course_term/$course_data->course_year/$course_data->course_type"); ?>'>
+						<button class="btn btn-primary btn-lg btn-block" type="submit" name="submit_signin">Enroll!</button>
+					</form>
+				</div>
             </div>
             <hr style="height:2px;background-color: gray"> 
             <h3><?php echo $course_data->course_intro ?></h3>
@@ -49,7 +51,7 @@ $box_video = img(image_uri('Box_Videos.png'), FALSE, 'class="img-rounded" width=
 					<?php echo $box_pp ?>
                     <a href="#">Past Papers</a>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
 </div>
