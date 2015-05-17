@@ -127,6 +127,35 @@ class course_model extends CI_Model {
 		else
 			return $query->result();
 	}
+	
+	/**
+	 * Retrieves all the uploads related to a course.
+	 * @param string $type The type of uploads to retrieve. NULL means all types.
+	 * @return array Array of uploads if any found, NULL otherwise. 
+	 */
+	public function get_uploads($type=null)
+	{
+		$where = array(	'course_code' => $this->session->course_code,
+						'course_term' => $this->session->course_term,
+						'course_year' => $this->session->course_year,
+						'course_type' => $this->session->course_type,
+						);
+		if ($type)
+			$where['upload.upload_type'] = $type;
+		
+		$this->db->select('*');
+		$this->db->from('course_post');
+		$this->db->join('post', 'post.post_id = course_post.post_id');
+		$this->db->join('upload', 'upload.post_id = post.post_id');
+		$this->db->join('user', 'user.user_id = post.post_author');
+		$this->db->where($where);
+		
+		$query = $this->db->get();
+		if ($query && $query->num_rows() > 0)
+			return $query->result();
+		else 
+			return null;
+	}
 
 	protected function get_user_type($user_id) {
 		$query = $this->db->get_where(array('user' => $user_id));

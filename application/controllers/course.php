@@ -81,14 +81,16 @@ class Course extends CI_Controller {
 		if ($this->session->is_logged_in) {
 			$user = $this->user_model->get_user_by_email($this->session->email);
 			if (!$user) {
+				echo '0';
 				return;
 			}
 
-			$path = upload_path('course_material/' . $code . '/' . $term . '/' . $year . '/' . $type);
-			if (!file_exists($path))
-				mkdir($path, 0777, true);
+			$path = 'course_material/' . $code . '/' . $term . '/' . $year . '/' . $type;
+			$full_path = upload_path($path);
+			if (!file_exists($full_path))
+				mkdir($full_path, 0777, true);
 
-			$config['upload_path'] = $path;
+			$config['upload_path'] = $full_path;
 			$config['allowed_types'] = 'mp4|pdf|doc|docx|ppt|pptx|txt';
 			$config['max_size'] = '5120000';
 			$config['encrypt_name'] = true;
@@ -118,7 +120,10 @@ class Course extends CI_Controller {
 						$ext = 'upload_video';
 						break;
 					case '.pdf':
-						$ext = 'upload_pdf';
+						$ext = 'upload_doc';
+						break;
+					case '.txt':
+						$ext = 'upload_doc';
 						break;
 					case '.doc':
 						$ext = 'upload_doc';
@@ -131,7 +136,7 @@ class Course extends CI_Controller {
 										'upload_type'		=> $ext,
 										'upload_caption'	=> clean_input($this->input->post('caption')),
 										'upload_description'=> clean_input($this->input->post('description')),
-										'upload_file'		=> $this->upload->data('file_name')
+										'upload_file'		=> $path.'/'.$this->upload->data('file_name')
 										);
 			
 				$this->db->insert('post', $post_data);
@@ -141,7 +146,8 @@ class Course extends CI_Controller {
 			}
 			else
 				echo '0';
-		}
+		} else
+			echo '0';
 	}
 
 	/**
@@ -219,6 +225,10 @@ class Course extends CI_Controller {
 	 * @param type $type
 	 */
 	public function course_home($code, $term, $year, $type) {
+		$code = clean_input($code);
+		$term = clean_input($term);
+		$year = clean_input($year);
+		$type = clean_input($type);
 		$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
 		if (!$data['course_data']) {
 			show_error('Course not found.');
@@ -229,6 +239,9 @@ class Course extends CI_Controller {
 		$this->session->course_term = $term;
 		$this->session->course_year = $year;
 		$this->session->course_type = $type;
+		
+		$data['doc'] = $this->course_model->get_uploads('upload_doc');
+		$data['video'] = $this->course_model->get_uploads('upload_video');
 
 		if ($this->load_page_head($code)) {
 			$this->load->view('templates/nav');
@@ -238,7 +251,6 @@ class Course extends CI_Controller {
 				
 			}
 			$this->load->view('course_home', $data);
-
 			$this->load->view('templates/page_foot');
 		}
 	}

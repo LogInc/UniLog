@@ -42,15 +42,19 @@ if (!isset($active_tab))
 		</ul>
 
 		<div class='tab-content'>
-			<div id='home' class='tab-pane fade in <?php $v = (($active_tab == 'home') ? 'active' : '');
-			echo $v ?>'>
+			<div id='home' class='tab-pane fade in <?php
+			$v = (($active_tab == 'home') ? 'active' : '');
+			echo $v
+			?>'>
 				home
 			</div>
 
-			<div id='uploads' class='tab-pane fade in <?php $v = (($active_tab == 'uploads') ? 'active' : '');
-			echo $v ?>'>
+			<div id='uploads' class='tab-pane fade in <?php
+			$v = (($active_tab == 'uploads') ? 'active' : '');
+			echo $v
+			?>'>
 				<div class='row' style='margin-top: 10px'>
-					<form id="upload-form" method="post" enctype="multipart/form-data" action="<?php echo base_url('user/course').'/'.$course_data->course_code.'/'.$course_data->course_term.'/'.$course_data->course_year.'/'.$course_data->course_type.'/upload'; ?>">
+					<form id="upload-form" method="post" enctype="multipart/form-data" action="<?php echo base_url('user/course') . '/' . $course_data->course_code . '/' . $course_data->course_term . '/' . $course_data->course_year . '/' . $course_data->course_type . '/upload'; ?>">
 						<div class='col-md-3'>
 							<button class='form-control btn btn-block btn-success' id="upload-file" type="button">Upload a file</button>
 						</div>
@@ -90,10 +94,51 @@ if (!isset($active_tab))
 						</div>
 					</form>
 				</div>
+				<hr>
+				<div class="row">
+					<div class="col-md-12" style="margin-top: 10px">
+						<h2>Notes</h2>
+						<?php
+						if ($doc) {
+							foreach ($doc as $note) {
+								$url = upload_uri($note->upload_file);
+								$html = <<<END
+									<h4 style="display:inline"><a href="$url"><strong>$note->upload_caption</strong></a>  uploaded by $note->user_first_name $note->user_last_name</h4>
+									<p>$note->upload_description</p>
+END;
+								echo $html;
+							}
+						} else
+							echo 'No notes uploaded.';
+						?>
+					</div>
+				</div>
+				<hr>
+
+				<div class="row">
+					<div class="col-md-12" style="margin-top: 10px">
+						<h2>Video Lectures</h2>
+						<?php
+						if ($video) {
+							foreach ($video as $note) {
+								$url = upload_uri($note->upload_file);
+								$html = <<<END
+									<h4 style="display:inline"><a href="$url"><strong>$note->upload_caption</strong></a> uploaded by $note->user_first_name $note->user_last_name</h4>
+									<p>$note->upload_description</p>
+END;
+								echo $html;
+							}
+						} else
+							echo 'No video lectures uploaded.';
+						?>
+					</div>
+				</div>
 			</div>
 
-			<div id='info' class='tab-pane fade in <?php $v = (($active_tab == 'info') ? 'active' : '');
-			echo $v ?>'>
+			<div id='info' class='tab-pane fade in <?php
+				 $v = (($active_tab == 'info') ? 'active' : '');
+				 echo $v
+				 ?>'>
 				Course Info
 			</div>
 		</div>
@@ -103,19 +148,16 @@ if (!isset($active_tab))
 <script src="<?php echo script_uri('jquery.form.js'); ?>"></script>
 <script>
 	var options = {
-		beforeSubmit : function() {
+		beforeSubmit: function () {
 			$('#upload-progress').width('0%').addClass('active');
 		},
-		
-		uploadProgress : function(event, position, total, percentComplete) {
-			$('#upload-progress').width(percentComplete+'%');
+		uploadProgress: function (event, position, total, percentComplete) {
+			$('#upload-progress').width(percentComplete + '%');
 			$('#upload-progress').html('<strong>' + percentComplete + '%</strong>');
 		},
-		
-		success : function() {
+		success: function () {
 		},
-		
-		complete : function(xhr) {
+		complete: function (xhr) {
 			$('#upload-progress').width('100%').removeClass('active');
 			alert(xhr.responseText);
 			if (xhr.responseText != '1')
@@ -123,7 +165,7 @@ if (!isset($active_tab))
 		}
 	};
 	$('#upload-form').ajaxForm(options);
-	
+
 	$('#course-nav a').click(function () {
 		$(this).tab('show');
 		//return false;

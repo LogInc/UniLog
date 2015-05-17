@@ -165,8 +165,7 @@ $query = <<<END
 CREATE TABLE upload (
 	upload_id			INT			UNSIGNED	NOT NULL	AUTO_INCREMENT,
 	post_id				INT			UNSIGNED	NULL,
-	upload_type			ENUM(	'upload_pdf',
-								'upload_doc',
+	upload_type			ENUM(	'upload_doc',
 								'upload_image',
 								'upload_video'
 							)					NOT NULL,
