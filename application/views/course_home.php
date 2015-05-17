@@ -108,7 +108,7 @@ if (!isset($active_tab))
 		},
 		
 		uploadProgress : function(event, position, total, percentComplete) {
-			$('#upload-progress').width(percentComplete);
+			$('#upload-progress').width(percentComplete+'%');
 			$('#upload-progress').html('<strong>' + percentComplete + '%</strong>');
 		},
 		
@@ -117,6 +117,7 @@ if (!isset($active_tab))
 		
 		complete : function(xhr) {
 			$('#upload-progress').width('100%').removeClass('active');
+			alert(xhr.responseText);
 			if (xhr.responseText != '1')
 				alert('Upload failed.');
 		}

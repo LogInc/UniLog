@@ -71,7 +71,10 @@ class Course extends CI_Controller {
 	}
 
 	/**
-	 * Uploads a file for the course.
+	 * Uploads a file for the course. Creates records in the upload, post and course_post
+	 * tables.
+	 * This method echos '1' for success as it is called through AJAX and its output
+	 * is not displayed directly in the browser.
 	 */
 	public function upload($code, $term, $year, $type) {
 		$this->load->model('user_model');
@@ -91,6 +94,49 @@ class Course extends CI_Controller {
 			$config['encrypt_name'] = true;
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('upload_file')) {
+				
+				$id = $this->db->query('SELECT MAX(post_id) as "m" FROM post')->result()[0]->m;
+				$id = ($id == null) ? 1 : $id + 1;
+				$post_data = array(	'post_id'		=> $id,
+									'post_type'		=> 'post_course_upload',
+									'post_author'	=> $this->session->user_id
+									);
+				
+				$course_post_data = array(	'post_id'		=> $id,
+											'course_code'	=> $code,
+											'course_term'	=> $term,
+											'course_year'	=> $year,
+											'course_type'	=> $type
+											);
+				
+				$ext = $this->upload->data('file_ext');
+				switch ($ext) {
+					case '.jpg':
+						$ext = 'upload_image';
+						break;
+					case '.mp4':
+						$ext = 'upload_video';
+						break;
+					case '.pdf':
+						$ext = 'upload_pdf';
+						break;
+					case '.doc':
+						$ext = 'upload_doc';
+						break;
+					case '.docx':
+						$ext = 'upload_doc';
+						break;
+				}
+				$upload_data = array(	'post_id'			=> $id,
+										'upload_type'		=> $ext,
+										'upload_caption'	=> clean_input($this->input->post('caption')),
+										'upload_description'=> clean_input($this->input->post('description')),
+										'upload_file'		=> $this->upload->data('file_name')
+										);
+			
+				$this->db->insert('post', $post_data);
+				$this->db->insert('course_post', $course_post_data);
+				$this->db->insert('upload', $upload_data);
 				echo '1';
 			}
 			else
