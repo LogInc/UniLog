@@ -6,7 +6,7 @@
  */
 ?>
 
-<div class="col-md-10">
+<div class="col-md-12">
 	<div class="row">
 		<div class="col-md-12" style=" margin-top:20px;background-color:#FFFFFF; min-height:500px ;padding: 25px;border-radius:5px" > 
 			<h3><strong><?php echo $title ?></strong></h3>          

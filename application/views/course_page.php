@@ -38,7 +38,7 @@ END;
         </div>
     </div>
 
-    <div class="row">
+<!--    <div class="row">
         <div style="background-color: white;min-height: 261px;padding: 20px;border-radius:5px;">        
             <div class="row">
                 <div class="col-md-4" style="margin-left: auto;margin-right: auto">
@@ -61,5 +61,5 @@ END;
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>

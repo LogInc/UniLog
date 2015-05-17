@@ -16,8 +16,6 @@
 		}
 		?>
         <hr>
-        <li><a href="#" style="color: black"><strong>Class Room</strong></a></li>
-        <hr>
         <li><a href="<?php echo base_url('user/my-courses') ?>" style="color: black"><b>My Courses</b></a></li>
         <hr>
 		<?php

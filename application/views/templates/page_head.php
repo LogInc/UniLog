@@ -45,7 +45,6 @@
             }
             .post-div{
                 background-color: white;
-                border-style:outset;
                 border-width:2px;
                 padding: 20px;
             } 
