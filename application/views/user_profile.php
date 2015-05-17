@@ -27,7 +27,7 @@ switch ($user_data->user_type) {
 }
 ?>
 <div class="col-md-9 " >
-    <div class="col-md-11" style="background-color: white;min-height: 261px;padding: 20px;border-radius:5px" >       
+    <div class="col-md-12" style="background-color: white;min-height: 261px;padding: 20px;border-radius:5px" >       
         <h3><strong>Your Profile</strong></h3>          
         <hr style="height:2px;background-color: gray"> 
 
@@ -52,7 +52,7 @@ switch ($user_data->user_type) {
     </div>
 
 
-	<div class="col-md-11" 
+	<div class="col-md-12" 
 		 style="background-color:white; min-height:261px; padding:20px; border-radius:5px; margin-top: 15px" >       
 		<h3><strong>Summary</strong></h3>          
 		<hr style="height:2px;background-color: gray">            

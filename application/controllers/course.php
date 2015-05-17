@@ -23,7 +23,7 @@ class Course extends CI_Controller {
 	public function index() {
 		$this->all();
 	}
-	
+
 	public function add() {
 		if ($this->session->user_type != 'user_type_instructor') {
 			show_message('Only an instructor can add a course.', 'Sorry!');
@@ -31,7 +31,7 @@ class Course extends CI_Controller {
 		}
 		$course = $this->course_model->add_course();
 		if ($course)
-			redirect('user/course/'.$course['course_code'].'/'.$course['course_term'].'/'.$course['course_year'].'/'.$course['course_type']);
+			redirect('user/course/' . $course['course_code'] . '/' . $course['course_term'] . '/' . $course['course_year'] . '/' . $course['course_type']);
 		else
 			show_message('Unable to add course.', 'Sorry!');
 	}
@@ -154,6 +154,12 @@ class Course extends CI_Controller {
 		if ($this->load_page_head($code)) {
 			$this->load->view('templates/nav');
 			$this->display_left_nav();
+
+			if ($this->session->user_type == 'user_type_instructor') {
+				
+			}
+			$this->load->view('course_home', $data);
+
 			$this->load->view('templates/page_foot');
 		}
 	}
@@ -197,7 +203,7 @@ class Course extends CI_Controller {
 			$data['courses'] = $this->instructor_model->get_courses($whose, 'archived');
 		} else
 			$data['courses'] = $this->course_model->get_archived_courses($whose);
-		
+
 		$data['title'] = 'Archived Courses';
 		$data['show_date'] = 'ended';
 		$this->load->view('templates/course_tiles', $data);
