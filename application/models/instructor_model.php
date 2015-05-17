@@ -54,8 +54,9 @@ class Instructor_Model extends User_Model {
 	 * archived courses only. Any other value returns all the courses.
 	 * @return array
 	 */
-	public function get_courses($which='all') {
-		$id = $this->session->user_id;
+	public function get_courses($id=0, $which='all') {
+		if (!$id)
+			$id = $this->session->user_id;
 		
 		$query = <<<END
 			SELECT *
@@ -77,6 +78,6 @@ END;
 		if (!$result)
 			return null;
 		
-		return $result->result_array();
+		return $result->result();
 	}
 }

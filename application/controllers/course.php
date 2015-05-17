@@ -103,6 +103,11 @@ class Course extends CI_Controller {
 	public function course_description($code, $term, $year, $type) {
 		if ($this->load_page_head($code)) {
 			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
+			if ($this->session->user_type == 'user_type_student') {
+				$this->load->model('student_model');
+				if (!$this->student_model->is_enrolled_in_course($code, $term, $year, $type))
+					$data['enroll_button'] = true;
+			}
 			$this->load->view('templates/nav');
 			$this->load->view('course_page', $data);
 			$this->load->view('templates/page_foot');
@@ -125,7 +130,7 @@ class Course extends CI_Controller {
 			show_error('Course not found.');
 			return;
 		}
-		
+
 		if ($this->load_page_head($code)) {
 			$this->load->view('templates/nav');
 			$this->display_left_nav();
@@ -144,7 +149,13 @@ class Course extends CI_Controller {
 			$data['course_home'] = 1;
 			$whose = $this->session->user_id;
 		}
-		$data['courses'] = $this->course_model->get_current_courses($whose);
+
+		if ($this->session->user_type == 'user_type_instructor') {
+			$this->load->model('instructor_model');
+			$data['courses'] = $this->instructor_model->get_courses($whose, 'current');
+		} else
+			$data['courses'] = $this->course_model->get_current_courses($whose);
+
 		$data['title'] = 'Current Courses';
 		$data['show_date'] = 'started';
 		$this->load->view('templates/course_tiles', $data);
@@ -161,7 +172,12 @@ class Course extends CI_Controller {
 			$data['course_home'] = 1;
 			$whose = $this->session->user_id;
 		}
-		$data['courses'] = $this->course_model->get_archived_courses($whose);
+		if ($this->session->user_type == 'user_type_instructor') {
+			$this->load->model('instructor_model');
+			$data['courses'] = $this->instructor_model->get_courses($whose, 'archived');
+		} else
+			$data['courses'] = $this->course_model->get_archived_courses($whose);
+		
 		$data['title'] = 'Archived Courses';
 		$data['show_date'] = 'ended';
 		$this->load->view('templates/course_tiles', $data);

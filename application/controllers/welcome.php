@@ -201,6 +201,7 @@ class Welcome extends CI_Controller {
 			$this->session->is_logged_in = true;
 			$this->session->email = $temp_user->user_email;
 			$this->session->user_id = $id;
+			$this->session->user_type = $temp_user->user_type;
 			//redirect('user');
 		} else
 			show_message('Invalid key.', 'Error');

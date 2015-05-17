@@ -22,7 +22,7 @@
         <hr>
 		<?php
 		if ($user_data->user_type == 'user_type_student') {
-			echo '<li><a href="' . base_url('courses') . '" style="color:black"><b>All Course</b></a></li>';
+			echo '<li><a href="' . base_url('courses') . '" style="color:black"><b>All Courses</b></a></li>';
 			echo '<hr>';
 		}
 
