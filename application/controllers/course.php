@@ -209,7 +209,7 @@ class Course extends CI_Controller {
 			}
 		}
 		else
-			echo $this->db->error();
+			return;
 	}
 
 	/**

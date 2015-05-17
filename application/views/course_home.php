@@ -199,7 +199,7 @@ END;
 	options = {
 		complete: function (xhr) {
 			$('#write-post-panel').slideUp();
-			loadPosts(20, 0);
+			loadPosts(10, 0);
 			if (xhr.responseText != '1')
 				alert('Post failed.');
 		}
@@ -240,6 +240,11 @@ END;
 		$('#file-name').val(file.name);
 	});
 
-	loadPosts(20, 0);
+	loadPosts(10, 0);
+	window.setInterval(regularLoadPosts, 10000);
+	
+	function regularLoadPosts() {
+		loadPosts(10, 0);
+	}
 
 </script>
