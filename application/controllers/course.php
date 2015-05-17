@@ -77,7 +77,6 @@ class Course extends CI_Controller {
 	 * is not displayed directly in the browser.
 	 */
 	public function upload($code, $term, $year, $type) {
-		$this->load->model('user_model');
 		if ($this->session->is_logged_in) {
 			$user = $this->user_model->get_user_by_email($this->session->email);
 			if (!$user) {
@@ -96,21 +95,21 @@ class Course extends CI_Controller {
 			$config['encrypt_name'] = true;
 			$this->load->library('upload', $config);
 			if ($this->upload->do_upload('upload_file')) {
-				
+
 				$id = $this->db->query('SELECT MAX(post_id) as "m" FROM post')->result()[0]->m;
 				$id = ($id == null) ? 1 : $id + 1;
-				$post_data = array(	'post_id'		=> $id,
-									'post_type'		=> 'post_course_upload',
-									'post_author'	=> $this->session->user_id
-									);
-				
-				$course_post_data = array(	'post_id'		=> $id,
-											'course_code'	=> $code,
-											'course_term'	=> $term,
-											'course_year'	=> $year,
-											'course_type'	=> $type
-											);
-				
+				$post_data = array('post_id' => $id,
+					'post_type' => 'post_course_upload',
+					'post_author' => $this->session->user_id
+				);
+
+				$course_post_data = array('post_id' => $id,
+					'course_code' => $code,
+					'course_term' => $term,
+					'course_year' => $year,
+					'course_type' => $type
+				);
+
 				$ext = $this->upload->data('file_ext');
 				switch ($ext) {
 					case '.jpg':
@@ -132,22 +131,85 @@ class Course extends CI_Controller {
 						$ext = 'upload_doc';
 						break;
 				}
-				$upload_data = array(	'post_id'			=> $id,
-										'upload_type'		=> $ext,
-										'upload_caption'	=> clean_input($this->input->post('caption')),
-										'upload_description'=> clean_input($this->input->post('description')),
-										'upload_file'		=> $path.'/'.$this->upload->data('file_name')
-										);
-			
+				$upload_data = array('post_id' => $id,
+					'upload_type' => $ext,
+					'upload_caption' => clean_input($this->input->post('caption')),
+					'upload_description' => clean_input($this->input->post('description')),
+					'upload_file' => $path . '/' . $this->upload->data('file_name')
+				);
+
 				$this->db->insert('post', $post_data);
 				$this->db->insert('course_post', $course_post_data);
 				$this->db->insert('upload', $upload_data);
 				echo '1';
-			}
-			else
+			} else
 				echo '0';
 		} else
 			echo '0';
+	}
+
+	/**
+	 * Inserts a post in to the database.
+	 * @return type
+	 */
+	public function post() {
+		if (!$this->session->is_logged_in || !is_string($this->session->course_code)) {
+			echo '0';
+			return;
+		}
+
+		$id = $this->db->query('SELECT MAX(post_id) as "m" FROM post')->result()[0]->m;
+		$id = ($id == null) ? 1 : $id + 1;
+		$post_data = array('post_id' => $id,
+			'post_type' => 'post_course_discussion',
+			'post_author' => $this->session->user_id,
+			'post_title' => clean_input($this->input->post('title')),
+			'post_text' => clean_input($this->input->post('text'))
+		);
+
+		$course_post_data = array('post_id' => $id,
+			'course_code' => $this->session->course_code,
+			'course_term' => $this->session->course_term,
+			'course_year' => $this->session->course_year,
+			'course_type' => $this->session->course_type
+		);
+
+		$this->db->insert('post', $post_data);
+		$this->db->insert('course_post', $course_post_data);
+
+		echo '1';
+	}
+
+	public function get_posts($limit = 10, $offset = 0) {
+		if (!$this->session->is_logged_in || !is_string($this->session->course_code)) {
+			echo '0';
+			return;
+		}
+
+		$where = array('course_code' => $this->session->course_code,
+			'course_term' => $this->session->course_term,
+			'course_year' => $this->session->course_year,
+			'course_type' => $this->session->course_type,
+		);
+
+		$this->db->select('user_first_name, user_last_name, post_title, post_text, post_type, post_timestamp');
+		$this->db->from('course_post');
+		$this->db->join('post', 'post.post_id = course_post.post_id');
+		$this->db->join('user', 'user.user_id = post.post_author');
+		$this->db->where($where);
+		$this->db->order_by('post_timestamp', 'DESC');
+		$this->db->limit($limit, $offset);
+		
+		$query = $this->db->get();
+		if ($query && $query->num_rows() > 0) {
+			$result = $query->result();
+			foreach ($result as $row) {
+				$data['post'] = $row;
+				$this->load->view('templates/post', $data);
+			}
+		}
+		else
+			echo $this->db->error();
 	}
 
 	/**
@@ -239,7 +301,7 @@ class Course extends CI_Controller {
 		$this->session->course_term = $term;
 		$this->session->course_year = $year;
 		$this->session->course_type = $type;
-		
+
 		$data['doc'] = $this->course_model->get_uploads('upload_doc');
 		$data['video'] = $this->course_model->get_uploads('upload_video');
 

@@ -187,7 +187,7 @@ CREATE TABLE post (
 	post_type			ENUM(	'post_admin_notification',
 								'post_course_update',
 								'post_course_upload',
-								'post_discussion'
+								'post_course_discussion'
 							)								NOT NULL,
 	post_timestamp		TIMESTAMP							NOT NULL,
 	post_title			VARCHAR(128)						NOT NULL,

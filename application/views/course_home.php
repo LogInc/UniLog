@@ -46,7 +46,33 @@ if (!isset($active_tab))
 			$v = (($active_tab == 'home') ? 'active' : '');
 			echo $v
 			?>'>
-				home
+				<div class='row' style='margin-top: 10px'>
+					<form id="post-form" method="post" action="<?php echo base_url('course/post'); ?>">
+						<div class='col-md-3'>
+							<button class='form-control btn btn-block btn-success' id="write-post" type="button">Write a Post</button>
+						</div>
+
+						<div class='col-md-12' id="write-post-panel" style="<?php if (!isset($display_post_form)) echo 'display:none'; ?>">
+							<div class='panel panel-default'>
+								<div class='panel-body'>
+									<div class='col-md-12 form-group'>
+										<input class='form-control form-control-static' type='text' name="title" placeholder="Title" required="">
+									</div>
+
+									<div class='col-md-12 form-group'>
+										<textarea class='form-control form-control-static' name="text" placeholder="Write your post here" required="" style="height:100px"></textarea>
+									</div>
+
+									<div class='col-md-2'>
+										<button type="submit" id="post-submit" class="form-control btn btn-danger">Post</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="row" id="posts" style="margin-top:10px">
+				</div>
 			</div>
 
 			<div id='uploads' class='tab-pane fade in <?php
@@ -147,6 +173,10 @@ END;
 
 <script src="<?php echo script_uri('jquery.form.js'); ?>"></script>
 <script>
+	function loadPosts(limit, offset) {
+		$('#posts').load("<?php echo base_url('course/get_posts/'); ?>" + '/' + limit + '/' + offset);
+	}
+	
 	var options = {
 		beforeSubmit: function () {
 			$('#upload-progress').width('0%').addClass('active');
@@ -159,12 +189,22 @@ END;
 		},
 		complete: function (xhr) {
 			$('#upload-progress').width('100%').removeClass('active');
-			alert(xhr.responseText);
+			//alert(xhr.responseText);
 			if (xhr.responseText != '1')
 				alert('Upload failed.');
 		}
 	};
 	$('#upload-form').ajaxForm(options);
+
+	options = {
+		complete: function (xhr) {
+			$('#write-post-panel').slideUp();
+			loadPosts(20, 0);
+			if (xhr.responseText != '1')
+				alert('Post failed.');
+		}
+	};
+	$('#post-form').ajaxForm(options);
 
 	$('#course-nav a').click(function () {
 		$(this).tab('show');
@@ -173,6 +213,10 @@ END;
 
 	$('#upload-file').click(function () {
 		$('#upload-panel').slideToggle();
+	});
+
+	$('#write-post').click(function () {
+		$('#write-post-panel').slideToggle();
 	});
 
 	$('#select-file').click(function () {
@@ -196,5 +240,6 @@ END;
 		$('#file-name').val(file.name);
 	});
 
+	loadPosts(20, 0);
 
 </script>
