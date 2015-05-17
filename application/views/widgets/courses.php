@@ -11,8 +11,8 @@
         <strong><a style="color:black" href="<?php echo base_url('course/current/' . $user_data->user_id) ?>">Current Courses</a></strong>
 		<?php
 		foreach ($courses as $course) {
-			$url = base_url('user/course/' . $course['course_code'] . '/' . $course['course_term'] . '/' . $course['course_year'] . '/' . $course['course_type']);
-			echo "<li><a href='$url'>" . $course['course_name'] . "</a></li>";
+			$url = base_url('user/course/' . $course->course_code . '/' . $course->course_term . '/' . $course->course_year . '/' . $course->course_type);
+			echo "<li><a href='$url'>" . $course->course_name . "</a></li>";
 		}
 		?>
         <hr>

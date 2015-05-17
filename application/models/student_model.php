@@ -94,7 +94,7 @@ END;
 		if (!$result)
 			return null;
 		
-		return $result->result_array();
+		return $result->result;
 	}
 	
 	/**

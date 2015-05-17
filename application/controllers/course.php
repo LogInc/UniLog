@@ -216,7 +216,7 @@ class Course extends CI_Controller {
 			$data['courses'] = $this->student_model->get_current_course_enrollments();
 		} else if ($this->user_data->user_type == 'user_type_instructor') {
 			$this->load->model('instructor_model');
-			$data['courses'] = $this->instructor_model->get_courses('current');
+			$data['courses'] = $this->instructor_model->get_courses(0, 'current');
 		}
 		$this->load->view('widgets/courses', $data);
 	}
