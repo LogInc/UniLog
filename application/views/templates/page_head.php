@@ -92,7 +92,7 @@
             }  
             #addcourseScreen 
             { 
-                height:500px;
+                height:550px;
                 width:600px; margin:0 auto; position:relative; z-index:10; display:none; 
                 border:5px solid #cccccc; border-radius:10px;
                 background:url('/unilog/images/add_course.jpg') no-repeat ;

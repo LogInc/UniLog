@@ -14,8 +14,34 @@
  */
 class course_model extends CI_Model {
 
+	/**
+	 * Adds a course in the database.
+	 * @return object array if course added, null otherwise
+	 */
 	public function add_course() {
+		$course_code = clean_input($this->input->post('course_code'));
+		$course_title = clean_input($this->input->post('course_title'));
+		$course_term = clean_input($this->input->post('course_term'));
+		$course_year = date('Y');
+		$course_type = clean_input($this->input->post('course_type'));
+		$course_desc = clean_input($this->input->post('course_description'));
+		
+		$data = array(	'course_code'			=> $course_code,
+						'course_term'			=> $course_term,
+						'course_year'			=> $course_year,
+						'course_type'			=> $course_type,
+						'course_name'			=> $course_title,
+						'course_intro'			=> $course_desc,
+						'course_start_date'		=> date('Y-m-d'),
+						'course_instructor'		=> $this->session->user_id
+						);
+		
+		if ($this->db->insert('course', $data))
+			return $data;
+		else
+			return null;
 	}
+
 	/**
 	 * Retrieves a course from the db.
 	 * @param string $code
@@ -101,12 +127,13 @@ class course_model extends CI_Model {
 		else
 			return $query->result();
 	}
-	
+
 	protected function get_user_type($user_id) {
 		$query = $this->db->get_where(array('user' => $user_id));
 		if (!$query || $query->num_rows() != 1)
 			return '';
-		else return $query->row()['user_type'];
+		else
+			return $query->row()['user_type'];
 	}
 
 	/**

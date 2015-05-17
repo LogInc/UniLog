@@ -23,7 +23,27 @@ class Course extends CI_Controller {
 	public function index() {
 		$this->all();
 	}
+	
+	public function add() {
+		if ($this->session->user_type != 'user_type_instructor') {
+			show_message('Only an instructor can add a course.', 'Sorry!');
+			return;
+		}
+		$course = $this->course_model->add_course();
+		if ($course)
+			redirect('user/course/'.$course['course_code'].'/'.$course['course_term'].'/'.$course['course_year'].'/'.$course['course_type']);
+		else
+			show_message('Unable to add course.', 'Sorry!');
+	}
 
+	/**
+	 * Enrolls a student user in the specified course.
+	 * @param type $code
+	 * @param type $term
+	 * @param type $year
+	 * @param type $type
+	 * @return void
+	 */
 	public function enroll($code, $term, $year, $type) {
 		$course = $this->course_model->get_course($code, $term, $year, $type);
 		if ($course == null) {
