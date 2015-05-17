@@ -187,6 +187,7 @@ CREATE TABLE post (
 	post_id				INT		UNSIGNED					NOT NULL	AUTO_INCREMENT,
 	post_type			ENUM(	'post_admin_notification',
 								'post_course_update',
+								'post_course_upload',
 								'post_discussion'
 							)								NOT NULL,
 	post_timestamp		TIMESTAMP							NOT NULL,

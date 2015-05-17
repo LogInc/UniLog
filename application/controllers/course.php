@@ -71,6 +71,34 @@ class Course extends CI_Controller {
 	}
 
 	/**
+	 * Uploads a file for the course.
+	 */
+	public function upload($code, $term, $year, $type) {
+		$this->load->model('user_model');
+		if ($this->session->is_logged_in) {
+			$user = $this->user_model->get_user_by_email($this->session->email);
+			if (!$user) {
+				return;
+			}
+
+			$path = upload_path('course_material/' . $code . '/' . $term . '/' . $year . '/' . $type);
+			if (!file_exists($path))
+				mkdir($path, 0777, true);
+
+			$config['upload_path'] = $path;
+			$config['allowed_types'] = 'mp4|pdf|doc|docx|ppt|pptx|txt';
+			$config['max_size'] = '5120000';
+			$config['encrypt_name'] = true;
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('upload_file')) {
+				echo '1';
+			}
+			else
+				echo '0';
+		}
+	}
+
+	/**
 	 * Displays a page containing tiles of all the courses hosted on the site.
 	 * @param type $whose. The user whose courses to display. 0 means display irrespective of user.
 	 * A special case is 'home', this displays the tiles of the current signed in user
@@ -150,6 +178,11 @@ class Course extends CI_Controller {
 			show_error('Course not found.');
 			return;
 		}
+
+		$this->session->course_code = $code;
+		$this->session->course_term = $term;
+		$this->session->course_year = $year;
+		$this->session->course_type = $type;
 
 		if ($this->load_page_head($code)) {
 			$this->load->view('templates/nav');
