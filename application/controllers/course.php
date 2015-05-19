@@ -192,14 +192,14 @@ class Course extends CI_Controller {
 			'course_type' => $this->session->course_type,
 		);
 
-		$this->db->select('user_first_name, user_last_name, post_title, post_text, post_type, post_timestamp');
+		$this->db->select('user_first_name, user_last_name, post.*');
 		$this->db->from('course_post');
 		$this->db->join('post', 'post.post_id = course_post.post_id');
 		$this->db->join('user', 'user.user_id = post.post_author');
 		$this->db->where($where);
 		$this->db->order_by('post_timestamp', 'DESC');
 		$this->db->limit($limit, $offset);
-		
+
 		$query = $this->db->get();
 		if ($query && $query->num_rows() > 0) {
 			$result = $query->result();
@@ -207,8 +207,31 @@ class Course extends CI_Controller {
 				$data['post'] = $row;
 				$this->load->view('templates/post', $data);
 			}
+		} else
+			return;
+	}
+
+	public function get_all_courses_posts($limit = 10, $offset = 0) {
+		if (!$this->session->is_logged_in) {
+			echo '0';
+			return;
 		}
-		else
+
+		$this->db->select('user_first_name, user_last_name, post.*');
+		$this->db->from('course_post');
+		$this->db->join('post', 'post.post_id = course_post.post_id');
+		$this->db->join('user', 'user.user_id = post.post_author');
+		$this->db->order_by('post_timestamp', 'DESC');
+		$this->db->limit($limit, $offset);
+
+		$query = $this->db->get();
+		if ($query && $query->num_rows() > 0) {
+			$result = $query->result();
+			foreach ($result as $row) {
+				$data['post'] = $row;
+				$this->load->view('templates/post', $data);
+			}
+		} else
 			return;
 	}
 

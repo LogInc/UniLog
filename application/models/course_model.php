@@ -156,6 +156,20 @@ class course_model extends CI_Model {
 		else 
 			return null;
 	}
+	
+	/**
+	 * Retrieves the upload records of a post.
+	 * @param type $post_id The id of the post.
+	 * @return object Query result if any found, null otherwise.
+	 */
+	public function get_upload_by_post_id($post_id)
+	{
+		$query = $this->db->get_where('upload', array('post_id' => clean_input($post_id)));
+		if ($query && $query->num_rows() > 0)
+			return $query->result();
+		else
+			return null;
+	}
 
 	protected function get_user_type($user_id) {
 		$query = $this->db->get_where(array('user' => $user_id));

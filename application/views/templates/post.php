@@ -21,10 +21,21 @@ Copyright 2015 log inc.
 			$time = $diff->i . 'm';
 		else
 			$time = $diff->s . 's';
-		
-		echo '<h3>' . $post->post_title . '</h3> ' . '<h4>' . $time . '</h4>';
-		echo '<h5>' . $post->user_first_name . ' ' . $post->user_last_name . '</h5>';
-		echo '<p>' . $post->post_text . '</p>';
+
+		if ($post->post_type == 'post_course_upload') {
+			$upload = $this->course_model->get_upload_by_post_id($post->post_id);
+			if ($row = $upload[0]) {
+				$url = upload_uri($row->upload_file);
+				echo "<h4 style = 'display:inline'><a href = '$url'><strong>$row->upload_caption</strong></a> uploaded by $post->user_first_name $post->user_last_name</h4>";
+				echo '<h4 style="display:inline;float:right">' . $time . '</h4>';
+				echo "<p>$row->upload_description</p>";
+			}
+		} else {
+			echo '<h3 style="display:inline">' . $post->post_title . '</h3> ';
+			echo '<h4 style="display:inline;float:right">' . $time . '</h4>';
+			echo '<h5>' . $post->user_first_name . ' ' . $post->user_last_name . '</h5>';
+			echo '<p>' . $post->post_text . '</p>';
+		}
 		?>
 	</div>
 </div>
