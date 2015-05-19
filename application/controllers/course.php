@@ -180,7 +180,7 @@ class Course extends CI_Controller {
 		echo '1';
 	}
 
-	public function get_posts($limit = 10, $offset = 0) {
+	public function get_posts($limit = 10, $offset = 0, $type = null) {
 		if (!$this->session->is_logged_in || !is_string($this->session->course_code)) {
 			echo '0';
 			return;
@@ -197,8 +197,13 @@ class Course extends CI_Controller {
 		$this->db->join('post', 'post.post_id = course_post.post_id');
 		$this->db->join('user', 'user.user_id = post.post_author');
 		$this->db->where($where);
+		if ($type)
+			$this->db->where(array('post.post_type' => $type));
+
 		$this->db->order_by('post_timestamp', 'DESC');
-		$this->db->limit($limit, $offset);
+
+		if ($limit)
+			$this->db->limit($limit, $offset);
 
 		$query = $this->db->get();
 		if ($query && $query->num_rows() > 0) {
@@ -211,7 +216,39 @@ class Course extends CI_Controller {
 			return;
 	}
 
-	public function get_all_courses_posts($limit = 10, $offset = 0) {
+	/**
+	 * Retrieves all the uploads related to a course.
+	 * @param string $type The type of uploads to retrieve. NULL means all types.
+	 * @return array Array of uploads if any found, NULL otherwise. 
+	 */
+	public function get_uploads($type = null) {
+		$where = array('course_code' => $this->session->course_code,
+			'course_term' => $this->session->course_term,
+			'course_year' => $this->session->course_year,
+			'course_type' => $this->session->course_type,
+		);
+		if ($type)
+			$where['upload.upload_type'] = $type;
+
+		$this->db->select('*');
+		$this->db->from('course_post');
+		$this->db->join('post', 'post.post_id = course_post.post_id');
+		$this->db->join('upload', 'upload.post_id = post.post_id');
+		$this->db->join('user', 'user.user_id = post.post_author');
+		$this->db->where($where);
+
+		$query = $this->db->get();
+		if ($query && $query->num_rows() > 0) {
+			$result = $query->result();
+			foreach ($result as $row) {
+				$data['post'] = $row;
+				$this->load->view('templates/post', $data);
+			}
+		} else
+			return;
+	}
+
+	public function get_all_courses_posts($limit = 10, $offset = 0, $type = null) {
 		if (!$this->session->is_logged_in) {
 			echo '0';
 			return;
@@ -221,8 +258,14 @@ class Course extends CI_Controller {
 		$this->db->from('course_post');
 		$this->db->join('post', 'post.post_id = course_post.post_id');
 		$this->db->join('user', 'user.user_id = post.post_author');
+
+		if ($type)
+			$this->db->where(array('post.post_type' => $type));
+
 		$this->db->order_by('post_timestamp', 'DESC');
-		$this->db->limit($limit, $offset);
+
+		if ($limit)
+			$this->db->limit($limit, $offset);
 
 		$query = $this->db->get();
 		if ($query && $query->num_rows() > 0) {
@@ -325,16 +368,9 @@ class Course extends CI_Controller {
 		$this->session->course_year = $year;
 		$this->session->course_type = $type;
 
-		$data['doc'] = $this->course_model->get_uploads('upload_doc');
-		$data['video'] = $this->course_model->get_uploads('upload_video');
-
 		if ($this->load_page_head($code)) {
 			$this->load->view('templates/nav');
 			$this->display_left_nav();
-
-			if ($this->session->user_type == 'user_type_instructor') {
-				
-			}
 			$this->load->view('course_home', $data);
 			$this->load->view('templates/page_foot');
 		}

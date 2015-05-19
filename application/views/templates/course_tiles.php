@@ -37,7 +37,7 @@
 							if (isset($course_home))
 								$base = 'user/course';
 							else
-								$base = 'course';
+								$base = 'course/view';
 							$a = base_url("$base/$course->course_code/$course->course_term/$course->course_year/$course->course_type");
 							$out = <<<END
             <a href="$a">

@@ -121,22 +121,12 @@ if (!isset($active_tab))
 					</form>
 				</div>
 				<hr>
+
 				<div class="row">
 					<div class="col-md-12" style="margin-top: 10px">
 						<h2>Notes</h2>
-						<?php
-						if ($doc) {
-							foreach ($doc as $note) {
-								$url = upload_uri($note->upload_file);
-								$html = <<<END
-									<h4 style="display:inline"><a href="$url"><strong>$note->upload_caption</strong></a>  uploaded by $note->user_first_name $note->user_last_name</h4>
-									<p>$note->upload_description</p>
-END;
-								echo $html;
-							}
-						} else
-							echo 'No notes uploaded.';
-						?>
+						<div id="notes">
+						</div>
 					</div>
 				</div>
 				<hr>
@@ -144,19 +134,8 @@ END;
 				<div class="row">
 					<div class="col-md-12" style="margin-top: 10px">
 						<h2>Video Lectures</h2>
-						<?php
-						if ($video) {
-							foreach ($video as $note) {
-								$url = upload_uri($note->upload_file);
-								$html = <<<END
-									<h4 style="display:inline"><a href="$url"><strong>$note->upload_caption</strong></a> uploaded by $note->user_first_name $note->user_last_name</h4>
-									<p>$note->upload_description</p>
-END;
-								echo $html;
-							}
-						} else
-							echo 'No video lectures uploaded.';
-						?>
+						<div id="videos">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -175,8 +154,10 @@ END;
 <script>
 	function loadPosts(limit, offset) {
 		$('#posts').load("<?php echo base_url('course/get_posts/'); ?>" + '/' + limit + '/' + offset);
+		$('#notes').load("<?php echo base_url('course/get_uploads/upload_doc'); ?>");
+		$('#videos').load("<?php echo base_url('course/get_uploads/upload_video'); ?>");
 	}
-	
+
 	var options = {
 		beforeSubmit: function () {
 			$('#upload-progress').width('0%').addClass('active');
@@ -189,7 +170,7 @@ END;
 		},
 		complete: function (xhr) {
 			$('#upload-progress').width('100%').removeClass('active');
-			//alert(xhr.responseText);
+			$('#upload-panel').slideUp();
 			if (xhr.responseText != '1')
 				alert('Upload failed.');
 		}
@@ -241,8 +222,8 @@ END;
 	});
 
 	loadPosts(10, 0);
-	window.setInterval(regularLoadPosts, 10000);
-	
+	//window.setInterval(regularLoadPosts, 10000);
+
 	function regularLoadPosts() {
 		loadPosts(10, 0);
 	}
