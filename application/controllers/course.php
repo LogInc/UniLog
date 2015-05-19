@@ -84,6 +84,19 @@ class Course extends CI_Controller {
 				return;
 			}
 
+			$course_where = array(
+				'course_code' => $code,
+				'course_term' => $term,
+				'course_year' => $year,
+				'course_type' => $type
+			);
+
+			$query = $this->db->get_where('course', $course_where);
+			if (!$query || !$query->num_rows() || $query->result()[0]->course_end_date != null) {
+				echo '0';
+				return;
+			}
+
 			$path = 'course_material/' . $code . '/' . $term . '/' . $year . '/' . $type;
 			$full_path = upload_path($path);
 			if (!file_exists($full_path))

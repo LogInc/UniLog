@@ -46,13 +46,17 @@ if (!isset($active_tab))
 			$v = (($active_tab == 'home') ? 'active' : '');
 			echo $v
 			?>'>
+					 <?php
+					 $url = base_url('course/post');
+					 $display = isset($display_post_form) ? '' : 'display:none';
+					 $html = <<<END
 				<div class='row' style='margin-top: 10px'>
-					<form id="post-form" method="post" action="<?php echo base_url('course/post'); ?>">
+					<form id="post-form" method="post" action="$url">
 						<div class='col-md-3'>
 							<button class='form-control btn btn-block btn-success' id="write-post" type="button">Write a Post</button>
 						</div>
 
-						<div class='col-md-12' id="write-post-panel" style="<?php if (!isset($display_post_form)) echo 'display:none'; ?>">
+						<div class='col-md-12' id="write-post-panel" style="$display">
 							<div class='panel panel-default'>
 								<div class='panel-body'>
 									<div class='col-md-12 form-group'>
@@ -71,21 +75,31 @@ if (!isset($active_tab))
 						</div>
 					</form>
 				</div>
+END;
+					 if (!$course_data->course_end_date)
+						 echo $html;
+					 ?>
+
 				<div class="row" id="posts" style="margin-top:10px">
 				</div>
 			</div>
 
 			<div id='uploads' class='tab-pane fade in <?php
 			$v = (($active_tab == 'uploads') ? 'active' : '');
-			echo $v
+			echo $v;
 			?>'>
+
+				<?php
+				$url = base_url('user/course') . '/' . $course_data->course_code . '/' . $course_data->course_term . '/' . $course_data->course_year . '/' . $course_data->course_type . '/upload';
+				$display = isset($display_upload_form) ? '' : 'display:none';
+				$html = <<<END
 				<div class='row' style='margin-top: 10px'>
-					<form id="upload-form" method="post" enctype="multipart/form-data" action="<?php echo base_url('user/course') . '/' . $course_data->course_code . '/' . $course_data->course_term . '/' . $course_data->course_year . '/' . $course_data->course_type . '/upload'; ?>">
+					<form id="upload-form" method="post" enctype="multipart/form-data" action="$url">
 						<div class='col-md-3'>
 							<button class='form-control btn btn-block btn-success' id="upload-file" type="button">Upload a file</button>
 						</div>
 
-						<div class='col-md-12' id="upload-panel" style="<?php if (!isset($display_upload_form)) echo 'display:none'; ?>">
+						<div class='col-md-12' id="upload-panel" style="$display">
 							<div class='panel panel-default'>
 								<div class='panel-body'>
 									<div class='col-md-8 form-group'>
@@ -120,7 +134,11 @@ if (!isset($active_tab))
 						</div>
 					</form>
 				</div>
-				<hr>
+			<hr>
+END;
+				if (!$course_data->course_end_date)
+					echo $html;
+				?>
 
 				<div class="row">
 					<div class="col-md-12" style="margin-top: 10px">
@@ -172,7 +190,7 @@ if (!isset($active_tab))
 			$('#upload-progress').width('100%').removeClass('active');
 			$('#upload-panel').slideUp();
 			if (xhr.responseText != '1')
-				alert('Upload failed.');
+				alert('Upload failed.' + xhr.responseText);
 		}
 	};
 	$('#upload-form').ajaxForm(options);
