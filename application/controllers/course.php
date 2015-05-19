@@ -24,6 +24,10 @@ class Course extends CI_Controller {
 		$this->all();
 	}
 
+	/**
+	 * Inserts a new course in the database.
+	 * @return void
+	 */
 	public function add() {
 		if ($this->session->user_type != 'user_type_instructor') {
 			show_message('Only an instructor can add a course.', 'Sorry!');
@@ -193,44 +197,37 @@ class Course extends CI_Controller {
 		echo '1';
 	}
 
-	public function get_posts($limit = 10, $offset = 0, $type = null) {
-		if (!$this->session->is_logged_in || !is_string($this->session->course_code)) {
+	/**
+	 * Retrieves posts posted on a course's page.
+	 * This method is called through AJAX to fill a div tag so it return html.
+	 * 
+	 * @param string $code Course code.
+	 * @param string $term Course term (fall / spring).
+	 * @param string $year Course year.
+	 * @param string $type Course type (th / pr)
+	 * @param int $limit No. of posts to retrieve. 0 for all.
+	 * @param int $offset Offset of the first post to retrieve.
+	 * @param string $post_type Type of posts. null for all.
+	 * @return html.
+	 */
+	public function get_course_posts($code, $term, $year, $type, $limit = 10, $offset = 0, $post_type = null) {
+		if (!$this->session->is_logged_in) {
 			echo '0';
 			return;
 		}
 
-		$where = array('course_code' => $this->session->course_code,
-			'course_term' => $this->session->course_term,
-			'course_year' => $this->session->course_year,
-			'course_type' => $this->session->course_type,
-		);
-
-		$this->db->select('user_first_name, user_last_name, post.*');
-		$this->db->from('course_post');
-		$this->db->join('post', 'post.post_id = course_post.post_id');
-		$this->db->join('user', 'user.user_id = post.post_author');
-		$this->db->where($where);
-		if ($type)
-			$this->db->where(array('post.post_type' => $type));
-
-		$this->db->order_by('post_timestamp', 'DESC');
-
-		if ($limit)
-			$this->db->limit($limit, $offset);
-
-		$query = $this->db->get();
-		if ($query && $query->num_rows() > 0) {
-			$result = $query->result();
+		$result = $this->course_model->get_course_posts($code, $term, $year, $type, $limit, $offset, $post_type);
+		if ($result)
 			foreach ($result as $row) {
 				$data['post'] = $row;
 				$this->load->view('templates/post', $data);
-			}
-		} else
-			return;
+			} else
+			echo '0';
 	}
 
 	/**
-	 * Retrieves all the uploads related to a course.
+	 * Retrieves all the uploads related to current course (whose homepage we are in).
+	 * This method is called through AJAX to fill a div tag.
 	 * @param string $type The type of uploads to retrieve. NULL means all types.
 	 * @return array Array of uploads if any found, NULL otherwise. 
 	 */
@@ -249,36 +246,6 @@ class Course extends CI_Controller {
 		$this->db->join('upload', 'upload.post_id = post.post_id');
 		$this->db->join('user', 'user.user_id = post.post_author');
 		$this->db->where($where);
-
-		$query = $this->db->get();
-		if ($query && $query->num_rows() > 0) {
-			$result = $query->result();
-			foreach ($result as $row) {
-				$data['post'] = $row;
-				$this->load->view('templates/post', $data);
-			}
-		} else
-			return;
-	}
-
-	public function get_all_courses_posts($limit = 10, $offset = 0, $type = null) {
-		if (!$this->session->is_logged_in) {
-			echo '0';
-			return;
-		}
-
-		$this->db->select('user_first_name, user_last_name, post.*');
-		$this->db->from('course_post');
-		$this->db->join('post', 'post.post_id = course_post.post_id');
-		$this->db->join('user', 'user.user_id = post.post_author');
-
-		if ($type)
-			$this->db->where(array('post.post_type' => $type));
-
-		$this->db->order_by('post_timestamp', 'DESC');
-
-		if ($limit)
-			$this->db->limit($limit, $offset);
 
 		$query = $this->db->get();
 		if ($query && $query->num_rows() > 0) {
@@ -342,8 +309,13 @@ class Course extends CI_Controller {
 	 * @param type $type	Course type (th / pr)
 	 */
 	public function course_description($code, $term, $year, $type) {
+		$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
+		if (!$data['course_data']) {
+			show_error('Course not found.');
+			return;
+		}
+
 		if ($this->load_page_head($code)) {
-			$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
 			if ($this->session->user_type == 'user_type_student') {
 				$this->load->model('student_model');
 				if (!$this->student_model->is_enrolled_in_course($code, $term, $year, $type))
@@ -366,10 +338,6 @@ class Course extends CI_Controller {
 	 * @param type $type
 	 */
 	public function course_home($code, $term, $year, $type) {
-		$code = clean_input($code);
-		$term = clean_input($term);
-		$year = clean_input($year);
-		$type = clean_input($type);
 		$data['course_data'] = $this->course_model->get_course($code, $term, $year, $type);
 		if (!$data['course_data']) {
 			show_error('Course not found.');

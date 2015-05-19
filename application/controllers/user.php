@@ -29,6 +29,8 @@ class User extends CI_Controller {
 		if ($this->load_page_head('Home')) {
 			$this->load->view('templates/nav');
 			$this->display_left_nav();
+			
+			$this->load->model('course_model');
 			$this->load->view('user_wall');
 
 			$this->load->view('templates/add_course');

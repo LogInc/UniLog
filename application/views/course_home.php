@@ -171,7 +171,13 @@ END;
 <script src="<?php echo script_uri('jquery.form.js'); ?>"></script>
 <script>
 	function loadPosts(limit, offset) {
-		$('#posts').load("<?php echo base_url('course/get_posts/'); ?>" + '/' + limit + '/' + offset);
+		<?php
+		$code = $this->session->course_code;
+		$term = $this->session->course_term;
+		$year = $this->session->course_year;
+		$type = $this->session->course_type;
+		?>
+		$('#posts').load("<?php echo base_url("course/get_course_posts/$code/$term/$year/$type"); ?>" + '/' + limit + '/' + offset);
 		$('#notes').load("<?php echo base_url('course/get_uploads/upload_doc'); ?>");
 		$('#videos').load("<?php echo base_url('course/get_uploads/upload_video'); ?>");
 	}
@@ -240,7 +246,7 @@ END;
 	});
 
 	loadPosts(10, 0);
-	//window.setInterval(regularLoadPosts, 10000);
+	window.setInterval(regularLoadPosts, 10000);
 
 	function regularLoadPosts() {
 		loadPosts(10, 0);

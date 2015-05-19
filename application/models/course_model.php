@@ -25,17 +25,17 @@ class course_model extends CI_Model {
 		$course_year = date('Y');
 		$course_type = clean_input($this->input->post('course_type'));
 		$course_desc = clean_input($this->input->post('course_description'));
-		
-		$data = array(	'course_code'			=> $course_code,
-						'course_term'			=> $course_term,
-						'course_year'			=> $course_year,
-						'course_type'			=> $course_type,
-						'course_name'			=> $course_title,
-						'course_intro'			=> $course_desc,
-						'course_start_date'		=> date('Y-m-d'),
-						'course_instructor'		=> $this->session->user_id
-						);
-		
+
+		$data = array('course_code' => $course_code,
+			'course_term' => $course_term,
+			'course_year' => $course_year,
+			'course_type' => $course_type,
+			'course_name' => $course_title,
+			'course_intro' => $course_desc,
+			'course_start_date' => date('Y-m-d'),
+			'course_instructor' => $this->session->user_id
+		);
+
 		if ($this->db->insert('course', $data))
 			return $data;
 		else
@@ -51,10 +51,11 @@ class course_model extends CI_Model {
 	 * @return object	course if found, null otherwise.
 	 */
 	public function get_course($code, $term, $year, $type) {
-		$data = array('course_code' => $code,
-			'course_term' => $term,
-			'course_year' => $year,
-			'course_type' => $type
+		$data = array(
+			'course_code' => clean_input($code),
+			'course_term' => clean_input($term),
+			'course_year' => clean_input($year),
+			'course_type' => clean_input($type)
 		);
 		$query = $this->db->get_where('course', $data);
 		if (!$query || $query->num_rows() != 1)
@@ -127,43 +128,82 @@ class course_model extends CI_Model {
 		else
 			return $query->result();
 	}
-	
+
 	/**
 	 * Retrieves all the uploads related to a course.
 	 * @param string $type The type of uploads to retrieve. NULL means all types.
 	 * @return array Array of uploads if any found, NULL otherwise. 
 	 */
-	public function get_uploads($type=null)
-	{
-		$where = array(	'course_code' => $this->session->course_code,
-						'course_term' => $this->session->course_term,
-						'course_year' => $this->session->course_year,
-						'course_type' => $this->session->course_type,
-						);
+	public function get_uploads($type = null) {
+		$where = array('course_code' => $this->session->course_code,
+			'course_term' => $this->session->course_term,
+			'course_year' => $this->session->course_year,
+			'course_type' => $this->session->course_type,
+		);
 		if ($type)
 			$where['upload.upload_type'] = $type;
-		
+
 		$this->db->select('*');
 		$this->db->from('course_post');
 		$this->db->join('post', 'post.post_id = course_post.post_id');
 		$this->db->join('upload', 'upload.post_id = post.post_id');
 		$this->db->join('user', 'user.user_id = post.post_author');
 		$this->db->where($where);
-		
+
 		$query = $this->db->get();
 		if ($query && $query->num_rows() > 0)
 			return $query->result();
-		else 
+		else
 			return null;
 	}
-	
+
+	/**
+	 * Retrieves posts posted on a course's page.
+	 * 
+	 * @param string $code Course code.
+	 * @param string $term Course term (fall / spring).
+	 * @param string $year Course year.
+	 * @param string $type Course type (th / pr)
+	 * @param int $limit No. of posts to retrieve. 0 for all.
+	 * @param int $offset Offset of the first post to retrieve.
+	 * @param string $post_type Type of posts. null for all.
+	 * @return html.
+	 */
+	public function get_course_posts($code, $term, $year, $type, $limit = 10, $offset = 0, $post_type = null) {
+		$where = array(
+			'course_code' => $code,
+			'course_term' => $term,
+			'course_year' => $year,
+			'course_type' => $type,
+		);
+
+		$this->db->select('user_first_name, user_last_name, post.*');
+		$this->db->from('course_post');
+		$this->db->join('post', 'post.post_id = course_post.post_id');
+		$this->db->join('user', 'user.user_id = post.post_author');
+		$this->db->where($where);
+		
+		if ($post_type)
+			$this->db->where(array('post.post_type' => $post_type));
+
+		$this->db->order_by('post_timestamp', 'DESC');
+
+		if ($limit)
+			$this->db->limit($limit, $offset);
+
+		$query = $this->db->get();
+		if ($query && $query->num_rows() > 0)
+			return $query->result();
+		else
+			return null;
+	}
+
 	/**
 	 * Retrieves the upload records of a post.
 	 * @param type $post_id The id of the post.
 	 * @return object Query result if any found, null otherwise.
 	 */
-	public function get_upload_by_post_id($post_id)
-	{
+	public function get_upload_by_post_id($post_id) {
 		$query = $this->db->get_where('upload', array('post_id' => clean_input($post_id)));
 		if ($query && $query->num_rows() > 0)
 			return $query->result();
