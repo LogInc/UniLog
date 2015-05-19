@@ -28,9 +28,9 @@ if (!isset($active_tab))
 		<hr>
 		<ul class='nav nav-tabs no-select' id='course-nav'>
 			<?php
-			$tabs = array('Home', 'Uploads', 'Course Info');
-			$refs = array('home', 'uploads', 'info');
-			for ($i = 0; $i < 3; $i++) {
+			$tabs = array('Home', 'Uploads');
+			$refs = array('home', 'uploads');
+			for ($i = 0; $i < 2; $i++) {
 				$html = '<li';
 				if ($active_tab == $refs[$i])
 					$html .= ' class="active"';

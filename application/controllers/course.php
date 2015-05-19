@@ -211,18 +211,15 @@ class Course extends CI_Controller {
 	 * @return html.
 	 */
 	public function get_course_posts($code, $term, $year, $type, $limit = 10, $offset = 0, $post_type = null) {
-		if (!$this->session->is_logged_in) {
-			echo '0';
+		if (!$this->session->is_logged_in)
 			return;
-		}
 
 		$result = $this->course_model->get_course_posts($code, $term, $year, $type, $limit, $offset, $post_type);
 		if ($result)
 			foreach ($result as $row) {
 				$data['post'] = $row;
 				$this->load->view('templates/post', $data);
-			} else
-			echo '0';
+			}
 	}
 
 	/**

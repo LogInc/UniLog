@@ -12,7 +12,7 @@
 		<?php
 		foreach ($courses as $course) {
 			$url = base_url('user/course/' . $course->course_code . '/' . $course->course_term . '/' . $course->course_year . '/' . $course->course_type);
-			echo "<li><a href='$url'>" . $course->course_name . "</a></li>";
+			echo "<li><a href='$url'>" . $course->course_name . ' (' . ucfirst($course->course_type) . ')' . "</a></li>";
 		}
 		?>
         <hr>
